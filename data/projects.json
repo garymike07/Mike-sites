@@ -1,0 +1,125 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "SaaS Landing Page",
+      "category": "saas",
+      "status": "live",
+      "description": "Modern, conversion-optimized landing page for SaaS products with animated sections and responsive design.",
+      "tags": ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
+      "thumbnail": "🚀",
+      "features": [
+        "Responsive design for all devices",
+        "Smooth scroll animations",
+        "Contact form integration",
+        "SEO optimized",
+        "Fast loading performance"
+      ],
+      "challenges": "Creating smooth animations while maintaining performance across all devices.",
+      "github": "https://github.com/garymike07/saas-landing",
+      "demo": "https://saas-demo.mikesites.dev",
+      "screenshots": ["screenshot1.jpg", "screenshot2.jpg"]
+    },
+    {
+      "id": 2,
+      "title": "Personal Portfolio",
+      "category": "portfolio",
+      "status": "live",
+      "description": "Clean, minimalist portfolio website showcasing creative work with interactive elements and smooth transitions.",
+      "tags": ["HTML5", "CSS3", "JavaScript", "GSAP"],
+      "thumbnail": "👨‍💻",
+      "features": [
+        "Interactive animations",
+        "Project showcase gallery",
+        "Contact form",
+        "Blog integration",
+        "Dark/Light mode toggle"
+      ],
+      "challenges": "Balancing visual appeal with fast loading times and accessibility.",
+      "github": "https://github.com/garymike07/portfolio",
+      "demo": "https://portfolio-demo.mikesites.dev",
+      "screenshots": ["portfolio1.jpg", "portfolio2.jpg"]
+    },
+    {
+      "id": 3,
+      "title": "Blog Template",
+      "category": "blog",
+      "status": "progress",
+      "description": "Feature-rich blog template with markdown support, search functionality, and social sharing capabilities.",
+      "tags": ["Next.js", "MDX", "Tailwind CSS", "Prisma"],
+      "thumbnail": "📝",
+      "features": [
+        "Markdown blog posts",
+        "Search and filtering",
+        "Social sharing",
+        "Comment system",
+        "RSS feed generation"
+      ],
+      "challenges": "Implementing efficient search and content management system.",
+      "github": "https://github.com/garymike07/blog-template",
+      "demo": "https://blog-demo.mikesites.dev",
+      "screenshots": ["blog1.jpg", "blog2.jpg"]
+    },
+    {
+      "id": 4,
+      "title": "E-Commerce Site",
+      "category": "ecommerce",
+      "status": "concept",
+      "description": "Full-featured e-commerce platform with shopping cart, payment integration, and admin dashboard.",
+      "tags": ["React", "Node.js", "MongoDB", "Stripe"],
+      "thumbnail": "🛒",
+      "features": [
+        "Product catalog",
+        "Shopping cart",
+        "Payment processing",
+        "User authentication",
+        "Admin dashboard"
+      ],
+      "challenges": "Implementing secure payment processing and inventory management.",
+      "github": "https://github.com/garymike07/ecommerce",
+      "demo": "https://shop-demo.mikesites.dev",
+      "screenshots": ["shop1.jpg", "shop2.jpg"]
+    },
+    {
+      "id": 5,
+      "title": "Cafe Website",
+      "category": "portfolio",
+      "status": "live",
+      "description": "Elegant website for a local cafe with online menu, reservation system, and location information.",
+      "tags": ["Vue.js", "Nuxt.js", "SCSS", "Firebase"],
+      "thumbnail": "☕",
+      "features": [
+        "Online menu display",
+        "Table reservations",
+        "Location and hours",
+        "Photo gallery",
+        "Contact information"
+      ],
+      "challenges": "Creating an appetizing visual design that loads quickly on mobile devices.",
+      "github": "https://github.com/garymike07/cafe-website",
+      "demo": "https://cafe-demo.mikesites.dev",
+      "screenshots": ["cafe1.jpg", "cafe2.jpg"]
+    },
+    {
+      "id": 6,
+      "title": "Admin Dashboard",
+      "category": "dashboard",
+      "status": "progress",
+      "description": "Comprehensive admin dashboard with data visualization, user management, and real-time analytics.",
+      "tags": ["React", "D3.js", "Express", "PostgreSQL"],
+      "thumbnail": "📊",
+      "features": [
+        "Data visualization charts",
+        "User management",
+        "Real-time analytics",
+        "Export functionality",
+        "Role-based access"
+      ],
+      "challenges": "Handling large datasets efficiently while maintaining smooth user interactions.",
+      "github": "https://github.com/garymike07/admin-dashboard",
+      "demo": "https://dashboard-demo.mikesites.dev",
+      "screenshots": ["dashboard1.jpg", "dashboard2.jpg"]
+    }
+  ]
+}
+
