@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mike Sites - Developer Portfolio Dashboard. Crafting modern web experiences with cutting-edge technology.">
+    <meta name="keywords" content="web developer, portfolio, SaaS, blogs, ecommerce, frontend, backend">
+    <meta name="author" content="Mike Sites">
+    <meta property="og:title" content="Mike Sites - Developer Portfolio">
+    <meta property="og:description" content="Crafting modern web experiences — explore my live and ongoing projects">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://garymike07.github.io/Mike-sites/">
+    <title>Mike Sites - Developer Portfolio Dashboard</title>
+    
+    <!-- Google Fonts - Soria -->
+    <link href="https://fonts.googleapis.com/css2?family=Soria:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-text">Mike Sites</div>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <h2>Mike Sites</h2>
+                <span class="tagline">Digital Lab</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebar-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item active">
+                    <a href="#home" class="nav-link" data-page="home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link" data-page="projects">
+                        <i class="fas fa-folder-open"></i>
+                        <span>All Projects</span>
+                    </a>
+                </li>
+                <li class="nav-item has-submenu">
+                    <a href="#categories" class="nav-link submenu-toggle">
+                        <i class="fas fa-th-large"></i>
+                        <span>Categories</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#saas" data-category="saas"><i class="fas fa-cloud"></i>SaaS</a></li>
+                        <li><a href="#blogs" data-category="blogs"><i class="fas fa-blog"></i>Blogs</a></li>
+                        <li><a href="#portfolios" data-category="portfolios"><i class="fas fa-briefcase"></i>Portfolios</a></li>
+                        <li><a href="#ecommerce" data-category="ecommerce"><i class="fas fa-shopping-cart"></i>Ecommerce</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link" data-page="about">
+                        <i class="fas fa-user"></i>
+                        <span>About Me</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link" data-page="contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tech-stack" class="nav-link" data-page="tech-stack">
+                        <i class="fas fa-code"></i>
+                        <span>Tech Stack</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="social-links">
+                <a href="https://github.com/garymike07" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/mike" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://dribbble.com/mike" target="_blank" class="social-link">
+                    <i class="fab fa-dribbble"></i>
+                </a>
+                <a href="https://twitter.com/mike" target="_blank" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+            <button class="request-project-btn" id="request-project-btn">
+                <i class="fas fa-plus"></i>
+                <span>Request a Project</span>
+                <div class="btn-glow"></div>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navbar -->
+        <header class="top-navbar">
+            <div class="navbar-left">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="navbar-right">
+                <nav class="top-nav">
+                    <a href="#blog" class="nav-link" data-page="blog">Blog</a>
+                    <a href="#resume" class="nav-link" data-page="resume">Resume</a>
+                </nav>
+                <div class="navbar-icons">
+                    <a href="https://github.com/garymike07" target="_blank" class="icon-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://dribbble.com/mike" target="_blank" class="icon-link">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/mike" target="_blank" class="icon-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="theme-toggle" id="theme-toggle">
+                    <div class="theme-options">
+                        <button class="theme-btn active" data-theme="dark">
+                            <i class="fas fa-moon"></i>
+                            <span>Dark</span>
+                        </button>
+                        <button class="theme-btn" data-theme="light">
+                            <i class="fas fa-sun"></i>
+                            <span>Light</span>
+                        </button>
+                        <button class="theme-btn" data-theme="neon">
+                            <i class="fas fa-bolt"></i>
+                            <span>Neon</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="user-menu">
+                    <button class="user-icon" id="user-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="page-content" id="page-content">
+            <!-- Home Page -->
+            <section class="page active" id="home-page">
+                <div class="hero-section">
+                    <div class="hero-background">
+                        <div class="parallax-layer" data-speed="0.5"></div>
+                        <div class="parallax-layer" data-speed="0.3"></div>
+                    </div>
+                    <div class="hero-content">
+                        <h1 class="hero-title">
+                            Welcome to Mike Sites – My Digital Lab
+                        </h1>
+                        <p class="hero-subtitle">
+                            Crafting modern web experiences — explore my live and ongoing projects
+                        </p>
+                        <div class="current-time">
+                            <i class="fas fa-clock"></i>
+                            <span id="current-time"></span>
+                        </div>
+                        <div class="hero-actions">
+                            <button class="cta-btn primary" data-page="projects">
+                                <span>Explore Projects</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button class="cta-btn secondary" data-page="contact">
+                                <span>Get In Touch</span>
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="scroll-indicator">
+                        <div class="scroll-arrow">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <span>Scroll to explore</span>
+                    </div>
+                </div>
+
+                <!-- Featured Projects Section -->
+                <section class="featured-projects">
+                    <div class="section-header">
+                        <h2>Featured Projects</h2>
+                        <p>A showcase of my latest and most impactful work</p>
+                    </div>
+                    <div class="projects-container">
+                        <div class="projects-scroll" id="projects-scroll">
+                            <!-- Project cards will be dynamically loaded here -->
+                        </div>
+                        <button class="scroll-btn left" id="scroll-left">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="scroll-btn right" id="scroll-right">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Stats Section -->
+                <section class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="50">0</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="25">0</div>
+                            <div class="stat-label">Happy Clients</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="3">0</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="15">0</div>
+                            <div class="stat-label">Technologies</div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Projects Page -->
+            <section class="page" id="projects-page">
+                <div class="page-header">
+                    <h1>All Projects</h1>
+                    <p>Explore my complete portfolio of web development projects</p>
+                </div>
+                <div class="projects-filter">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="live">Live</button>
+                    <button class="filter-btn" data-filter="ongoing">Ongoing</button>
+                    <button class="filter-btn" data-filter="concept">Concept</button>
+                </div>
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Project cards will be dynamically loaded here -->
+                </div>
+            </section>
+
+            <!-- Other pages will be added in the next phase -->
+        </div>
+    </main>
+
+    <!-- Project Modal -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" id="modal-body">
+                <!-- Modal content will be dynamically loaded -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Request Project Modal -->
+    <div class="modal-overlay" id="request-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="request-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <h2>Request a Project</h2>
+                <form class="request-form" id="request-form">
+                    <div class="form-group">
+                        <label for="project-name">Project Name</label>
+                        <input type="text" id="project-name" name="project-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-type">Project Type</label>
+                        <select id="project-type" name="project-type" required>
+                            <option value="">Select a type</option>
+                            <option value="saas">SaaS Application</option>
+                            <option value="blog">Blog/Content Site</option>
+                            <option value="portfolio">Portfolio Website</option>
+                            <option value="ecommerce">E-commerce Store</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-description">Project Description</label>
+                        <textarea id="project-description" name="project-description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-budget">Budget Range</label>
+                        <select id="project-budget" name="project-budget" required>
+                            <option value="">Select budget range</option>
+                            <option value="1000-5000">$1,000 - $5,000</option>
+                            <option value="5000-10000">$5,000 - $10,000</option>
+                            <option value="10000-25000">$10,000 - $25,000</option>
+                            <option value="25000+">$25,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Your Email</label>
+                        <input type="email" id="contact-email" name="contact-email" required>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <span>Submit Request</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/themes.js"></script>
+</body>
+</html>
+
