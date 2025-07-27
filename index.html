@@ -96,9 +96,6 @@
                 <a href="https://linkedin.com/in/mike" target="_blank" class="social-link">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="https://dribbble.com/mike" target="_blank" class="social-link">
-                    <i class="fab fa-dribbble"></i>
-                </a>
                 <a href="https://twitter.com/mike" target="_blank" class="social-link">
                     <i class="fab fa-twitter"></i>
                 </a>
@@ -129,12 +126,13 @@
                     <a href="https://github.com/garymike07" target="_blank" class="icon-link">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://dribbble.com/mike" target="_blank" class="icon-link">
-                        <i class="fab fa-dribbble"></i>
-                    </a>
                     <a href="https://linkedin.com/in/mike" target="_blank" class="icon-link">
                         <i class="fab fa-linkedin"></i>
                     </a>
+                    <button class="admin-access-btn" id="admin-access-btn" style="background: #ff6b35; border: none; color: white; padding: 0.5rem 1rem; border-radius: 5px; margin-left: 1rem; cursor: pointer;">
+                        <i class="fas fa-shield-alt"></i>
+                        Admin Access
+                    </button>
                 </div>
                 <div class="theme-toggle" id="theme-toggle">
                     <div class="theme-options">
@@ -164,12 +162,19 @@
         <div class="page-content" id="page-content">
             <!-- Home Page -->
             <section class="page active" id="home-page">
-                <div class="hero-section">
+                <div class="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/1000021819.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
                     <div class="hero-background">
                         <div class="parallax-layer" data-speed="0.5"></div>
                         <div class="parallax-layer" data-speed="0.3"></div>
                     </div>
                     <div class="hero-content">
+                        <div class="profile-section" style="text-align: center; margin-bottom: 2rem;">
+                            <img src="images/1000022086.jpg" alt="Mike's Portfolio Thumbnail" style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid #00d4ff; box-shadow: 0 0 30px rgba(0, 212, 255, 0.5); margin-bottom: 1rem; object-fit: cover;">
+                            <div class="status-badge" style="display: inline-flex; align-items: center; background: #00ff88; color: #000; padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; margin-bottom: 1rem;">
+                                <span style="width: 8px; height: 8px; background: #000; border-radius: 50%; margin-right: 0.5rem; animation: pulse 2s infinite;"></span>
+                                LIVE & COMPLETED
+                            </div>
+                        </div>
                         <h1 class="hero-title">
                             Welcome to Mike Sites – My Digital Lab
                         </h1>
@@ -185,17 +190,11 @@
                                 <span>Explore Projects</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
-                            <button class="cta-btn secondary" data-page="contact">
+                            <button class="cta-btn secondary" onclick="window.location.href='mailto:wrotomike@gmail.com'">
                                 <span>Get In Touch</span>
                                 <i class="fas fa-envelope"></i>
                             </button>
                         </div>
-                    </div>
-                    <div class="scroll-indicator">
-                        <div class="scroll-arrow">
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <span>Scroll to explore</span>
                     </div>
                 </div>
 
@@ -215,6 +214,141 @@
                         <button class="scroll-btn right" id="scroll-right">
                             <i class="fas fa-chevron-right"></i>
                         </button>
+                    </div>
+                </section>
+
+                <!-- Blog Section -->
+                <section class="blog-section" style="padding: 4rem 2rem; background: rgba(0,0,0,0.8); margin-top: 2rem;">
+                    <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                        <h2 style="color: #00d4ff; font-size: 2.5rem; margin-bottom: 1rem;">Blog Posts</h2>
+                        <p style="color: #ccc; font-size: 1.2rem;">Explore my latest thoughts and insights</p>
+                    </div>
+                    <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+                        <div class="blog-card" style="background: rgba(255,255,255,0.1); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,212,255,0.2); transition: transform 0.3s ease;">
+                            <img src="images/1000022093.jpg" alt="Digital Transformation Blog" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div style="padding: 1.5rem;">
+                                <div style="color: #00d4ff; font-size: 0.9rem; margin-bottom: 0.5rem;">January 15, 2024</div>
+                                <h3 style="color: white; font-size: 1.3rem; margin-bottom: 1rem;">The Future of Digital Transformation in Public Service</h3>
+                                <p style="color: #ccc; line-height: 1.6;">Exploring how digital transformation is revolutionizing public service delivery, improving efficiency, and enhancing citizen experience through innovative ICT solutions.</p>
+                            </div>
+                        </div>
+                        <div class="blog-card" style="background: rgba(255,255,255,0.1); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,212,255,0.2); transition: transform 0.3s ease;">
+                            <img src="images/1000022092.jpg" alt="System Development Blog" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div style="padding: 1.5rem;">
+                                <div style="color: #00d4ff; font-size: 0.9rem; margin-bottom: 0.5rem;">January 10, 2024</div>
+                                <h3 style="color: white; font-size: 1.3rem; margin-bottom: 1rem;">Best Practices in System Development</h3>
+                                <p style="color: #ccc; line-height: 1.6;">A comprehensive guide to modern system development practices, including agile methodologies, security considerations, and scalable architecture design.</p>
+                            </div>
+                        </div>
+                        <div class="blog-card" style="background: rgba(255,255,255,0.1); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,212,255,0.2); transition: transform 0.3s ease;">
+                            <img src="images/1000022090.jpg" alt="Cloud Database Blog" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div style="padding: 1.5rem;">
+                                <div style="color: #00d4ff; font-size: 0.9rem; margin-bottom: 0.5rem;">January 5, 2024</div>
+                                <h3 style="color: white; font-size: 1.3rem; margin-bottom: 1rem;">Database Management in the Cloud Era</h3>
+                                <p style="color: #ccc; line-height: 1.6;">Understanding the evolution of database management systems and how cloud technologies are reshaping data storage and retrieval strategies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Information Section -->
+                <section class="contact-info-section" style="padding: 4rem 2rem; background: rgba(0,212,255,0.1);">
+                    <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                        <h2 style="color: #00d4ff; font-size: 2.5rem; margin-bottom: 1rem;">Contact Information</h2>
+                        <p style="color: #ccc; font-size: 1.2rem;">Get in touch for your next project</p>
+                    </div>
+                    <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 800px; margin: 0 auto;">
+                        <div class="contact-card" style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,212,255,0.2);">
+                            <i class="fas fa-phone" style="font-size: 2rem; color: #00d4ff; margin-bottom: 1rem;"></i>
+                            <h3 style="color: white; margin-bottom: 1rem;">Phone</h3>
+                            <p style="color: #ccc; font-size: 1.1rem;">0792618158</p>
+                        </div>
+                        <div class="contact-card" style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,212,255,0.2);">
+                            <i class="fas fa-envelope" style="font-size: 2rem; color: #00d4ff; margin-bottom: 1rem;"></i>
+                            <h3 style="color: white; margin-bottom: 1rem;">Email</h3>
+                            <p style="color: #ccc; font-size: 1.1rem;">wrotomike@gmail.com</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SaaS Projects Section -->
+                <section class="saas-projects-section" style="padding: 4rem 2rem; background: rgba(0,0,0,0.9);">
+                    <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                        <h2 style="color: #00d4ff; font-size: 2.5rem; margin-bottom: 1rem;">SaaS Projects</h2>
+                        <p style="color: #ccc; font-size: 1.2rem;">Ongoing projects with comprehensive details</p>
+                    </div>
+                    <div class="saas-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+                        <div class="saas-card" style="background: rgba(255,255,255,0.1); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,212,255,0.2);">
+                            <img src="images/1000022092.jpg" alt="Budget Planner" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div style="padding: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <h3 style="color: white; font-size: 1.3rem;">Budget Planner</h3>
+                                    <span style="background: #00ff88; color: #000; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">LIVE</span>
+                                </div>
+                                <p style="color: #ccc; line-height: 1.6; margin-bottom: 1.5rem;">A system to help users plan and manage their budgets with advanced analytics and reporting features.</p>
+                                <button class="request-access-btn" onclick="showAccessModal('budget-planner')" style="width: 100%; background: #00d4ff; color: #000; border: none; padding: 0.8rem; border-radius: 8px; font-weight: 600; cursor: pointer;">Request Access</button>
+                            </div>
+                        </div>
+                        <div class="saas-card" style="background: rgba(255,255,255,0.1); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,212,255,0.2);">
+                            <img src="images/1000022092.jpg" alt="Pharmacy Management" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div style="padding: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <h3 style="color: white; font-size: 1.3rem;">Pharmacy Management System</h3>
+                                    <span style="background: #4169e1; color: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">COMPLETED</span>
+                                </div>
+                                <p style="color: #ccc; line-height: 1.6; margin-bottom: 1.5rem;">A comprehensive system for managing pharmacy operations, inventory, and customer relationships.</p>
+                                <button class="request-access-btn" onclick="showAccessModal('pharmacy-system')" style="width: 100%; background: #00d4ff; color: #000; border: none; padding: 0.8rem; border-radius: 8px; font-weight: 600; cursor: pointer;">Request Access</button>
+                            </div>
+                        </div>
+                        <div class="saas-card" style="background: rgba(255,255,255,0.1); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,212,255,0.2);">
+                            <img src="images/1000022092.jpg" alt="School Management" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div style="padding: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <h3 style="color: white; font-size: 1.3rem;">School Management System</h3>
+                                    <span style="background: #4169e1; color: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">COMPLETED</span>
+                                </div>
+                                <p style="color: #ccc; line-height: 1.6; margin-bottom: 1.5rem;">An integrated system for managing school administration and academic activities.</p>
+                                <button class="request-access-btn" onclick="showAccessModal('school-system')" style="width: 100%; background: #00d4ff; color: #000; border: none; padding: 0.8rem; border-radius: 8px; font-weight: 600; cursor: pointer;">Request Access</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Portfolio Showcase Section -->
+                <section class="portfolio-showcase-section" style="padding: 4rem 2rem; background: rgba(0,212,255,0.05);">
+                    <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                        <h2 style="color: #00d4ff; font-size: 2.5rem; margin-bottom: 1rem;">Portfolio Showcase</h2>
+                        <p style="color: #ccc; font-size: 1.2rem;">High-quality screenshots of my primary website</p>
+                    </div>
+                    <div class="portfolio-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+                        <div class="portfolio-item" onclick="showPortfolioDetails('homepage')" style="cursor: pointer; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,212,255,0.2); transition: transform 0.3s ease;">
+                            <img src="images/1000022086.jpg" alt="Homepage Screenshot" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; text-align: center;">
+                                <h4 style="color: white; margin-bottom: 0.5rem;">Homepage Design</h4>
+                                <p style="color: #ccc; font-size: 0.9rem;">Modern landing page with interactive elements</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" onclick="showPortfolioDetails('about')" style="cursor: pointer; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,212,255,0.2); transition: transform 0.3s ease;">
+                            <img src="images/1000022087.jpg" alt="About Page Screenshot" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; text-align: center;">
+                                <h4 style="color: white; margin-bottom: 0.5rem;">About Section</h4>
+                                <p style="color: #ccc; font-size: 0.9rem;">Professional profile and experience showcase</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" onclick="showPortfolioDetails('projects')" style="cursor: pointer; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,212,255,0.2); transition: transform 0.3s ease;">
+                            <img src="images/1000022090.jpg" alt="Projects Page Screenshot" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; text-align: center;">
+                                <h4 style="color: white; margin-bottom: 0.5rem;">Projects Gallery</h4>
+                                <p style="color: #ccc; font-size: 0.9rem;">Comprehensive project portfolio display</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" onclick="showPortfolioDetails('blog')" style="cursor: pointer; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,212,255,0.2); transition: transform 0.3s ease;">
+                            <img src="images/1000022093.jpg" alt="Blog Page Screenshot" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; text-align: center;">
+                                <h4 style="color: white; margin-bottom: 0.5rem;">Blog Interface</h4>
+                                <p style="color: #ccc; font-size: 0.9rem;">Clean blog layout with content management</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -303,13 +437,13 @@
                         <textarea id="project-description" name="project-description" rows="4" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="project-budget">Budget Range</label>
+                        <label for="project-budget">Budget Range (KSH)</label>
                         <select id="project-budget" name="project-budget" required>
                             <option value="">Select budget range</option>
-                            <option value="1000-5000">$1,000 - $5,000</option>
-                            <option value="5000-10000">$5,000 - $10,000</option>
-                            <option value="10000-25000">$10,000 - $25,000</option>
-                            <option value="25000+">$25,000+</option>
+                            <option value="50000-200000">KSH 50,000 - KSH 200,000</option>
+                            <option value="200000-500000">KSH 200,000 - KSH 500,000</option>
+                            <option value="500000-1000000">KSH 500,000 - KSH 1,000,000</option>
+                            <option value="1000000+">KSH 1,000,000+</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -331,4 +465,237 @@
     <script src="js/themes.js"></script>
 </body>
 </html>
+
+
+
+    <!-- Admin Access Modal -->
+    <div class="modal-overlay" id="admin-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center;">
+        <div class="modal-content" style="background: rgba(20,20,20,0.95); padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; border: 1px solid #00d4ff;">
+            <button class="modal-close" onclick="closeAdminModal()" style="float: right; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <h2 style="color: #00d4ff; margin-bottom: 1.5rem;">Admin Access</h2>
+            <div id="admin-login-form">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="admin-password" style="color: white; display: block; margin-bottom: 0.5rem;">Password</label>
+                    <input type="password" id="admin-password" style="width: 100%; padding: 0.8rem; border: 1px solid #00d4ff; background: rgba(255,255,255,0.1); color: white; border-radius: 5px;">
+                </div>
+                <button onclick="authenticateAdmin()" style="width: 100%; background: #00d4ff; color: #000; border: none; padding: 0.8rem; border-radius: 5px; font-weight: 600; cursor: pointer;">Login</button>
+            </div>
+            <div id="admin-dashboard" style="display: none;">
+                <h3 style="color: #00d4ff; margin-bottom: 1rem;">Project Requests</h3>
+                <div id="project-requests-list" style="max-height: 300px; overflow-y: auto;">
+                    <!-- Project requests will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Access Modal -->
+    <div class="modal-overlay" id="access-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center;">
+        <div class="modal-content" style="background: rgba(20,20,20,0.95); padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; border: 1px solid #00d4ff;">
+            <button class="modal-close" onclick="closeAccessModal()" style="float: right; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <h2 style="color: #00d4ff; margin-bottom: 1.5rem;">Project Access</h2>
+            <p style="color: #ccc; margin-bottom: 1.5rem;">Enter your credentials to access detailed project information and documentation.</p>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <label for="access-username" style="color: white; display: block; margin-bottom: 0.5rem;">Username</label>
+                <input type="text" id="access-username" style="width: 100%; padding: 0.8rem; border: 1px solid #00d4ff; background: rgba(255,255,255,0.1); color: white; border-radius: 5px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <label for="access-password" style="color: white; display: block; margin-bottom: 0.5rem;">Password</label>
+                <input type="password" id="access-password" style="width: 100%; padding: 0.8rem; border: 1px solid #00d4ff; background: rgba(255,255,255,0.1); color: white; border-radius: 5px;">
+            </div>
+            <button onclick="authenticateProjectAccess()" style="width: 100%; background: #00d4ff; color: #000; border: none; padding: 0.8rem; border-radius: 5px; font-weight: 600; cursor: pointer;">Access Project</button>
+        </div>
+    </div>
+
+    <!-- Portfolio Details Modal -->
+    <div class="modal-overlay" id="portfolio-details-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center;">
+        <div class="modal-content" style="background: rgba(20,20,20,0.95); padding: 2rem; border-radius: 15px; max-width: 700px; width: 90%; border: 1px solid #00d4ff; max-height: 80vh; overflow-y: auto;">
+            <button class="modal-close" onclick="closePortfolioModal()" style="float: right; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <div id="portfolio-details-content">
+                <!-- Portfolio details will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Admin functionality
+        let projectRequests = JSON.parse(localStorage.getItem('projectRequests') || '[]');
+        let currentProject = '';
+
+        function showAdminModal() {
+            document.getElementById('admin-modal').style.display = 'flex';
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').style.display = 'none';
+            document.getElementById('admin-login-form').style.display = 'block';
+            document.getElementById('admin-dashboard').style.display = 'none';
+            document.getElementById('admin-password').value = '';
+        }
+
+        function authenticateAdmin() {
+            const password = document.getElementById('admin-password').value;
+            if (password === 'Shutters500ft') {
+                document.getElementById('admin-login-form').style.display = 'none';
+                document.getElementById('admin-dashboard').style.display = 'block';
+                displayProjectRequests();
+            } else {
+                alert('Invalid credentials');
+            }
+        }
+
+        function displayProjectRequests() {
+            const requestsList = document.getElementById('project-requests-list');
+            if (projectRequests.length === 0) {
+                requestsList.innerHTML = '<p style="color: #ccc;">No project requests yet.</p>';
+                return;
+            }
+
+            requestsList.innerHTML = projectRequests.map(request => `
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; margin-bottom: 1rem; border-radius: 8px;">
+                    <h4 style="color: #00d4ff; margin-bottom: 0.5rem;">${request.name}</h4>
+                    <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 0.3rem;"><strong>Type:</strong> ${request.type}</p>
+                    <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 0.3rem;"><strong>Budget:</strong> ${request.budget}</p>
+                    <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 0.3rem;"><strong>Email:</strong> ${request.email}</p>
+                    <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 0.3rem;"><strong>Date:</strong> ${new Date(request.timestamp).toLocaleDateString()}</p>
+                    <p style="color: #ccc; font-size: 0.9rem;"><strong>Description:</strong> ${request.description}</p>
+                </div>
+            `).join('');
+        }
+
+        // Project access functionality
+        function showAccessModal(projectId) {
+            currentProject = projectId;
+            document.getElementById('access-modal').style.display = 'flex';
+        }
+
+        function closeAccessModal() {
+            document.getElementById('access-modal').style.display = 'none';
+            document.getElementById('access-username').value = '';
+            document.getElementById('access-password').value = '';
+        }
+
+        function authenticateProjectAccess() {
+            const username = document.getElementById('access-username').value;
+            const password = document.getElementById('access-password').value;
+            
+            if (username && password) {
+                alert(`Access granted to ${currentProject}. Redirecting to project documentation...`);
+                closeAccessModal();
+            } else {
+                alert('Please enter both username and password');
+            }
+        }
+
+        // Portfolio details functionality
+        function showPortfolioDetails(section) {
+            const content = document.getElementById('portfolio-details-content');
+            const details = {
+                homepage: {
+                    title: 'Homepage Design',
+                    tech: 'HTML5, CSS3, JavaScript, Responsive Design',
+                    timeline: '2 weeks development',
+                    description: 'Modern landing page featuring interactive elements, smooth animations, and responsive design. Includes hero section, project showcase, and contact integration.'
+                },
+                about: {
+                    title: 'About Section',
+                    tech: 'CSS Grid, Flexbox, Animation Libraries',
+                    timeline: '1 week development',
+                    description: 'Professional profile showcase with experience timeline, skills display, and social media integration. Features smooth scrolling and hover effects.'
+                },
+                projects: {
+                    title: 'Projects Gallery',
+                    tech: 'JavaScript, CSS Grid, Modal System',
+                    timeline: '3 weeks development',
+                    description: 'Comprehensive project portfolio with filtering, search functionality, and detailed project modals. Includes live project links and technology stacks.'
+                },
+                blog: {
+                    title: 'Blog Interface',
+                    tech: 'Content Management, Responsive Design',
+                    timeline: '2 weeks development',
+                    description: 'Clean blog layout with content management capabilities, category filtering, and responsive design for optimal reading experience.'
+                }
+            };
+
+            const detail = details[section];
+            content.innerHTML = `
+                <h2 style="color: #00d4ff; margin-bottom: 1rem;">${detail.title}</h2>
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="color: white; margin-bottom: 0.5rem;">Technical Specifications</h3>
+                    <p style="color: #ccc;">${detail.tech}</p>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="color: white; margin-bottom: 0.5rem;">Development Timeline</h3>
+                    <p style="color: #ccc;">${detail.timeline}</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 0.5rem;">Project Outcomes</h3>
+                    <p style="color: #ccc;">${detail.description}</p>
+                </div>
+            `;
+            document.getElementById('portfolio-details-modal').style.display = 'flex';
+        }
+
+        function closePortfolioModal() {
+            document.getElementById('portfolio-details-modal').style.display = 'none';
+        }
+
+        // Enhanced project request form
+        document.getElementById('request-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('project-name').value,
+                type: document.getElementById('project-type').value,
+                description: document.getElementById('project-description').value,
+                budget: document.getElementById('project-budget').value,
+                email: document.getElementById('contact-email').value,
+                timestamp: new Date().toISOString()
+            };
+
+            projectRequests.push(formData);
+            localStorage.setItem('projectRequests', JSON.stringify(projectRequests));
+
+            // Generate email
+            const subject = `Project Request: ${formData.name}`;
+            const body = `Project Name: ${formData.name}%0D%0AProject Type: ${formData.type}%0D%0ABudget: ${formData.budget}%0D%0AClient Email: ${formData.email}%0D%0A%0D%0ADescription:%0D%0A${formData.description}`;
+            
+            window.location.href = `mailto:wrotomike@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Reset form and close modal
+            this.reset();
+            document.getElementById('request-modal').style.display = 'none';
+            
+            alert('Project request submitted successfully! An email has been generated for you.');
+        });
+
+        // Event listeners
+        document.getElementById('admin-access-btn').addEventListener('click', showAdminModal);
+
+        // Add hover effects for cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.blog-card, .saas-card, .portfolio-item');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                    this.style.boxShadow = '0 20px 40px rgba(0,212,255,0.3)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 10px 30px rgba(0,212,255,0.2)';
+                });
+            });
+
+            // Add pulse animation to status badge
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes pulse {
+                    0% { opacity: 1; }
+                    50% { opacity: 0.5; }
+                    100% { opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
 
