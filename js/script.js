@@ -914,3 +914,59 @@ function initBlogGenerator() {
 
     updateBlogPreview(); // Initial call
 }
+
+
+// Modal functionality
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId || 'project-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Initialize modal close functionality
+function initModals() {
+    // Close modal when clicking the close button
+    document.querySelectorAll('.close-button').forEach(button => {
+        button.addEventListener('click', () => {
+            closeModal();
+        });
+    });
+
+    // Close modal when clicking outside of it
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+}
+
+// Make sure to call initModals in the DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', function() {
+    initModals();
+});
+
+// Global object for external access
+window.mikeSites = {
+    openModal: openModal,
+    closeModal: closeModal
+};
+

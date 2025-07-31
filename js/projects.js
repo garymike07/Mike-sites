@@ -151,8 +151,8 @@ class ProjectManager {
             });
         });
 
-        // Card click to open modal
-        container.querySelectorAll('.project-card').forEach(card => {
+        // Card click to open modal (except for portfolio which opens site directly)
+        container.querySelectorAll('.project-card:not(.clickable)').forEach(card => {
             card.addEventListener('click', () => {
                 const projectId = parseInt(card.getAttribute('data-project-id'));
                 this.openProjectModal(projectId);
@@ -168,17 +168,6 @@ class ProjectManager {
         if (!modalBody) return;
 
         modalBody.innerHTML = this.createProjectModalContent(project);
-
-        if (project.id === 1) {
-            const requestRepoBtn = document.getElementById('request-repo-btn');
-            if (requestRepoBtn) {
-                requestRepoBtn.addEventListener('click', () => {
-                    if (confirm('Contact creator at 0792 618156.')) {
-                        window.open('https://github.com/garymike07/myk', '_blank');
-                    }
-                });
-            }
-        }
         
         if (window.mikeSites) {
             window.mikeSites.openModal('project-modal');
@@ -186,36 +175,45 @@ class ProjectManager {
     }
 
     createProjectModalContent(project) {
-        const liveButton = project.liveUrl ? 
-            `<a href="${project.liveUrl}" target="_blank" class="cta-btn primary">
+        const liveButton = project.demo ? 
+            `<a href="${project.demo}" target="_blank" class="cta-btn primary">
                 <span>View Live Demo</span>
                 <i class="fas fa-external-link-alt"></i>
             </a>` : '';
 
-        const githubButton = project.githubUrl ? 
-            `<a href="${project.githubUrl}" target="_blank" class="cta-btn secondary">
+        const githubButton = project.github ? 
+            `<a href="${project.github}" target="_blank" class="cta-btn secondary">
                 <span>View on GitHub</span>
                 <i class="fab fa-github"></i>
             </a>` : '';
 
-        const requestRepoButton = project.id === 1 ?
-            `<button id="request-repo-btn" class="cta-btn secondary">
-                <span>Request similar repo</span>
-            </button>` : '';
+        const visitSiteButton = project.id === 2 ? 
+            `<a href="${project.demo}" target="_blank" class="cta-btn primary">
+                <span>Visit Portfolio Site</span>
+                <i class="fas fa-external-link-alt"></i>
+            </a>` : '';
 
-        const clientFeedback = project.clientFeedback ? 
-            `<div class="modal-section">
-                <h3>Client Feedback</h3>
-                <blockquote class="client-quote">
-                    "${project.clientFeedback}"
-                </blockquote>
-            </div>` : '';
-
-        const projectDetails = project.completionDate && project.developer ?
+        const projectDetails = project.completionDate && project.developedBy ?
             `<div class="modal-section">
                 <h3>Project Details</h3>
                 <p><strong>Completed on:</strong> ${project.completionDate}</p>
-                <p><strong>Developed by:</strong> ${project.developer}</p>
+                <p><strong>Developed by:</strong> ${project.developedBy}</p>
+            </div>` : '';
+
+        const challengesSection = project.challenges ?
+            `<div class="modal-section">
+                <h3>Challenges Solved</h3>
+                <p>${project.challenges}</p>
+            </div>` : '';
+
+        const screenshotsSection = project.screenshots && project.screenshots.length > 0 ?
+            `<div class="modal-section">
+                <h3>Screenshots</h3>
+                <div class="screenshot-gallery">
+                    ${project.screenshots.map(screenshot => 
+                        `<img src="images/${screenshot}" alt="${project.title} screenshot" class="screenshot">`
+                    ).join('')}
+                </div>
             </div>` : '';
 
         return `
@@ -245,191 +243,21 @@ class ProjectManager {
                 
                 <div class="modal-section">
                     <h3>Technology Stack</h3>
-                    <div class="tech-stack-grid">
-                        <div class="tech-category">
-                            <h4>Frontend</h4>
-                            <div class="tech-tags">
-                                ${project.techStack.frontend.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                            </div>
-                        </div>
-                        <div class="tech-category">
-                            <h4>Backend</h4>
-                            <div class="tech-tags">
-                                ${project.techStack.backend.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                            </div>
-                        </div>
-                        <div class="tech-category">
-                            <h4>Deployment</h4>
-                            <div class="tech-tags">
-                                ${project.techStack.deployment.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                            </div>
-                        </div>
+                    <div class="tech-tags">
+                        ${project.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
                     </div>
                 </div>
                 
-                <div class="modal-section">
-                    <h3>Challenges Solved</h3>
-                    <p>${project.challenges}</p>
-                </div>
+                ${challengesSection}
                 
-                ${clientFeedback}
-                
-                <div class="modal-section">
-                    <h3>Screenshots</h3>
-                    <div class="screenshot-gallery">
-                        ${project.screenshots.map(screenshot => 
-                            `<img src="${screenshot}" alt="${project.title} screenshot" class="screenshot">`
-                        ).join('')}
-                    </div>
-                </div>
+                ${screenshotsSection}
                 
                 <div class="modal-actions">
+                    ${visitSiteButton}
                     ${liveButton}
                     ${githubButton}
-                    ${requestRepoButton}
                 </div>
             </div>
-            
-            <style>
-                .project-card.clickable:hover {
-                    transform: translateY(-5px);
-                    box-shadow: var(--shadow-lg);
-                }
-                .project-modal-content {
-                    max-width: 800px;
-                    margin: 0 auto;
-                }
-                
-                .modal-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: var(--spacing-xl);
-                    padding-bottom: var(--spacing-lg);
-                    border-bottom: 1px solid var(--border-color);
-                }
-                
-                .modal-header h2 {
-                    font-size: var(--font-size-2xl);
-                    font-weight: 600;
-                    color: var(--text-primary);
-                }
-                
-                .modal-section {
-                    margin-bottom: var(--spacing-xl);
-                }
-                
-                .modal-section h3 {
-                    font-size: var(--font-size-lg);
-                    font-weight: 600;
-                    margin-bottom: var(--spacing-md);
-                    color: var(--text-primary);
-                }
-                
-                .modal-image {
-                    width: 100%;
-                    border-radius: var(--border-radius-lg);
-                    box-shadow: var(--shadow-md);
-                }
-                
-                .feature-list {
-                    list-style: none;
-                    padding: 0;
-                }
-                
-                .feature-list li {
-                    padding: var(--spacing-sm) 0;
-                    border-bottom: 1px solid var(--border-color);
-                    position: relative;
-                    padding-left: var(--spacing-lg);
-                }
-                
-                .feature-list li:before {
-                    content: '✓';
-                    position: absolute;
-                    left: 0;
-                    color: var(--accent-primary);
-                    font-weight: bold;
-                }
-                
-                .tech-stack-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                    gap: var(--spacing-lg);
-                }
-                
-                .tech-category h4 {
-                    font-size: var(--font-size-base);
-                    font-weight: 600;
-                    margin-bottom: var(--spacing-sm);
-                    color: var(--text-primary);
-                }
-                
-                .tech-tags {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: var(--spacing-xs);
-                }
-                
-                .tech-tag {
-                    padding: var(--spacing-xs) var(--spacing-sm);
-                    background: var(--bg-tertiary);
-                    color: var(--text-secondary);
-                    border-radius: var(--border-radius);
-                    font-size: var(--font-size-xs);
-                    font-weight: 500;
-                }
-                
-                .client-quote {
-                    font-style: italic;
-                    font-size: var(--font-size-lg);
-                    color: var(--text-secondary);
-                    border-left: 4px solid var(--accent-primary);
-                    padding-left: var(--spacing-lg);
-                    margin: var(--spacing-lg) 0;
-                }
-                
-                .screenshot-gallery {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                    gap: var(--spacing-md);
-                }
-                
-                .screenshot {
-                    width: 100%;
-                    border-radius: var(--border-radius);
-                    box-shadow: var(--shadow-sm);
-                    transition: transform var(--transition-fast);
-                    cursor: pointer;
-                }
-                
-                .screenshot:hover {
-                    transform: scale(1.05);
-                }
-                
-                .modal-actions {
-                    display: flex;
-                    gap: var(--spacing-md);
-                    justify-content: center;
-                    margin-top: var(--spacing-xl);
-                    padding-top: var(--spacing-lg);
-                    border-top: 1px solid var(--border-color);
-                }
-                
-                @media (max-width: 768px) {
-                    .modal-actions {
-                        flex-direction: column;
-                    }
-                    
-                    .tech-stack-grid {
-                        grid-template-columns: 1fr;
-                    }
-                    
-                    .screenshot-gallery {
-                        grid-template-columns: 1fr;
-                    }
-                }
-            </style>
         `;
     }
 
@@ -452,9 +280,7 @@ class ProjectManager {
             `Removed "${project.title}" from favorites` : 
             `Added "${project.title}" to favorites`;
         
-        if (window.mikeSites) {
-            window.mikeSites.showNotification(message, 'success');
-        }
+        console.log(message);
     }
 
     loadFavorites() {
