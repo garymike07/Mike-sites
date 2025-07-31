@@ -1,6 +1,26 @@
 {
   "projects": [
     {
+      "id": 2,
+      "title": "Personal Portfolio",
+      "category": "portfolio",
+      "status": "live",
+      "description": "Clean, minimalist portfolio website showcasing creative work with interactive elements and smooth transitions.",
+      "tags": ["HTML5", "CSS3", "JavaScript", "GSAP"],
+      "thumbnail": "👨‍💻",
+      "features": [
+        "Interactive animations",
+        "Project showcase gallery",
+        "Contact form",
+        "Blog integration",
+        "Dark/Light mode toggle"
+      ],
+      "challenges": "Balancing visual appeal with fast loading times and accessibility.",
+      "github": "https://github.com/garymike07/portfolio",
+      "demo": "https://garymike07.github.io/myk/",
+      "screenshots": ["portfolio1.jpg", "portfolio2.jpg"]
+    },
+    {
       "id": 1,
       "title": "SaaS Landing Page",
       "category": "saas",
@@ -21,26 +41,6 @@
       "screenshots": ["screenshot1.jpg", "screenshot2.jpg"],
       "completionDate": "30/07/2025",
       "developedBy": "Mike"
-    },
-    {
-      "id": 2,
-      "title": "Personal Portfolio",
-      "category": "portfolio",
-      "status": "live",
-      "description": "Clean, minimalist portfolio website showcasing creative work with interactive elements and smooth transitions.",
-      "tags": ["HTML5", "CSS3", "JavaScript", "GSAP"],
-      "thumbnail": "👨‍💻",
-      "features": [
-        "Interactive animations",
-        "Project showcase gallery",
-        "Contact form",
-        "Blog integration",
-        "Dark/Light mode toggle"
-      ],
-      "challenges": "Balancing visual appeal with fast loading times and accessibility.",
-      "github": "https://github.com/garymike07/portfolio",
-      "demo": "https://portfolio-demo.mikesites.dev",
-      "screenshots": ["portfolio1.jpg", "portfolio2.jpg"]
     },
     {
       "id": 3,
