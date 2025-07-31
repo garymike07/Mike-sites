@@ -64,7 +64,8 @@
             <li><a href="#contact" class="nav-link" data-section="contact">📧 Contact</a></li>
             <li><a href="#tech-stack" class="nav-link" data-section="tech-stack">⚡ Tech Stack</a></li>
             <li><a href="#toolbox" class="nav-link" data-section="toolbox">🛠️ Toolbox</a></li>
-            <li><a href="#blog" class="nav-link" data-section="blog">📝 Blog</a></li>
+            <li><a href="#blog" class="nav-link" data-section="blog">📝 Blog Posts</a></li>
+            <li><a href="#blog-generator" class="nav-link" data-section="blog-generator">💡 Blog Generator</a></li>
             <li><a href="#playground" class="nav-link" data-section="playground">🎮 Playground</a></li>
         </ul>
 
@@ -372,6 +373,49 @@
                     <div class="preview-container">
                         <iframe id="preview-frame" class="preview-frame"></iframe>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Generator Section -->
+        <section id="blog-generator" class="section">
+            <div class="section-header">
+                <h2>Blog Post Generator</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Create a styled blog post from your content. Type your content, choose a template, and see a live preview. When you're ready, you can download the complete HTML file.</p>
+            </div>
+
+            <div class="generator-container">
+                <div class="generator-controls">
+                    <h3>Content</h3>
+                    <div class="form-group">
+                        <label for="blog-title">Title</label>
+                        <input type="text" id="blog-title" placeholder="Enter your blog post title">
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-author">Author</label>
+                        <input type="text" id="blog-author" placeholder="Enter the author's name">
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-content">Content (Markdown supported)</label>
+                        <textarea id="blog-content" rows="15" placeholder="Write your blog content here..."></textarea>
+                    </div>
+
+                    <h3>Templates</h3>
+                    <div id="template-selector" class="template-selector">
+                        <button class="template-btn active" data-template="minimalist">Minimalist</button>
+                        <button class="template-btn" data-template="professional">Professional</button>
+                        <button class="template-btn" data-template="creative">Creative</button>
+                        <button class="template-btn" data-template="developer">Developer</button>
+                    </div>
+
+                    <button id="download-html-btn" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                        Download HTML
+                    </button>
+                </div>
+
+                <div class="generator-preview">
+                    <h3>Live Preview</h3>
+                    <iframe id="blog-preview-frame" class="blog-preview-frame"></iframe>
                 </div>
             </div>
         </section>
