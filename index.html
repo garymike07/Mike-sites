@@ -281,8 +281,12 @@
                             <span class="tech-item">React</span>
                             <span class="tech-item">Vue.js</span>
                             <span class="tech-item">TypeScript</span>
-                            <span class="tech-item">Tailwind CSS</span>
-                            <span class="tech-item">SASS</span>
+                            <span class="tech-item">Angular</span>
+                            <span class="tech-item">HTML5</span>
+                            <span class="tech-item">CSS3</span>
+                            <span class="tech-item">JavaScript (ES6+)</span>
+                            <span class="tech-item">Sass/Less</span>
+                            <span class="tech-item">Webpack/Rollup</span>
                         </div>
                     </div>
                     <div class="tech-category">
@@ -290,19 +294,43 @@
                         <div class="tech-items">
                             <span class="tech-item">Node.js</span>
                             <span class="tech-item">Python</span>
-                            <span class="tech-item">Express</span>
-                            <span class="tech-item">Django</span>
-                            <span class="tech-item">PostgreSQL</span>
+                            <span class="tech-item">Express.js</span>
+                            <span class="tech-item">Django/Flask</span>
+                            <span class="tech-item">Ruby on Rails</span>
+                            <span class="tech-item">PHP</span>
+                            <span class="tech-item">Go</span>
                         </div>
                     </div>
                     <div class="tech-category">
-                        <h3>Tools & Services</h3>
+                        <h3>Databases</h3>
+                        <div class="tech-items">
+                            <span class="tech-item">MongoDB</span>
+                            <span class="tech-item">PostgreSQL</span>
+                            <span class="tech-item">MySQL</span>
+                            <span class="tech-item">Firebase Firestore</span>
+                            <span class="tech-item">Redis</span>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Cloud & DevOps</h3>
                         <div class="tech-items">
                             <span class="tech-item">AWS</span>
+                            <span class="tech-item">Google Cloud</span>
+                            <span class="tech-item">Azure</span>
                             <span class="tech-item">Docker</span>
+                            <span class="tech-item">Kubernetes</span>
+                            <span class="tech-item">CI/CD</span>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Tools & Others</h3>
+                        <div class="tech-items">
                             <span class="tech-item">Git</span>
+                            <span class="tech-item">GitHub/GitLab</span>
+                            <span class="tech-item">Jira</span>
                             <span class="tech-item">Figma</span>
-                            <span class="tech-item">Vercel</span>
+                            <span class="tech-item">RESTful APIs</span>
+                            <span class="tech-item">GraphQL</span>
                         </div>
                     </div>
                 </div>
@@ -313,26 +341,26 @@
         <section id="toolbox" class="section">
             <div class="toolbox-container">
                 <h2>Developer Toolbox</h2>
-                <div class="tools-grid">
+                <div class="toolbox-grid">
                     <div class="tool-card">
-                        <h3>Color Palette Generator</h3>
-                        <p>Generate beautiful color schemes for your projects</p>
-                        <button class="tool-btn">Launch Tool</button>
+                        <h3>Color Converter</h3>
+                        <p>Convert color formats (Hex, RGB, HSL).</p>
+                        <button>Open Tool</button>
                     </div>
                     <div class="tool-card">
-                        <h3>CSS Grid Generator</h3>
-                        <p>Create responsive CSS Grid layouts visually</p>
-                        <button class="tool-btn">Launch Tool</button>
+                        <h3>Base64 Encoder/Decoder</h3>
+                        <p>Encode and decode Base64 strings.</p>
+                        <button>Open Tool</button>
                     </div>
                     <div class="tool-card">
-                        <h3>API Tester</h3>
-                        <p>Test REST APIs with a simple interface</p>
-                        <button class="tool-btn">Launch Tool</button>
+                        <h3>JSON Formatter</h3>
+                        <p>Prettify and validate JSON data.</p>
+                        <button>Open Tool</button>
                     </div>
                     <div class="tool-card">
-                        <h3>Lorem Ipsum Generator</h3>
-                        <p>Generate placeholder text for your designs</p>
-                        <button class="tool-btn">Launch Tool</button>
+                        <h3>URL Encoder/Decoder</h3>
+                        <p>Encode and decode URL components.</p>
+                        <button>Open Tool</button>
                     </div>
                 </div>
             </div>
@@ -342,7 +370,7 @@
         <section id="blog" class="section">
             <div class="blog-container">
                 <h2>Latest Blog Posts</h2>
-                <div id="blog-posts" class="blog-posts">
+                <div class="blog-posts-grid">
                     <!-- Blog posts will be dynamically loaded here -->
                 </div>
             </div>
@@ -352,48 +380,46 @@
         <section id="playground" class="section">
             <div class="playground-container">
                 <h2>Code Playground</h2>
-                <div class="playground-tabs">
-                    <button class="tab-btn active" data-tab="html">HTML</button>
-                    <button class="tab-btn" data-tab="css">CSS</button>
-                    <button class="tab-btn" data-tab="js">JavaScript</button>
-                </div>
-                <div class="playground-content">
-                    <div class="code-editors">
-                        <textarea id="html-editor" class="code-editor active" placeholder="Enter HTML code..."></textarea>
-                        <textarea id="css-editor" class="code-editor" placeholder="Enter CSS code..."></textarea>
-                        <textarea id="js-editor" class="code-editor" placeholder="Enter JavaScript code..."></textarea>
+                <p>Experiment with HTML, CSS, and JavaScript in real-time.</p>
+                <div class="editor-area">
+                    <div class="editor-panel">
+                        <label for="html-editor">HTML</label>
+                        <textarea id="html-editor" spellcheck="false"></textarea>
                     </div>
-                    <div class="playground-controls">
-                        <button id="run-code" class="run-btn">Run Code</button>
-                        <button id="clear-code" class="clear-btn">Clear</button>
+                    <div class="editor-panel">
+                        <label for="css-editor">CSS</label>
+                        <textarea id="css-editor" spellcheck="false"></textarea>
                     </div>
-                    <div class="preview-container">
-                        <iframe id="preview-frame" class="preview-frame"></iframe>
+                    <div class="editor-panel">
+                        <label for="js-editor">JavaScript</label>
+                        <textarea id="js-editor" spellcheck="false"></textarea>
                     </div>
                 </div>
+                <div class="preview-area">
+                    <label>Live Preview</label>
+                    <iframe id="preview-frame"></iframe>
+                </div>
+                <button id="run-code-btn">Run Code</button>
             </div>
         </section>
-    </main>
 
-    <!-- Project Modal -->
-    <div id="project-modal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <div id="modal-body" class="modal-body">
-                <!-- Modal content will be dynamically loaded here -->
+        <!-- Project Modal Structure -->
+        <div id="project-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3 id="modal-title"></h3>
+                <p id="modal-description"></p>
+                <div id="modal-features"></div>
+                <div id="modal-tech-stack"></div>
+                <a id="modal-live-demo" href="#" target="_blank">Live Demo</a>
+                <a id="modal-github-repo" href="#" target="_blank">GitHub Repo</a>
             </div>
         </div>
-    </div>
 
-    <!-- Notification Container -->
-    <div id="notification-container" class="notification-container"></div>
-
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="loading-overlay">
-        <div class="loading-spinner"></div>
-    </div>
+    </main>
 
     <script src="js/script.js"></script>
 </body>
 </html>
+
 
