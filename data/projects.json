@@ -121,6 +121,101 @@
       "github": "https://github.com/garymike07/admin-dashboard",
       "demo": "https://dashboard-demo.mikesites.dev",
       "screenshots": ["dashboard1.jpg", "dashboard2.jpg"]
+    },
+    {
+      "id": 7,
+      "title": "CV Maker",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "A web application to help users create professional CVs and resumes.",
+      "tags": ["React", "Node.js", "Express", "MongoDB"],
+      "thumbnail": "📄",
+      "features": [
+        "Multiple templates",
+        "Real-time preview",
+        "PDF export",
+        "User authentication"
+      ],
+      "challenges": "Generating PDF documents with consistent styling across different platforms.",
+      "github": "https://github.com/garymike07/cv-maker",
+      "demo": "#",
+      "screenshots": []
+    },
+    {
+      "id": 8,
+      "title": "Learning App",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "An online platform for learning new skills through courses and quizzes.",
+      "tags": ["Vue.js", "Nuxt.js", "Firebase"],
+      "thumbnail": "🎓",
+      "features": [
+        "Course management",
+        "Video lectures",
+        "Quizzes and assignments",
+        "Progress tracking"
+      ],
+      "challenges": "Streaming video content efficiently and securing course materials.",
+      "github": "https://github.com/garymike07/learning-app",
+      "demo": "#",
+      "screenshots": []
+    },
+    {
+      "id": 9,
+      "title": "Landlord Rent Management System",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "A system for landlords to manage properties, tenants, and rent payments.",
+      "tags": ["Angular", "TypeScript", "Node.js", "PostgreSQL"],
+      "thumbnail": "🏠",
+      "features": [
+        "Property and tenant management",
+        "Rent tracking and reminders",
+        "Expense logging",
+        "Reporting"
+      ],
+      "challenges": "Ensuring data security and privacy for sensitive tenant information.",
+      "github": "https://github.com/garymike07/rent-management",
+      "demo": "#",
+      "screenshots": []
+    },
+    {
+      "id": 10,
+      "title": "Pharmacy Management System",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "A comprehensive system for managing pharmacy operations, including inventory and sales.",
+      "tags": ["React", "Redux", "Node.js", "MySQL"],
+      "thumbnail": "💊",
+      "features": [
+        "Inventory management",
+        "Sales and billing",
+        "Prescription management",
+        "Supplier management"
+      ],
+      "challenges": "Complying with healthcare regulations and ensuring data accuracy.",
+      "github": "https://github.com/garymike07/pharmacy-management",
+      "demo": "#",
+      "screenshots": []
+    },
+    {
+      "id": 11,
+      "title": "School Management System",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "An all-in-one platform for managing school activities, students, and staff.",
+      "tags": ["PHP", "Laravel", "MySQL", "jQuery"],
+      "thumbnail": "🏫",
+      "features": [
+        "Student and staff management",
+        "Attendance tracking",
+        "Grading and reports",
+        "Timetable scheduling"
+      ],
+      "challenges": "Handling a large number of concurrent users and managing complex permissions.",
+      "github": "https://github.com/garymike07/school-management",
+      "demo": "#",
+      "screenshots": []
     }
   ]
 }
