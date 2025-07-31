@@ -81,7 +81,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     initLanguageToggle();
     initMobileMenu();
     initNotifications();
-    
+    initBlogGenerator();
+
     // Fetch data
     try {
         const [projectsRes, blogPostsRes] = await Promise.all([
@@ -308,10 +309,29 @@ function toggleFavorite(projectId) {
 function openProjectModal(projectId) {
     const project = projectsData.find(p => p.id === projectId);
     if (!project) return;
-    
+
     const modal = document.getElementById('project-modal');
     const modalBody = document.getElementById('modal-body');
-    
+
+    let extraFields = '';
+    if (project.id === 1) {
+        extraFields = `
+            <div class="project-meta" style="margin-top: 20px; font-size: 0.9rem; color: var(--text-secondary);">
+                ${project.developedBy ? `<div style="margin-bottom: 5px;"><strong>Developed by:</strong> ${project.developedBy}</div>` : ''}
+                ${project.completionDate ? `<div><strong>Completed on:</strong> ${project.completionDate}</div>` : ''}
+            </div>
+        `;
+    }
+
+    let requestRepoButton = '';
+    if (project.id === 1) {
+        requestRepoButton = `
+            <button class="btn btn-secondary" onclick="openRequestRepoModal()">
+                📋 Request Similar Repo
+            </button>
+        `;
+    }
+
     modalBody.innerHTML = `
         <div class="modal-header">
             <h2>${project.title}</h2>
@@ -321,7 +341,9 @@ function openProjectModal(projectId) {
             <div class="project-thumbnail-large">${project.thumbnail}</div>
             <p class="project-description-full">${project.description}</p>
             
-            <div class="project-features">
+            ${extraFields}
+
+            <div class="project-features" style="margin-top: 20px;">
                 <h3>Key Features</h3>
                 <ul>
                     ${project.features.map(feature => `<li>${feature}</li>`).join('')}
@@ -353,10 +375,33 @@ function openProjectModal(projectId) {
                 <button class="btn btn-secondary" onclick="cloneProject('${project.title}')">
                     📋 Clone This Project
                 </button>
+                ${requestRepoButton}
             </div>
         </div>
     `;
-    
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function openRequestRepoModal() {
+    const modal = document.getElementById('project-modal');
+    const modalBody = document.getElementById('modal-body');
+
+    modalBody.innerHTML = `
+        <div class="modal-header">
+            <h2>Contact Creator</h2>
+        </div>
+        <div class="modal-content-body" style="text-align: center; padding: 30px;">
+            <p style="font-size: 1.1rem; margin-bottom: 20px;">To request a similar repository or for any inquiries, please contact the creator at:</p>
+            <h3 style="font-size: 1.5rem; color: var(--accent-color); margin-bottom: 30px; letter-spacing: 1px;">0792 618156</h3>
+            <p style="margin-bottom: 20px;">You can view the source code for the original project on GitHub:</p>
+            <a href="https://github.com/garymike07/myk" target="_blank" class="btn btn-primary">
+                View on GitHub
+            </a>
+        </div>
+    `;
+
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -731,3 +776,141 @@ window.addEventListener('load', () => {
     }, 1000);
 });
 
+function initBlogGenerator() {
+    const titleInput = document.getElementById('blog-title');
+    const authorInput = document.getElementById('blog-author');
+    const contentInput = document.getElementById('blog-content');
+    const templateSelector = document.getElementById('template-selector');
+    const previewFrame = document.getElementById('blog-preview-frame');
+    const downloadBtn = document.getElementById('download-html-btn');
+
+    if (!titleInput) return; // Don't run if the generator elements aren't on the page
+
+    let activeTemplate = 'minimalist';
+
+    function parseMarkdown(text) {
+        if (!text) return '';
+        const toHtml = text
+            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+            .replace(/\*(.*)\*/gim, '<em>$1</em>')
+            .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2">$1</a>')
+            .split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+        return toHtml;
+    }
+
+    function getFullHtml(title, author, content, template) {
+        const bodyClass = `template-${template}-body`;
+        const htmlContent = parseMarkdown(content);
+
+        let templateStructure = `
+            <h1>${title}</h1>
+            <div class="author">By ${author}</div>
+            <div class="content">${htmlContent}</div>
+        `;
+
+        if (template === 'professional') {
+            templateStructure = `
+                <div class="container">
+                    <main>
+                        <h1>${title}</h1>
+                        <div class="author">By ${author}</div>
+                        <div class="content">${htmlContent}</div>
+                    </main>
+                    <aside class="sidebar">
+                        <h3>About the Author</h3>
+                        <p>${author} is a passionate writer and creator.</p>
+                    </aside>
+                </div>
+            `;
+        } else if (template === 'creative') {
+            templateStructure = `
+                <header class="header">
+                    <h1>${title}</h1>
+                    <p class="author">By ${author}</p>
+                </header>
+                <div class="content">${htmlContent}</div>
+            `;
+        }
+
+        return `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>${title}</title>
+                <style>
+                    /* Inlined styles for the template */
+                    .template-minimalist-body { font-family: sans-serif; background-color: #fff; color: #333; line-height: 1.7; padding: 40px; max-width: 800px; margin: 0 auto; }
+                    .template-minimalist-body h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
+                    .template-minimalist-body .author { text-align: center; color: #888; margin-bottom: 40px; }
+                    .template-minimalist-body p { margin-bottom: 20px; }
+
+                    .template-professional-body { font-family: sans-serif; background-color: #f8f9fa; color: #212529; line-height: 1.6; margin: 0; padding: 0; }
+                    .template-professional-body .container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 3fr 1fr; gap: 30px; padding: 40px 20px; }
+                    .template-professional-body h1 { font-size: 2.8rem; margin-bottom: 15px; color: #0056b3; }
+                    .template-professional-body .author { color: #6c757d; margin-bottom: 30px; }
+                    .template-professional-body .sidebar { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+                    .template-professional-body .sidebar h3 { margin-bottom: 15px; }
+
+                    .template-creative-body { font-family: sans-serif; background-color: #fff; color: #444; margin: 0; padding: 0; }
+                    .template-creative-body .header { height: 400px; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1200x400') no-repeat center center/cover; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+                    .template-creative-body .header h1 { font-size: 3.5rem; }
+                    .template-creative-body .content { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+
+                    .template-developer-body { font-family: monospace; background-color: #0d1117; color: #c9d1d9; line-height: 1.6; padding: 40px; }
+                    .template-developer-body h1 { font-size: 2.5rem; margin-bottom: 20px; color: #58a6ff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+                    .template-developer-body .author { color: #8b949e; margin-bottom: 30px; }
+                    .template-developer-body code { background-color: #161b22; padding: 2px 4px; border-radius: 4px; }
+                    .template-developer-body pre { background-color: #161b22; padding: 15px; border-radius: 8px; overflow-x: auto; }
+                </style>
+            </head>
+            <body class="${bodyClass}">
+                ${templateStructure}
+            </body>
+            </html>
+        `;
+    }
+
+    function updateBlogPreview() {
+        if (!previewFrame) return;
+        const title = titleInput.value || 'Your Title Here';
+        const author = authorInput.value || 'Anonymous';
+        const content = contentInput.value || 'Your content will appear here.';
+        const fullHtml = getFullHtml(title, author, content, activeTemplate);
+        previewFrame.srcdoc = fullHtml;
+    }
+
+    function downloadHtmlFile() {
+        const title = titleInput.value || 'blog-post';
+        const author = authorInput.value || 'Anonymous';
+        const content = contentInput.value || '';
+        const fullHtml = getFullHtml(title, author, content, activeTemplate);
+        const blob = new Blob([fullHtml], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `${title.toLowerCase().replace(/\s+/g, '-')}.html`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
+    titleInput.addEventListener('input', updateBlogPreview);
+    authorInput.addEventListener('input', updateBlogPreview);
+    contentInput.addEventListener('input', updateBlogPreview);
+    downloadBtn.addEventListener('click', downloadHtmlFile);
+
+    templateSelector.addEventListener('click', (e) => {
+        if (e.target.matches('.template-btn')) {
+            templateSelector.querySelector('.active').classList.remove('active');
+            e.target.classList.add('active');
+            activeTemplate = e.target.dataset.template;
+            updateBlogPreview();
+        }
+    });
+
+    updateBlogPreview(); // Initial call
+}

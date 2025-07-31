@@ -16,9 +16,11 @@
         "Fast loading performance"
       ],
       "challenges": "Creating smooth animations while maintaining performance across all devices.",
-      "github": "https://github.com/garymike07/saas-landing",
-      "demo": "https://saas-demo.mikesites.dev",
-      "screenshots": ["screenshot1.jpg", "screenshot2.jpg"]
+      "github": "https://github.com/garymike07/myk",
+      "demo": "https://github.com/garymike07/myk",
+      "screenshots": ["screenshot1.jpg", "screenshot2.jpg"],
+      "completionDate": "30/07/2025",
+      "developedBy": "Mike"
     },
     {
       "id": 2,
