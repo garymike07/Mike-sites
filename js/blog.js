@@ -8,6 +8,7 @@ class BlogManager {
         this.postsPerPage = 6;
         this.currentCategory = 'all';
         this.searchQuery = '';
+        this.currentTemplate = '1';
         this.init();
     }
 
@@ -173,6 +174,13 @@ class BlogManager {
             });
         });
 
+        // Template switcher
+        document.querySelectorAll('.template-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.setTemplate(e.target.getAttribute('data-template'));
+            });
+        });
+
         // Pagination
         const prevBtn = document.getElementById('prev-page');
         const nextBtn = document.getElementById('next-page');
@@ -229,6 +237,9 @@ class BlogManager {
         const container = document.getElementById('blog-grid');
         if (!container) return;
 
+        container.className = 'blog-grid'; // Reset class name
+        container.classList.add(`template-${this.currentTemplate}`);
+
         const startIndex = (this.currentPage - 1) * this.postsPerPage;
         const endIndex = startIndex + this.postsPerPage;
         const postsToShow = this.filteredPosts.slice(startIndex, endIndex);
@@ -244,11 +255,38 @@ class BlogManager {
             return;
         }
 
-        container.innerHTML = postsToShow.map(post => this.createPostCard(post)).join('');
+        let templateFunc;
+        switch (this.currentTemplate) {
+            case '1':
+                templateFunc = this.createPostCard_template1;
+                break;
+            case '2':
+                templateFunc = this.createPostCard_template2;
+                break;
+            case '3':
+                templateFunc = this.createPostCard_template3;
+                break;
+            case '4':
+                templateFunc = this.createPostCard_template4;
+                break;
+            default:
+                templateFunc = this.createPostCard_template1;
+        }
+
+        container.innerHTML = postsToShow.map(post => templateFunc.call(this, post)).join('');
         this.attachPostCardListeners(container);
     }
 
-    createPostCard(post) {
+    setTemplate(template) {
+        this.currentTemplate = template;
+        document.querySelectorAll('.template-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`.template-btn[data-template="${template}"]`).classList.add('active');
+        this.renderPosts();
+    }
+
+    createPostCard_template1(post) {
         const formattedDate = new Date(post.publishDate).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -289,6 +327,52 @@ class BlogManager {
                             </button>
                         </div>
                     </div>
+                </div>
+            </article>
+        `;
+    }
+
+    createPostCard_template2(post) {
+        const formattedDate = new Date(post.publishDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        return `
+            <article class="blog-card blog-card-t2" data-post-id="${post.id}" style="background-image: url(${post.thumbnail});">
+                <div class="blog-content-t2">
+                    <div class="blog-category-t2">${post.category}</div>
+                    <h2 class="blog-title-t2">${post.title}</h2>
+                    <div class="blog-meta-t2">
+                        <span>${formattedDate}</span> | <span>${post.readTime}</span>
+                    </div>
+                    <button class="read-more-btn" data-post-id="${post.id}">Read More</button>
+                </div>
+            </article>
+        `;
+    }
+
+    createPostCard_template3(post) {
+        return `
+            <article class="blog-card blog-card-t3" data-post-id="${post.id}">
+                <div class="blog-content-t3">
+                    <h2 class="blog-title-t3">${post.title}</h2>
+                    <p class="blog-excerpt-t3">${post.excerpt}</p>
+                    <div class="blog-meta-t3">
+                        <span>By ${post.author}</span> | <span>${post.readTime}</span>
+                    </div>
+                    <div class="blog-tags-t3">
+                        ${post.tags.map(tag => `<span>#${tag}</span>`).join(' ')}
+                    </div>
+                </div>
+            </article>
+        `;
+    }
+
+    createPostCard_template4(post) {
+        const formattedDate = new Date(post.publishDate).toLocaleDateString('en-US', { day: '2-digit', month: 'short' });
+        return `
+            <article class="blog-card blog-card-t4" data-post-id="${post.id}">
+                <div class="blog-date-t4">${formattedDate}</div>
+                <div class="blog-content-t4">
+                    <h2 class="blog-title-t4">${post.title}</h2>
+                    <div class="blog-category-t4">${post.category}</div>
                 </div>
             </article>
         `;

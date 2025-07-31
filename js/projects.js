@@ -25,7 +25,9 @@ class ProjectManager {
                 thumbnail: "assets/images/project-ecommerce.jpg",
                 tags: ["React", "Node.js", "MongoDB", "Stripe"],
                 liveUrl: "https://demo-ecommerce.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/ecommerce-platform",
+                githubUrl: "https://github.com/garymike07/myk",
+                completionDate: "30/07/2025",
+                developer: "Mike",
                 features: [
                     "Real-time inventory management",
                     "Secure payment processing with Stripe",
@@ -282,9 +284,11 @@ class ProjectManager {
     createProjectCard(project) {
         const isFavorited = this.favorites.includes(project.id);
         const statusClass = project.status.toLowerCase();
-        
+        const clickableClass = project.id === 1 ? ' clickable' : '';
+        const clickableAttribute = project.id === 1 ? `style="cursor:pointer;" onclick="window.location.href='https://github.com/garymike07/myk'"` : '';
+
         return `
-            <div class="project-card" data-project-id="${project.id}">
+            <div class="project-card${clickableClass}" data-project-id="${project.id}" ${clickableAttribute}>
                 <div class="project-thumbnail">
                     <img src="${project.thumbnail}" alt="${project.title}" loading="lazy">
                     <div class="project-status ${statusClass}">${project.status}</div>
@@ -344,6 +348,17 @@ class ProjectManager {
         if (!modalBody) return;
 
         modalBody.innerHTML = this.createProjectModalContent(project);
+
+        if (project.id === 1) {
+            const requestRepoBtn = document.getElementById('request-repo-btn');
+            if (requestRepoBtn) {
+                requestRepoBtn.addEventListener('click', () => {
+                    if (confirm('Contact creator at 0792 618156.')) {
+                        window.open('https://github.com/garymike07/myk', '_blank');
+                    }
+                });
+            }
+        }
         
         if (window.mikeSites) {
             window.mikeSites.openModal('project-modal');
@@ -363,12 +378,24 @@ class ProjectManager {
                 <i class="fab fa-github"></i>
             </a>` : '';
 
+        const requestRepoButton = project.id === 1 ?
+            `<button id="request-repo-btn" class="cta-btn secondary">
+                <span>Request similar repo</span>
+            </button>` : '';
+
         const clientFeedback = project.clientFeedback ? 
             `<div class="modal-section">
                 <h3>Client Feedback</h3>
                 <blockquote class="client-quote">
                     "${project.clientFeedback}"
                 </blockquote>
+            </div>` : '';
+
+        const projectDetails = project.completionDate && project.developer ?
+            `<div class="modal-section">
+                <h3>Project Details</h3>
+                <p><strong>Completed on:</strong> ${project.completionDate}</p>
+                <p><strong>Developed by:</strong> ${project.developer}</p>
             </div>` : '';
 
         return `
@@ -382,6 +409,8 @@ class ProjectManager {
                     <img src="${project.thumbnail}" alt="${project.title}" class="modal-image">
                 </div>
                 
+                ${projectDetails}
+
                 <div class="modal-section">
                     <h3>Description</h3>
                     <p>${project.description}</p>
@@ -437,10 +466,15 @@ class ProjectManager {
                 <div class="modal-actions">
                     ${liveButton}
                     ${githubButton}
+                    ${requestRepoButton}
                 </div>
             </div>
             
             <style>
+                .project-card.clickable:hover {
+                    transform: translateY(-5px);
+                    box-shadow: var(--shadow-lg);
+                }
                 .project-modal-content {
                     max-width: 800px;
                     margin: 0 auto;

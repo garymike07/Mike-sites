@@ -2066,3 +2066,96 @@ textarea:focus {
   }
 }
 
+/* Blog Template 2 Styles */
+.blog-card-t2 {
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--spacing-lg);
+    position: relative;
+    min-height: 350px;
+}
+.blog-card-t2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+.blog-content-t2 {
+    position: relative;
+    z-index: 1;
+}
+.blog-category-t2 {
+    background: var(--accent-primary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    display: inline-block;
+    margin-bottom: var(--spacing-sm);
+}
+.blog-title-t2 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+.blog-meta-t2 {
+    font-size: var(--font-size-sm);
+    opacity: 0.8;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Blog Template 3 Styles */
+.blog-card-t3 {
+    background: var(--bg-secondary);
+    padding: var(--spacing-lg);
+    text-align: center;
+}
+.blog-title-t3 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+.blog-excerpt-t3 {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+.blog-meta-t3 {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-md);
+}
+.blog-tags-t3 span {
+    color: var(--accent-primary);
+    font-weight: 500;
+}
+
+/* Blog Template 4 Styles */
+.blog-card-t4 {
+    display: flex;
+    align-items: center;
+    background: var(--bg-secondary);
+    padding: var(--spacing-md);
+}
+.blog-date-t4 {
+    background: var(--accent-primary);
+    color: white;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 600;
+    margin-right: var(--spacing-md);
+}
+.blog-title-t4 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+.blog-category-t4 {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
