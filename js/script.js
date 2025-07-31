@@ -368,10 +368,10 @@ function openProjectModal(projectId) {
                     🚀 Live Preview
                 </a>
                 <button class="btn btn-secondary" onclick="requestProjectClone()">
-                    🛒 Request Clone
+                    <i class="fas fa-shopping-cart"></i> Request Clone
                 </button>
                 <button class="btn btn-secondary" onclick="downloadProject('${project.github}')">
-                    📥 Download Code
+                    <i class="fas fa-download"></i> Download Code
                 </button>
             </div>
         </div>
@@ -908,6 +908,28 @@ function initBlogGenerator() {
         const title = titleInput.value || 'blog-post';
         const author = authorInput.value || 'Anonymous';
         const content = contentInput.value || '';
+
+        // Create a new blog post object
+        const newPost = {
+            id: Math.max(...blogPosts.map(p => p.id)) + 1,
+            title: title,
+            slug: title.toLowerCase().replace(/\s+/g, '-'),
+            excerpt: content.substring(0, 100) + '...',
+            content: content,
+            date: new Date().toISOString().split('T')[0],
+            readTime: `${Math.ceil(content.split(' ').length / 200)} min read`,
+            image: '📝',
+            tags: ['Generated'],
+            author: author
+        };
+
+        // Add the new post to the beginning of the array
+        blogPosts.unshift(newPost);
+
+        // Re-render the blog posts section
+        initBlogPosts();
+
+        // Generate and download the HTML file
         const fullHtml = getFullHtml(title, author, content, activeTemplate);
         const blob = new Blob([fullHtml], { type: 'text/html' });
         const a = document.createElement('a');
