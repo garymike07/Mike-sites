@@ -246,7 +246,11 @@ function renderProjects(projects) {
     
     projectsGrid.innerHTML = projects.map(project => `
         <div class="project-card" data-project-id="${project.id}">
-            <div class="project-thumbnail">${project.thumbnail}</div>
+            <div class="project-thumbnail">
+                ${project.thumbnail.startsWith('images/') ? 
+                    `<img src="${project.thumbnail}" alt="${project.title}" loading="lazy">` : 
+                    project.thumbnail}
+            </div>
             <div class="project-content">
                 <h3 class="project-title">${project.title}</h3>
                 <span class="project-status status-${project.status}">${getStatusText(project.status)}</span>
