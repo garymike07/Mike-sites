@@ -914,3 +914,16 @@ function initBlogGenerator() {
 
     updateBlogPreview(); // Initial call
 }
+
+
+    const modalContent = modal.querySelector(".modal-content");
+    if (modalContent) {
+        modalContent.addEventListener("click", function(event) {
+            event.stopPropagation();
+        });
+    }
+
+    const closeButton = modal.querySelector(".close-button");
+    if (closeButton) {
+        closeButton.addEventListener("click", closeModal);
+    }
