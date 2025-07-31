@@ -206,18 +206,15 @@ class ProjectManager {
                 <p>${project.challenges}</p>
             </div>` : '';
 
-        const screenshotsSection = project.screenshots && project.screenshots.length > 0 ?
+          const screenshotsSection = project.screenshots && project.screenshots.length > 0 && project.id !== 2 ?
             `<div class="modal-section">
                 <h3>Screenshots</h3>
                 <div class="screenshot-gallery">
                     ${project.screenshots.map(screenshot => 
                         `<img src="images/${screenshot}" alt="${project.title} screenshot" class="screenshot">`
-                    ).join('')}
+                    ).join("")}
                 </div>
-            </div>` : '';
-
-        return `
-            <div class="project-modal-content">
+            </div>` : "";          <div class="project-modal-content">
                 <div class="modal-header">
                     <h2>${project.title}</h2>
                     <div class="project-status ${project.status}">${project.status}</div>
