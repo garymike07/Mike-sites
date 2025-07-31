@@ -70,7 +70,6 @@ html {
 body {
     font-family: 'Soria', sans-serif;
     background-color: var(--primary-bg);
-    background-image: url('../images/background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
