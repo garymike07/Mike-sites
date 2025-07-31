@@ -20,6 +20,10 @@
       "demo": "https://garymike07.github.io/myk/",
       "screenshots": ["portfolio1.jpg", "portfolio2.jpg"]
     },
+    {
+      "id": 1,
+      "title": "SaaS Landing Page",
+      "category": "saas",
       "status": "ongoing",
       "description": "Modern, conversion-optimized landing page for SaaS products with animated sections and responsive design.",
       "tags": ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
@@ -78,6 +82,10 @@
       "demo": "https://shop-demo.mikesites.dev",
       "screenshots": ["shop1.jpg", "shop2.jpg"]
     },
+    {
+      "id": 5,
+      "title": "Cafe Website",
+      "category": "other",
       "status": "ongoing",
       "description": "Elegant website for a local cafe with online menu, reservation system, and location information.",
       "tags": ["Vue.js", "Nuxt.js", "SCSS", "Firebase"],
