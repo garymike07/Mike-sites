@@ -314,7 +314,7 @@ function openProjectModal(projectId) {
     const modalBody = document.getElementById('modal-body');
 
     let extraFields = '';
-    if (project.id === 1) {
+    if (project.id === 2) {
         extraFields = `
             <div class="project-meta" style="margin-top: 20px; font-size: 0.9rem; color: var(--text-secondary);">
                 ${project.developedBy ? `<div style="margin-bottom: 5px;"><strong>Developed by:</strong> ${project.developedBy}</div>` : ''}
@@ -324,11 +324,11 @@ function openProjectModal(projectId) {
     }
 
     let requestRepoButton = '';
-    if (project.id === 1) {
+    if (project.id === 2) {
         requestRepoButton = `
-            <button class="btn btn-secondary" onclick="openRequestRepoModal()">
-                📋 Request Similar Repo
-            </button>
+            <a href="https://garymike07.github.io/myk/" target="_blank" class="btn btn-primary">
+                Visit My Site
+            </a>
         `;
     }
 
