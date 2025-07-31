@@ -148,33 +148,36 @@
                     <div class="scroll-arrow"></div>
                     <span>Scroll to explore</span>
                 </div>
-            </div>
-        </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="section-header">
-                <h2>Smart Project Showcase</h2>
-                <div class="project-controls">
-                    <div class="search-container">
-                        <input type="text" id="project-search" placeholder="Search projects...">
+                <div class="project-showcase-container" style="margin-top: 60px; padding: 0 20px;">
+                    <div class="section-header">
+                        <h2>Smart Project Showcase</h2>
+                        <div class="project-controls">
+                            <div class="search-container">
+                                <input type="text" id="project-search" placeholder="Search projects...">
+                            </div>
+                            <div class="filter-container">
+                                <select id="project-filter">
+                                    <option value="all">All Categories</option>
+                                    <option value="saas">SaaS</option>
+                                    <option value="portfolio">Portfolio</option>
+                                    <option value="blog">Blog</option>
+                                    <option value="ecommerce">E-commerce</option>
+                                    <option value="dashboard">Dashboard</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div class="filter-container">
-                        <select id="project-filter">
-                            <option value="all">All Categories</option>
-                            <option value="saas">SaaS</option>
-                            <option value="portfolio">Portfolio</option>
-                            <option value="blog">Blog</option>
-                            <option value="ecommerce">E-commerce</option>
-                            <option value="dashboard">Dashboard</option>
-                        </select>
+
+                    <div id="projects-grid" class="projects-grid">
+                        <!-- Projects will be dynamically loaded here -->
                     </div>
                 </div>
             </div>
-            
-            <div id="projects-grid" class="projects-grid">
-                <!-- Projects will be dynamically loaded here -->
-            </div>
+        </section>
+
+        <!-- Projects Section (now empty, can be removed later) -->
+        <section id="projects" class="section">
         </section>
 
         <!-- About Section -->
