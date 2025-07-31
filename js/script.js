@@ -327,15 +327,6 @@ function openProjectModal(projectId) {
         `;
     }
 
-    let requestRepoButton = '';
-    if (project.id === 2) {
-        requestRepoButton = `
-            <a href="https://garymike07.github.io/myk/" target="_blank" class="btn btn-primary">
-                Visit My Site
-            </a>
-        `;
-    }
-
     modalBody.innerHTML = `
         <div class="modal-header">
             <h2>${project.title}</h2>
@@ -376,16 +367,33 @@ function openProjectModal(projectId) {
                 <a href="${project.demo}" target="_blank" class="btn btn-primary">
                     🚀 Live Preview
                 </a>
-                <button class="btn btn-secondary" onclick="cloneProject('${project.title}')">
-                    📋 Clone This Project
+                <button class="btn btn-secondary" onclick="requestProjectClone()">
+                    🛒 Request Clone
                 </button>
-                ${requestRepoButton}
+                <button class="btn btn-secondary" onclick="downloadProject('${project.github}')">
+                    📥 Download Code
+                </button>
             </div>
         </div>
     `;
 
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+}
+
+function requestProjectClone() {
+    showNotification('To request a clone of this project, please contact the creator.', 'info');
+}
+
+function downloadProject(githubUrl) {
+    const pin = prompt("Please enter the secret PIN to download the project:");
+    if (pin === "1234") {
+        const downloadUrl = `${githubUrl}/archive/refs/heads/main.zip`;
+        window.open(downloadUrl, '_blank');
+        showNotification('Download started!', 'success');
+    } else {
+        showNotification('Invalid PIN. Download aborted.', 'error');
+    }
 }
 
 function openRequestRepoModal() {
@@ -425,22 +433,30 @@ function cloneProject(projectTitle) {
 
 // Blog posts
 function initBlogPosts() {
-    const blogContainer = document.getElementById('blog-posts');
+    const blogContainer = document.querySelector('.blog-posts-grid');
     if (!blogContainer) return;
-    
-    blogContainer.innerHTML = blogPosts.map(post => `
-        <article class="blog-post" onclick="openBlogModal(${post.id})" style="cursor: pointer;">
-            <div class="blog-post-image">${post.image}</div>
-            <div class="blog-post-content">
-                <h3 class="blog-post-title">${post.title}</h3>
-                <p class="blog-post-excerpt">${post.excerpt}</p>
-                <div class="blog-post-meta">
-                    <span>${new Date(post.date).toLocaleDateString()}</span>
-                    <span>${post.readTime}</span>
+
+    // Sort posts by date in descending order
+    const sortedPosts = blogPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Get the most recent post
+    const recentPost = sortedPosts[0];
+
+    if (recentPost) {
+        blogContainer.innerHTML = `
+            <article class="blog-post" onclick="openBlogModal(${recentPost.id})" style="cursor: pointer;">
+                <div class="blog-post-image">${recentPost.image}</div>
+                <div class="blog-post-content">
+                    <h3 class="blog-post-title">${recentPost.title}</h3>
+                    <p class="blog-post-excerpt">${recentPost.excerpt}</p>
+                    <div class="blog-post-meta">
+                        <span>${new Date(recentPost.date).toLocaleDateString()}</span>
+                        <span>${recentPost.readTime}</span>
+                    </div>
                 </div>
-            </div>
-        </article>
-    `).join('');
+            </article>
+        `;
+    }
 }
 
 function openBlogModal(postId) {
