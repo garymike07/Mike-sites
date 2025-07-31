@@ -121,6 +121,96 @@
       "github": "https://github.com/garymike07/admin-dashboard",
       "demo": "https://dashboard-demo.mikesites.dev",
       "screenshots": ["dashboard1.jpg", "dashboard2.jpg"]
+    },
+    {
+      "id": 7,
+      "title": "CV Maker",
+      "category": "other",
+      "status": "ongoing",
+      "description": "Create professional CVs and resumes with ease.",
+      "tags": ["React", "Node.js", "MongoDB"],
+      "thumbnail": "📄",
+      "features": [
+        "Multiple templates",
+        "Real-time preview",
+        "PDF export"
+      ],
+      "challenges": "Generating pixel-perfect PDFs from HTML templates.",
+      "github": "https://github.com/garymike07/cv-maker",
+      "demo": "https://cv-maker-demo.mikesites.dev",
+      "screenshots": []
+    },
+    {
+      "id": 8,
+      "title": "Learning App",
+      "category": "other",
+      "status": "ongoing",
+      "description": "An interactive platform for online learning.",
+      "tags": ["Vue.js", "Firebase"],
+      "thumbnail": "🎓",
+      "features": [
+        "Video lessons",
+        "Quizzes",
+        "Progress tracking"
+      ],
+      "challenges": "Creating a seamless and engaging learning experience.",
+      "github": "https://github.com/garymike07/learning-app",
+      "demo": "https://learning-app-demo.mikesites.dev",
+      "screenshots": []
+    },
+    {
+      "id": 9,
+      "title": "Landlord Rent Management System",
+      "category": "other",
+      "status": "ongoing",
+      "description": "A system for landlords to manage rent payments and properties.",
+      "tags": ["React", "Node.js", "PostgreSQL"],
+      "thumbnail": "🏠",
+      "features": [
+        "Property management",
+        "Rent tracking",
+        "Tenant management"
+      ],
+      "challenges": "Ensuring data security and privacy.",
+      "github": "https://github.com/garymike07/rent-management",
+      "demo": "https://rent-management-demo.mikesites.dev",
+      "screenshots": []
+    },
+    {
+      "id": 10,
+      "title": "Pharmacy Management System",
+      "category": "other",
+      "status": "ongoing",
+      "description": "A system for managing a pharmacy's inventory and sales.",
+      "tags": ["Angular", "Spring Boot", "MySQL"],
+      "thumbnail": "💊",
+      "features": [
+        "Inventory management",
+        "Sales tracking",
+        "Prescription management"
+      ],
+      "challenges": "Handling sensitive patient data and complying with regulations.",
+      "github": "https://github.com/garymike07/pharmacy-management",
+      "demo": "https://pharmacy-management-demo.mikesites.dev",
+      "screenshots": []
+    },
+    {
+      "id": 11,
+      "title": "School Management System",
+      "category": "other",
+      "status": "ongoing",
+      "description": "A comprehensive system for managing school operations.",
+      "tags": ["React", "Django", "PostgreSQL"],
+      "thumbnail": "🏫",
+      "features": [
+        "Student management",
+        "Teacher management",
+        "Course management"
+      ],
+      "challenges": "Creating a system that is easy to use for all stakeholders.",
+      "github": "https://github.com/garymike07/school-management",
+      "demo": "https://school-management-demo.mikesites.dev",
+      "screenshots": []
     }
   ]
 }

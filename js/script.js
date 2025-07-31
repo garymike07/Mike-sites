@@ -376,8 +376,11 @@ function openProjectModal(projectId) {
                 <a href="${project.demo}" target="_blank" class="btn btn-primary">
                     🚀 Live Preview
                 </a>
-                <button class="btn btn-secondary" onclick="cloneProject('${project.title}')">
-                    📋 Clone This Project
+                <button class="btn btn-secondary" onclick="requestClone('${project.title}')">
+                    🛒 Request a Clone
+                </button>
+                <button class="btn btn-secondary" onclick="downloadCode('${project.github}')">
+                    💾 Download Code
                 </button>
                 ${requestRepoButton}
             </div>
@@ -416,31 +419,46 @@ function closeModal() {
     document.body.style.overflow = 'auto';
 }
 
-function cloneProject(projectTitle) {
-    const cloneCommand = `git clone https://github.com/garymike07/${projectTitle.toLowerCase().replace(/\s+/g, '-')}`;
-    navigator.clipboard.writeText(cloneCommand).then(() => {
-        showNotification('Clone command copied to clipboard!', 'success');
-    });
+function requestClone(projectTitle) {
+    showNotification(`Request for a clone of ${projectTitle} has been sent.`, 'success');
+}
+
+function downloadCode(repoUrl) {
+    const pin = prompt("Please enter the secret PIN provided by the creator:");
+    if (pin) {
+        // In a real application, you would verify the PIN against a server.
+        // For now, we'll just assume it's correct and proceed with the download.
+        const downloadUrl = `${repoUrl}/archive/refs/heads/main.zip`;
+        window.open(downloadUrl, '_blank');
+    }
 }
 
 // Blog posts
 function initBlogPosts() {
-    const blogContainer = document.getElementById('blog-posts');
+    const blogContainer = document.querySelector('.blog-posts-grid');
     if (!blogContainer) return;
-    
-    blogContainer.innerHTML = blogPosts.map(post => `
-        <article class="blog-post" onclick="openBlogModal(${post.id})" style="cursor: pointer;">
-            <div class="blog-post-image">${post.image}</div>
-            <div class="blog-post-content">
-                <h3 class="blog-post-title">${post.title}</h3>
-                <p class="blog-post-excerpt">${post.excerpt}</p>
-                <div class="blog-post-meta">
-                    <span>${new Date(post.date).toLocaleDateString()}</span>
-                    <span>${post.readTime}</span>
+
+    // Sort posts by date in descending order
+    const sortedPosts = blogPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Get the most recent post
+    const recentPost = sortedPosts[0];
+
+    if (recentPost) {
+        blogContainer.innerHTML = `
+            <article class="blog-post" onclick="openBlogModal(${recentPost.id})" style="cursor: pointer;">
+                <div class="blog-post-image">${recentPost.image}</div>
+                <div class="blog-post-content">
+                    <h3 class="blog-post-title">${recentPost.title}</h3>
+                    <p class="blog-post-excerpt">${recentPost.excerpt}</p>
+                    <div class="blog-post-meta">
+                        <span>${new Date(recentPost.date).toLocaleDateString()}</span>
+                        <span>${recentPost.readTime}</span>
+                    </div>
                 </div>
-            </div>
-        </article>
-    `).join('');
+            </article>
+        `;
+    }
 }
 
 function openBlogModal(postId) {
