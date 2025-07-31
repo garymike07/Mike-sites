@@ -382,6 +382,18 @@ function openProjectModal(projectId) {
 
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    const modalContent = modal.querySelector(".modal-content");
+    if (modalContent) {
+        modalContent.addEventListener("click", function(event) {
+            event.stopPropagation();
+        });
+    }
+
+    const closeButton = modal.querySelector(".close-button");
+    if (closeButton) {
+        closeButton.addEventListener("click", closeModal);
+    }
 }
 
 function openRequestRepoModal() {
@@ -404,6 +416,18 @@ function openRequestRepoModal() {
 
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    const modalContent = modal.querySelector(".modal-content");
+    if (modalContent) {
+        modalContent.addEventListener("click", function(event) {
+            event.stopPropagation();
+        });
+    }
+
+    const closeButton = modal.querySelector(".close-button");
+    if (closeButton) {
+        closeButton.addEventListener("click", closeModal);
+    }
 }
 
 function closeModal() {
@@ -475,6 +499,18 @@ function openBlogModal(postId) {
 
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    const modalContent = modal.querySelector(".modal-content");
+    if (modalContent) {
+        modalContent.addEventListener("click", function(event) {
+            event.stopPropagation();
+        });
+    }
+
+    const closeButton = modal.querySelector(".close-button");
+    if (closeButton) {
+        closeButton.addEventListener("click", closeModal);
+    }
 }
 
 // Contact form
