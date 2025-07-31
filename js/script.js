@@ -166,13 +166,13 @@ function initNavigation() {
             e.preventDefault();
             const category = link.dataset.category;
             
-            // Switch to projects section
+            // Switch to home section to show the projects
             sections.forEach(section => {
-                section.classList.toggle('active', section.id === 'projects');
+                section.classList.toggle('active', section.id === 'home');
             });
             
             navLinks.forEach(l => l.classList.remove('active'));
-            document.querySelector('[data-section="projects"]').classList.add('active');
+            document.querySelector('[data-section="home"]').classList.add('active');
             
             // Filter projects by category
             filterProjects(category);
