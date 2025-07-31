@@ -864,24 +864,24 @@ function initBlogGenerator() {
                 <title>${title}</title>
                 <style>
                     /* Inlined styles for the template */
-                    .template-minimalist-body { font-family: sans-serif; background-color: #fff; color: #333; line-height: 1.7; padding: 40px; max-width: 800px; margin: 0 auto; }
+                    .template-minimalist-body { font-family: 'Soria', sans-serif; background-color: #fff; color: #333; line-height: 1.7; padding: 40px; max-width: 800px; margin: 0 auto; }
                     .template-minimalist-body h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
                     .template-minimalist-body .author { text-align: center; color: #888; margin-bottom: 40px; }
                     .template-minimalist-body p { margin-bottom: 20px; }
 
-                    .template-professional-body { font-family: sans-serif; background-color: #f8f9fa; color: #212529; line-height: 1.6; margin: 0; padding: 0; }
+                    .template-professional-body { font-family: 'Soria', sans-serif; background-color: #f8f9fa; color: #212529; line-height: 1.6; margin: 0; padding: 0; }
                     .template-professional-body .container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 3fr 1fr; gap: 30px; padding: 40px 20px; }
                     .template-professional-body h1 { font-size: 2.8rem; margin-bottom: 15px; color: #0056b3; }
                     .template-professional-body .author { color: #6c757d; margin-bottom: 30px; }
                     .template-professional-body .sidebar { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
                     .template-professional-body .sidebar h3 { margin-bottom: 15px; }
 
-                    .template-creative-body { font-family: sans-serif; background-color: #fff; color: #444; margin: 0; padding: 0; }
+                    .template-creative-body { font-family: 'Soria', sans-serif; background-color: #fff; color: #444; margin: 0; padding: 0; }
                     .template-creative-body .header { height: 400px; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1200x400') no-repeat center center/cover; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
                     .template-creative-body .header h1 { font-size: 3.5rem; }
                     .template-creative-body .content { max-width: 800px; margin: 40px auto; padding: 0 20px; }
 
-                    .template-developer-body { font-family: monospace; background-color: #0d1117; color: #c9d1d9; line-height: 1.6; padding: 40px; }
+                    .template-developer-body { font-family: 'Soria', monospace; background-color: #0d1117; color: #c9d1d9; line-height: 1.6; padding: 40px; }
                     .template-developer-body h1 { font-size: 2.5rem; margin-bottom: 20px; color: #58a6ff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
                     .template-developer-body .author { color: #8b949e; margin-bottom: 30px; }
                     .template-developer-body code { background-color: #161b22; padding: 2px 4px; border-radius: 4px; }
