@@ -61,168 +61,20 @@ const dailyTips = [
 ];
 
 // Project data
-const projectsData = [
-    {
-        id: 1,
-        title: "SaaS Landing Page",
-        category: "saas",
-        status: "live",
-        description: "Modern, conversion-optimized landing page for SaaS products with animated sections and responsive design.",
-        tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
-        thumbnail: "🚀",
-        features: [
-            "Responsive design for all devices",
-            "Smooth scroll animations",
-            "Contact form integration",
-            "SEO optimized",
-            "Fast loading performance"
-        ],
-        challenges: "Creating smooth animations while maintaining performance across all devices.",
-        github: "https://github.com/garymike07/saas-landing",
-        demo: "https://saas-demo.mikesites.dev",
-        screenshots: ["screenshot1.jpg", "screenshot2.jpg"]
-    },
-    {
-        id: 2,
-        title: "Personal Portfolio",
-        category: "portfolio",
-        status: "live",
-        description: "Clean, minimalist portfolio website showcasing creative work with interactive elements and smooth transitions.",
-        tags: ["HTML5", "CSS3", "JavaScript", "GSAP"],
-        thumbnail: "👨‍💻",
-        features: [
-            "Interactive animations",
-            "Project showcase gallery",
-            "Contact form",
-            "Blog integration",
-            "Dark/Light mode toggle"
-        ],
-        challenges: "Balancing visual appeal with fast loading times and accessibility.",
-        github: "https://github.com/garymike07/portfolio",
-        demo: "https://portfolio-demo.mikesites.dev",
-        screenshots: ["portfolio1.jpg", "portfolio2.jpg"]
-    },
-    {
-        id: 3,
-        title: "Blog Template",
-        category: "blog",
-        status: "progress",
-        description: "Feature-rich blog template with markdown support, search functionality, and social sharing capabilities.",
-        tags: ["Next.js", "MDX", "Tailwind CSS", "Prisma"],
-        thumbnail: "📝",
-        features: [
-            "Markdown blog posts",
-            "Search and filtering",
-            "Social sharing",
-            "Comment system",
-            "RSS feed generation"
-        ],
-        challenges: "Implementing efficient search and content management system.",
-        github: "https://github.com/garymike07/blog-template",
-        demo: "https://blog-demo.mikesites.dev",
-        screenshots: ["blog1.jpg", "blog2.jpg"]
-    },
-    {
-        id: 4,
-        title: "E-Commerce Site",
-        category: "ecommerce",
-        status: "concept",
-        description: "Full-featured e-commerce platform with shopping cart, payment integration, and admin dashboard.",
-        tags: ["React", "Node.js", "MongoDB", "Stripe"],
-        thumbnail: "🛒",
-        features: [
-            "Product catalog",
-            "Shopping cart",
-            "Payment processing",
-            "User authentication",
-            "Admin dashboard"
-        ],
-        challenges: "Implementing secure payment processing and inventory management.",
-        github: "https://github.com/garymike07/ecommerce",
-        demo: "https://shop-demo.mikesites.dev",
-        screenshots: ["shop1.jpg", "shop2.jpg"]
-    },
-    {
-        id: 5,
-        title: "Cafe Website",
-        category: "portfolio",
-        status: "live",
-        description: "Elegant website for a local cafe with online menu, reservation system, and location information.",
-        tags: ["Vue.js", "Nuxt.js", "SCSS", "Firebase"],
-        thumbnail: "☕",
-        features: [
-            "Online menu display",
-            "Table reservations",
-            "Location and hours",
-            "Photo gallery",
-            "Contact information"
-        ],
-        challenges: "Creating an appetizing visual design that loads quickly on mobile devices.",
-        github: "https://github.com/garymike07/cafe-website",
-        demo: "https://cafe-demo.mikesites.dev",
-        screenshots: ["cafe1.jpg", "cafe2.jpg"]
-    },
-    {
-        id: 6,
-        title: "Admin Dashboard",
-        category: "dashboard",
-        status: "progress",
-        description: "Comprehensive admin dashboard with data visualization, user management, and real-time analytics.",
-        tags: ["React", "D3.js", "Express", "PostgreSQL"],
-        thumbnail: "📊",
-        features: [
-            "Data visualization charts",
-            "User management",
-            "Real-time analytics",
-            "Export functionality",
-            "Role-based access"
-        ],
-        challenges: "Handling large datasets efficiently while maintaining smooth user interactions.",
-        github: "https://github.com/garymike07/admin-dashboard",
-        demo: "https://dashboard-demo.mikesites.dev",
-        screenshots: ["dashboard1.jpg", "dashboard2.jpg"]
-    }
-];
+let projectsData = [];
 
 // Blog posts data
-const blogPosts = [
-    {
-        id: 1,
-        title: "Building Modern Web Applications with React",
-        excerpt: "Learn the best practices for creating scalable and maintainable React applications in 2024.",
-        date: "2024-01-15",
-        readTime: "8 min read",
-        image: "📱"
-    },
-    {
-        id: 2,
-        title: "CSS Grid vs Flexbox: When to Use Which",
-        excerpt: "A comprehensive guide to choosing between CSS Grid and Flexbox for your layout needs.",
-        date: "2024-01-10",
-        readTime: "6 min read",
-        image: "🎨"
-    },
-    {
-        id: 3,
-        title: "JavaScript Performance Optimization Tips",
-        excerpt: "Practical techniques to improve the performance of your JavaScript applications.",
-        date: "2024-01-05",
-        readTime: "10 min read",
-        image: "⚡"
-    }
-];
+let blogPosts = [];
 
 // Initialize application
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('Mike Sites Portfolio Loaded');
     
-    // Initialize all components
+    // Initialize all components that don't depend on fetched data
     initTheme();
     initNavigation();
     initClock();
     initDailyTip();
-    initProjects();
-    initBlogPosts();
     initContactForm();
     initPlayground();
     initScrollAnimations();
@@ -230,6 +82,30 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
     initNotifications();
     
+    // Fetch data
+    try {
+        const [projectsRes, blogPostsRes] = await Promise.all([
+            fetch('data/projects.json'),
+            fetch('data/blog-posts.json')
+        ]);
+        if (!projectsRes.ok || !blogPostsRes.ok) {
+            throw new Error(`HTTP error! status: ${projectsRes.status} ${blogPostsRes.status}`);
+        }
+        const projectsJSON = await projectsRes.json();
+        const blogPostsJSON = await blogPostsRes.json();
+
+        projectsData = projectsJSON.projects;
+        blogPosts = blogPostsJSON.posts;
+
+        // Initialize data-dependent components
+        initProjects();
+        initBlogPosts();
+
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        showNotification('Could not load project or blog data.', 'error');
+    }
+
     // Show welcome notification
     showNotification('Welcome to Mike Sites! 🚀', 'success');
 });
@@ -504,7 +380,7 @@ function initBlogPosts() {
     if (!blogContainer) return;
     
     blogContainer.innerHTML = blogPosts.map(post => `
-        <article class="blog-post">
+        <article class="blog-post" onclick="openBlogModal(${post.id})" style="cursor: pointer;">
             <div class="blog-post-image">${post.image}</div>
             <div class="blog-post-content">
                 <h3 class="blog-post-title">${post.title}</h3>
@@ -516,6 +392,44 @@ function initBlogPosts() {
             </div>
         </article>
     `).join('');
+}
+
+function openBlogModal(postId) {
+    const post = blogPosts.find(p => p.id === postId);
+    if (!post) return;
+
+    const modal = document.getElementById('project-modal');
+    const modalBody = document.getElementById('modal-body');
+
+    // Simple markdown to HTML for paragraphs
+    const formattedContent = post.content.split('\n\n').map(p => `<p>${p}</p>`).join('');
+
+    modalBody.innerHTML = `
+        <div class="modal-header">
+            <h2>${post.title}</h2>
+        </div>
+        <div class="modal-content-body" style="padding-top: 20px;">
+            <div class="blog-post-meta" style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-secondary); display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <span><strong>By:</strong> ${post.author}</span> &bull;
+                <span><strong>Date:</strong> ${new Date(post.date).toLocaleDateString()}</span> &bull;
+                <span><strong>Read time:</strong> ${post.readTime}</span>
+            </div>
+
+            <div class="project-tech-stack" style="margin-bottom: 30px;">
+                <h3>Tags</h3>
+                <div class="tech-tags" style="margin-top: 10px;">
+                    ${post.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+                </div>
+            </div>
+
+            <div class="blog-content-full" style="line-height: 1.8; color: var(--text-secondary);">
+                ${formattedContent}
+            </div>
+        </div>
+    `;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
 // Contact form
