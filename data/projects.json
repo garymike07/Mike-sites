@@ -7,7 +7,7 @@
       "status": "live",
       "description": "Clean, minimalist portfolio website showcasing creative work with interactive elements and smooth transitions.",
       "tags": ["HTML5", "CSS3", "JavaScript", "GSAP"],
-      "thumbnail": "👨‍💻",
+      "thumbnail": "images/1000023920.jpg",
       "features": [
         "Interactive animations",
         "Project showcase gallery",
@@ -37,7 +37,7 @@
       ],
       "challenges": "Creating smooth animations while maintaining performance across all devices.",
       "github": "https://github.com/garymike07/myk",
-      "demo": "https://github.com/garymike07/myk",
+      "demo": "https://garymike07.github.io/myk/",
       "screenshots": ["screenshot1.jpg", "screenshot2.jpg"],
       "completionDate": "30/07/2025",
       "developedBy": "Mike"

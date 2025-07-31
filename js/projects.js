@@ -13,200 +13,18 @@ class ProjectManager {
         this.setupEventListeners();
     }
 
-    loadProjectData() {
-        // Sample project data - in a real application, this would come from an API
-        this.projects = [
-            {
-                id: 1,
-                title: "E-Commerce Platform",
-                description: "A modern, scalable e-commerce solution with advanced features including real-time inventory management, payment processing, and analytics dashboard.",
-                category: "ecommerce",
-                status: "live",
-                thumbnail: "assets/images/project-ecommerce.jpg",
-                tags: ["React", "Node.js", "MongoDB", "Stripe"],
-                liveUrl: "https://demo-ecommerce.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/myk",
-                completionDate: "30/07/2025",
-                developer: "Mike",
-                features: [
-                    "Real-time inventory management",
-                    "Secure payment processing with Stripe",
-                    "Advanced search and filtering",
-                    "Admin dashboard with analytics",
-                    "Mobile-responsive design",
-                    "SEO optimized"
-                ],
-                challenges: "Implementing real-time inventory updates across multiple concurrent users while maintaining data consistency.",
-                clientFeedback: "Exceeded expectations! The platform increased our online sales by 150% in the first quarter.",
-                screenshots: [
-                    "assets/images/ecommerce-home.jpg",
-                    "assets/images/ecommerce-product.jpg",
-                    "assets/images/ecommerce-checkout.jpg"
-                ],
-                techStack: {
-                    frontend: ["React", "Redux", "Tailwind CSS"],
-                    backend: ["Node.js", "Express", "MongoDB"],
-                    deployment: ["AWS", "Docker", "Nginx"]
-                }
-            },
-            {
-                id: 2,
-                title: "SaaS Analytics Dashboard",
-                description: "A comprehensive analytics platform for SaaS businesses with real-time data visualization, custom reporting, and team collaboration features.",
-                category: "saas",
-                status: "ongoing",
-                thumbnail: "assets/images/project-saas.jpg",
-                tags: ["Vue.js", "Python", "PostgreSQL", "D3.js"],
-                liveUrl: "https://analytics.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/saas-analytics",
-                features: [
-                    "Real-time data visualization",
-                    "Custom dashboard builder",
-                    "Advanced filtering and segmentation",
-                    "Team collaboration tools",
-                    "API integrations",
-                    "White-label solutions"
-                ],
-                challenges: "Processing and visualizing large datasets in real-time while maintaining optimal performance.",
-                clientFeedback: "The insights we get from this dashboard have transformed our decision-making process.",
-                screenshots: [
-                    "assets/images/saas-dashboard.jpg",
-                    "assets/images/saas-reports.jpg",
-                    "assets/images/saas-settings.jpg"
-                ],
-                techStack: {
-                    frontend: ["Vue.js", "Vuex", "D3.js", "Chart.js"],
-                    backend: ["Python", "Django", "PostgreSQL", "Redis"],
-                    deployment: ["Google Cloud", "Kubernetes", "Docker"]
-                }
-            },
-            {
-                id: 3,
-                title: "Tech Blog Platform",
-                description: "A modern blogging platform specifically designed for tech writers with syntax highlighting, collaborative editing, and SEO optimization.",
-                category: "blogs",
-                status: "live",
-                thumbnail: "assets/images/project-blog.jpg",
-                tags: ["Next.js", "TypeScript", "Prisma", "Vercel"],
-                liveUrl: "https://techblog.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/tech-blog-platform",
-                features: [
-                    "Markdown editor with live preview",
-                    "Syntax highlighting for code blocks",
-                    "SEO optimization tools",
-                    "Comment system with moderation",
-                    "Newsletter integration",
-                    "Analytics and insights"
-                ],
-                challenges: "Creating a seamless writing experience while ensuring optimal SEO performance and fast loading times.",
-                clientFeedback: "This platform has made technical writing so much more enjoyable and efficient.",
-                screenshots: [
-                    "assets/images/blog-editor.jpg",
-                    "assets/images/blog-post.jpg",
-                    "assets/images/blog-dashboard.jpg"
-                ],
-                techStack: {
-                    frontend: ["Next.js", "TypeScript", "Tailwind CSS"],
-                    backend: ["Prisma", "PostgreSQL", "NextAuth.js"],
-                    deployment: ["Vercel", "PlanetScale"]
-                }
-            },
-            {
-                id: 4,
-                title: "Creative Portfolio Website",
-                description: "A stunning portfolio website for a creative agency featuring smooth animations, interactive galleries, and a content management system.",
-                category: "portfolios",
-                status: "live",
-                thumbnail: "assets/images/project-portfolio.jpg",
-                tags: ["React", "Framer Motion", "Sanity", "GSAP"],
-                liveUrl: "https://creative-agency.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/creative-portfolio",
-                features: [
-                    "Smooth scroll animations",
-                    "Interactive project galleries",
-                    "Content management system",
-                    "Contact form with validation",
-                    "Mobile-optimized design",
-                    "Performance optimized"
-                ],
-                challenges: "Balancing stunning visual effects with optimal performance across all devices.",
-                clientFeedback: "Our new website has significantly improved our client acquisition rate.",
-                screenshots: [
-                    "assets/images/portfolio-home.jpg",
-                    "assets/images/portfolio-gallery.jpg",
-                    "assets/images/portfolio-contact.jpg"
-                ],
-                techStack: {
-                    frontend: ["React", "Framer Motion", "GSAP", "SCSS"],
-                    backend: ["Sanity CMS", "Node.js"],
-                    deployment: ["Netlify", "Sanity Cloud"]
-                }
-            },
-            {
-                id: 5,
-                title: "AI-Powered Task Manager",
-                description: "An intelligent task management application that uses AI to prioritize tasks, suggest optimal schedules, and provide productivity insights.",
-                category: "saas",
-                status: "concept",
-                thumbnail: "assets/images/project-ai-tasks.jpg",
-                tags: ["React", "Python", "TensorFlow", "OpenAI"],
-                liveUrl: null,
-                githubUrl: "https://github.com/garymike07/ai-task-manager",
-                features: [
-                    "AI-powered task prioritization",
-                    "Smart scheduling suggestions",
-                    "Productivity analytics",
-                    "Natural language task input",
-                    "Team collaboration",
-                    "Integration with popular tools"
-                ],
-                challenges: "Training AI models to understand user preferences and provide accurate task prioritization.",
-                clientFeedback: null,
-                screenshots: [
-                    "assets/images/ai-tasks-concept1.jpg",
-                    "assets/images/ai-tasks-concept2.jpg"
-                ],
-                techStack: {
-                    frontend: ["React", "TypeScript", "Material-UI"],
-                    backend: ["Python", "FastAPI", "TensorFlow", "OpenAI API"],
-                    deployment: ["AWS", "Docker", "Lambda"]
-                }
-            },
-            {
-                id: 6,
-                title: "Restaurant Ordering System",
-                description: "A complete restaurant ordering system with QR code menus, online ordering, payment processing, and kitchen management.",
-                category: "ecommerce",
-                status: "ongoing",
-                thumbnail: "assets/images/project-restaurant.jpg",
-                tags: ["Vue.js", "Laravel", "MySQL", "Stripe"],
-                liveUrl: "https://restaurant-demo.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/restaurant-ordering",
-                features: [
-                    "QR code digital menus",
-                    "Online ordering system",
-                    "Payment processing",
-                    "Kitchen order management",
-                    "Customer feedback system",
-                    "Analytics dashboard"
-                ],
-                challenges: "Ensuring real-time order synchronization between customer app and kitchen display.",
-                clientFeedback: "This system has streamlined our operations and improved customer satisfaction.",
-                screenshots: [
-                    "assets/images/restaurant-menu.jpg",
-                    "assets/images/restaurant-order.jpg",
-                    "assets/images/restaurant-kitchen.jpg"
-                ],
-                techStack: {
-                    frontend: ["Vue.js", "Vuetify", "PWA"],
-                    backend: ["Laravel", "MySQL", "Redis"],
-                    deployment: ["DigitalOcean", "Docker", "Nginx"]
-                }
-            }
-        ];
-
-        this.renderFeaturedProjects();
-        this.renderAllProjects();
+    async loadProjectData() {
+        try {
+            const response = await fetch('data/projects.json');
+            const data = await response.json();
+            this.projects = data.projects;
+            
+            this.renderFeaturedProjects();
+            this.renderAllProjects();
+        } catch (error) {
+            console.error('Error loading project data:', error);
+            this.projects = [];
+        }
     }
 
     setupEventListeners() {
@@ -284,8 +102,9 @@ class ProjectManager {
     createProjectCard(project) {
         const isFavorited = this.favorites.includes(project.id);
         const statusClass = project.status.toLowerCase();
-        const clickableClass = project.id === 1 ? ' clickable' : '';
-        const clickableAttribute = project.id === 1 ? `style="cursor:pointer;" onclick="window.location.href='https://github.com/garymike07/myk'"` : '';
+        const isPortfolio = project.id === 2; // Personal Portfolio project
+        const clickableClass = isPortfolio ? ' clickable' : '';
+        const clickableAttribute = isPortfolio ? `style="cursor:pointer;" onclick="window.open('${project.demo}', '_blank')"` : '';
 
         return `
             <div class="project-card${clickableClass}" data-project-id="${project.id}" ${clickableAttribute}>
@@ -303,6 +122,7 @@ class ProjectManager {
                         <button class="more-info-btn" data-project-id="${project.id}">
                             More Info
                         </button>
+                        ${isPortfolio ? `<button class="visit-site-btn" onclick="window.open('${project.demo}', '_blank')">Visit Site</button>` : ''}
                         <button class="favorite-btn ${isFavorited ? 'favorited' : ''}" data-project-id="${project.id}">
                             <i class="fas fa-heart"></i>
                         </button>

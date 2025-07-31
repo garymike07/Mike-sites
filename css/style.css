@@ -1547,3 +1547,46 @@ body {
 .template-developer-body .author { color: #8b949e; margin-bottom: 30px; }
 .template-developer-body code { background-color: #161b22; padding: 2px 4px; border-radius: 4px; }
 .template-developer-body pre { background-color: #161b22; padding: 15px; border-radius: 8px; overflow-x: auto; }
+
+
+/* Visit Site Button Styles */
+.visit-site-btn {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.visit-site-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.visit-site-btn:active {
+    transform: translateY(0);
+}
+
+/* Clickable project card styles */
+.project-card.clickable {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.project-card.clickable:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.project-card.clickable:hover .project-thumbnail img {
+    transform: scale(1.05);
+}
+
