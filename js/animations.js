@@ -8,6 +8,7 @@ class AnimationController {
         this.setupMagneticButtons();
         this.setupTypewriter();
         this.setupParallax();
+        this.setupScrollProgress();
     }
 
     init() {
@@ -166,6 +167,19 @@ class AnimationController {
             button.addEventListener('mouseleave', () => {
                 button.style.transform = 'translate(0, 0) scale(1)';
             });
+        });
+    }
+
+    setupScrollProgress() {
+        const progressBar = document.querySelector('.scroll-progress-bar');
+        if (!progressBar) return;
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+
+            progressBar.style.width = `${scrollPercentage}%`;
         });
     }
 
