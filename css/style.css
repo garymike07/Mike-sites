@@ -2271,12 +2271,12 @@ body {
 
 
 /* Logo adjustments */
-.header-logo {
-    width: 40px !important; /* Further reduced size */
-    height: 40px !important; /* Further reduced size */
-    border-radius: 50% !important; /* Circular shape */
+.logo-section .header-logo {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
     object-fit: cover !important;
-    margin-right: 10px !important; /* Adjust spacing */
+    margin-right: 10px !important;
 }
 
 .logo-section {
