@@ -144,6 +144,52 @@
         <section id="projects" class="section">
         </section>
 
+        <!-- Live Demos Section -->
+        <section id="demos" class="section">
+            <div class="demos-container">
+                <h2>🌟 Personal Portfolio - Live Demo</h2>
+                <p>This is a live demonstration of my personal portfolio website. It showcases my skills, projects, and professional experience in a clean, modern interface. The site is fully responsive and designed with a glassmorphism aesthetic.</p>
+                
+                <div class="demo-preview">
+                    <img src="https://via.placeholder.com/400x300/1a1a1a/00d4ff?text=Mike+Portfolio" alt="Portfolio Preview" style="width: 100%; max-width: 400px; border-radius: 10px; margin: 20px 0;">
+                </div>
+
+                <div class="demo-features">
+                    <h3>⭐ Key Features:</h3>
+                    <ul>
+                        <li>🎨 <strong>Interactive Design:</strong> A visually appealing layout with smooth animations and transitions.</li>
+                        <li>🚀 <strong>Project Showcase:</strong> Detailed view of my projects with descriptions, technologies used, and links.</li>
+                        <li>📱 <strong>Fully Responsive:</strong> Adapts seamlessly to all screen sizes, from mobile phones to desktops.</li>
+                        <li>🌙 <strong>Dynamic Theme Switching:</strong> Allows users to switch between dark, light, and neon themes.</li>
+                        <li>⚡ <strong>Performance Optimized:</strong> Built for speed with fast loading times and efficient code.</li>
+                    </ul>
+                </div>
+
+                <div class="demo-tech">
+                    <h3>🛠️ Core Technologies:</h3>
+                    <p>HTML5 CSS3 JavaScript (ES6+) Responsive Design Flexbox & Grid</p>
+                </div>
+
+                <div class="demo-iframe-container" style="margin-top: 30px;">
+                    <iframe 
+                        id="portfolio-iframe"
+                        src="https://garymike07.github.io/myk/" 
+                        style="width: 100%; height: 600px; border: none; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);"
+                        title="Personal Portfolio Live Demo">
+                    </iframe>
+                </div>
+
+                <div class="demo-actions" style="margin-top: 30px; text-align: center;">
+                    <a href="https://garymike07.github.io/myk/" target="_blank" class="btn btn-primary" style="margin-right: 15px;">
+                        🔗 View Live Site
+                    </a>
+                    <button onclick="document.getElementById('portfolio-iframe').src = document.getElementById('portfolio-iframe').src" class="btn btn-secondary">
+                        🔄 Reload Demo
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- About Section -->
         <section id="about" class="section">
             <div class="about-container">
@@ -477,20 +523,24 @@
 
     </main>
 
-    <script src="js/script.js"></script>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modal-body">
+                <!-- Project details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/projects.js"></script>
 </body>
 </html>
-
-
-
-
-        <!-- Live Demos Section -->
-        <section id="demos" class="section">
-            <div class="demos-container">
-                <h2>Live Demos</h2>
-                <p>Explore interactive live demonstrations of my projects.</p>
-                <!-- Demos will be dynamically loaded here -->
-            </div>
-        </section>
 
 
