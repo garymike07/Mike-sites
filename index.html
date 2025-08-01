@@ -23,16 +23,51 @@
     <meta property="twitter:image" content="https://garymike07.github.io/Mike-sites/images/og-image.jpg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/style.css?v=1.1">
-    <link rel="stylesheet" href="css/animations.css?v=1.0">
-    <link rel="stylesheet" href="css/modern-design.css?v=1.0">
-    <link rel="stylesheet" href="css/interactive-styles.css?v=1.0">
+    <!-- Critical CSS inline for faster loading -->
+    <style>
+        /* Critical CSS for above-the-fold content */
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+        .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-primary); display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.5s ease; }
+        .spinner { width: 50px; height: 50px; border: 3px solid var(--border-color); border-top: 3px solid var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
     
-    <!-- External Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.min.js"></script>
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/style.css"></noscript>
+    
+    <!-- Defer non-critical CSS -->
+    <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/modern-design.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/interactive-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Fallback for browsers without JavaScript -->
+    <noscript>
+        <link rel="stylesheet" href="css/animations.css">
+        <link rel="stylesheet" href="css/modern-design.css">
+        <link rel="stylesheet" href="css/interactive-styles.css">
+    </noscript>
+    
+    <!-- External Libraries - Defer loading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.min.js" defer></script>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
@@ -165,6 +200,7 @@
                             <option value="all">All Categories</option>
                             <option value="live">Live</option>
                             <option value="ongoing">Ongoing</option>
+                            <option value="progress">Progress</option>
                             <option value="concept">Concept</option>
                         </select>
                     </div>
@@ -440,12 +476,13 @@
         <div class="loading-spinner"></div>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/main.js"></script>
-    <script src="js/projects.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/three-scene.js"></script>
-    <script src="js/interactive-features.js"></script>
+    <!-- Scripts - Defer loading for better performance -->
+    <script src="js/lazy-load.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/projects.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/three-scene.js" defer></script>
+    <script src="js/interactive-features.js" defer></script>
     
     <!-- Monaco Editor Setup -->
     <script>

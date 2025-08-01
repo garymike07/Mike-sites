@@ -133,11 +133,11 @@ class ProjectManager {
     getFilteredProjects() {
         let filtered = [...this.projects];
 
-        // Apply category filter from dropdown
+        // Apply status filter from dropdown
         const projectFilter = document.getElementById("project-filter");
         if (projectFilter && projectFilter.value !== "all") {
             filtered = filtered.filter(project => 
-                project.category && project.category.toLowerCase() === projectFilter.value.toLowerCase()
+                project.status && project.status.toLowerCase() === projectFilter.value.toLowerCase()
             );
         }
 

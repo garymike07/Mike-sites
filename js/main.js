@@ -184,8 +184,13 @@ class MikeSites {
         }
 
         // Load projects if navigating to projects section
-        if (sectionId === 'projects' && this.projectManager) {
-            this.projectManager.renderAllProjects();
+        if (sectionId === 'projects') {
+            if (this.projectManager) {
+                this.projectManager.renderAllProjects();
+            } else {
+                // Initialize project manager if not already done
+                this.projectManager = new ProjectManager();
+            }
         }
     }
 
