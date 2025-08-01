@@ -174,6 +174,15 @@ class ProjectManager {
             );
         }
         
+        // Apply technology filter if set
+        if (this.currentTechFilter) {
+            filtered = filtered.filter(project =>
+                project.tags && project.tags.some(tag =>
+                    tag.toLowerCase().includes(this.currentTechFilter.toLowerCase())
+                )
+            );
+        }
+
         return filtered;
     }
 
@@ -360,6 +369,9 @@ class ProjectManager {
                         ${demoLink}
                         <button class="btn btn-secondary source-code-btn" data-project-id="${project.id}">
                             Source Code
+                        </button>
+                        <button class="btn btn-cta add-to-cart-btn" data-project-id="${project.id}">
+                            Add to Cart
                         </button>
                     </div>
                 </div>

@@ -338,6 +338,89 @@
     margin-right: 16px;
 }
 
+/* Project Request Form Modal Styles */
+.request-modal .modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.progress-indicator {
+    width: 100%;
+    height: 10px;
+    background: var(--tertiary-bg);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent-color);
+    transition: width 0.4s ease;
+}
+
+#progress-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.form-wizard-content {
+    padding: 2rem;
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.form-step h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.selection-card {
+    background: var(--tertiary-bg);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 2px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.selection-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+.selection-card.selected {
+    border-color: var(--highlight-color);
+    background: var(--secondary-bg);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+.selection-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.form-wizard-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+}
+
 /* Enhanced project details styling */
 .modal-section p strong {
     color: var(--text-primary);

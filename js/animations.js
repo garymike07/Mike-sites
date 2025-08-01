@@ -9,6 +9,7 @@ class AnimationController {
         this.setupTypewriter();
         this.setupParallax();
         this.setupScrollProgress();
+        this.setupStatsCounter();
     }
 
     init() {
@@ -219,6 +220,26 @@ class AnimationController {
                 element.style.transform = `translateY(${yPos}px)`;
             });
         });
+    }
+
+    setupStatsCounter() {
+        const statsCounter = document.querySelector('.stats-counter');
+        if (!statsCounter) return;
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(numberEl => {
+                        const target = parseInt(numberEl.dataset.target);
+                        this.animateCounter(numberEl, target);
+                    });
+                    observer.unobserve(entry.target); // Animate only once
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(statsCounter);
     }
 
     fallbackAnimations() {

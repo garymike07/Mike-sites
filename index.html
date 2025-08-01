@@ -72,6 +72,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
@@ -107,6 +108,9 @@
                     <button class="nav-btn" data-section="contact">Contact</button>
                 </nav>
                 <div class="header-actions">
+                    <div id="header-rating-display" class="header-rating">
+                        ⭐ <span id="avg-rating-header">0.0</span>/5 (<span id="rating-count-header">0</span> reviews)
+                    </div>
                     <div id="header-clock-container" class="header-clock">
                         <span id="clock">00:00:00</span>
                         <span class="timezone">Nairobi</span>
@@ -208,15 +212,41 @@
 
         <!-- About Section -->
         <section id="about" class="section">
-            <div class="about-container">
-                <h2>About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>I'm Mike, a passionate full-stack developer and digital innovator with over 5 years of experience creating cutting-edge web solutions. My expertise spans across modern JavaScript frameworks, cloud technologies, and scalable architecture design.</p>
+            <div class="about-container section-container">
+                <div class="section-header">
+                    <h2>About Me</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-text-column">
+                        <h3>Full-Stack Developer & Digital Innovator</h3>
+                        <p>I'm Mike, a passionate developer with over 5 years of experience creating cutting-edge web solutions. My expertise spans modern JavaScript frameworks, cloud technologies, and scalable architecture.</p>
                         <p>I specialize in building SaaS platforms, e-commerce solutions, and interactive web applications that deliver exceptional user experiences. My approach combines technical excellence with creative problem-solving to bring ideas to life.</p>
-                        <p>When I'm not coding, you'll find me exploring emerging technologies, contributing to open-source projects, or mentoring aspiring developers. I believe in the power of technology to transform businesses and improve lives.</p>
                     </div>
-                    <div class="experience-timeline">
+                    <div class="about-visual-column">
+                        <img src="images/profile-avatar.png" alt="Developer Illustration" class="about-illustration">
+                    </div>
+                </div>
+
+                <div class="stats-counter">
+                    <div class="stat-item"><span class="stat-number" data-target="5">0</span>+ Years Experience</div>
+                    <div class="stat-item"><span class="stat-number" data-target="50">0</span>+ Projects Completed</div>
+                    <div class="stat-item"><span class="stat-number" data-target="1000">0</span>+ Code Downloads</div>
+                </div>
+
+                <div class="skills-section">
+                    <h3>My Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card">React</div>
+                        <div class="skill-card">Node.js</div>
+                        <div class="skill-card">Python</div>
+                        <div class="skill-card">JavaScript</div>
+                        <div class="skill-card">CSS3</div>
+                        <div class="skill-card">HTML5</div>
+                        <div class="skill-card">MongoDB</div>
+                        <div class="skill-card">Firebase</div>
+                    </div>
+                </div>
+                 <div class="experience-timeline">
                         <h3>Experience Timeline</h3>
                         <div class="timeline">
                             <div class="timeline-item">
@@ -249,7 +279,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </section>
 
@@ -317,6 +346,28 @@
                 </form>
             </div>
         </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews" class="section">
+            <div class="section-header">
+                <h2>Reviews & Ratings</h2>
+            </div>
+            <div class="reviews-container">
+                <div class="reviews-summary">
+                    <div class="average-rating">
+                        <span id="avg-rating-value-display">0.0</span>
+                        <div id="avg-stars-display" class="stars"></div>
+                        <span id="total-reviews-display">based on 0 reviews</span>
+                    </div>
+                    <div id="rating-breakdown-display" class="rating-breakdown">
+                        <!-- Breakdown bars will be rendered here -->
+                    </div>
+                </div>
+                <div id="reviews-list" class="reviews-list">
+                    <!-- Individual reviews will be rendered here -->
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Project Modal Structure -->
@@ -346,11 +397,87 @@
         </div>
     </div>
 
+    <!-- Project Request Form Modal -->
+    <div id="request-project-modal" class="modal-overlay">
+        <div class="modal-content request-modal">
+            <button class="close-button" id="close-request-modal">&times;</button>
+            <div class="modal-header">
+                <h2>Request a Custom Project</h2>
+                <div class="progress-indicator">
+                    <div class="progress-bar" style="width: 20%;"></div>
+                    <span id="progress-text">Step 1 of 5</span>
+                </div>
+            </div>
+            <div class="form-wizard-content">
+                <!-- Steps will be dynamically rendered here -->
+            </div>
+            <div class="form-wizard-footer">
+                <button id="prev-step-btn" class="btn btn-secondary" style="display: none;">Previous</button>
+                <button id="next-step-btn" class="btn btn-primary">Next</button>
+                <button id="send-request-btn" class="btn btn-primary" style="display: none;">Send Request</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secure Download Modal -->
+    <div id="secure-download-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-button" id="close-download-modal">&times;</button>
+            <h3>Secure Download</h3>
+            <p>Enter the secret key to download the source code for <strong id="download-project-name"></strong>.</p>
+            <div class="form-group">
+                <label for="secret-key">Secret Key</label>
+                <input type="password" id="secret-key" placeholder="Enter secret key">
+                <p id="download-error" style="color: var(--error-color); display: none; margin-top: 0.5rem;">Invalid secret key.</p>
+            </div>
+            <button id="submit-secret-key-btn" class="btn btn-primary">Download Source</button>
+            <div id="request-access-section" style="margin-top: 1.5rem; display: none;">
+                <p>Don't have access?</p>
+                <a id="request-access-key-link" class="btn btn-secondary">Request Access Key</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="site-footer">
         <p>&copy; 2025 Mike Sites. All rights reserved.</p>
         <p>Built with ❤️ and code by <a href="https://github.com/garymike07" target="_blank">Mike Sites</a></p>
     </footer>
+
+    <!-- Shopping Cart Elements -->
+    <div class="cart-icon-container">
+        <button id="cart-icon" class="cart-icon">
+            🛒
+            <span id="cart-item-count" class="cart-item-count">0</span>
+        </button>
+    </div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button id="close-cart-btn" class="close-button">&times;</button>
+        </div>
+        <div id="cart-items-container" class="cart-items">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <div class="cart-footer">
+            <p>Total Items: <span id="cart-total-items">0</span></p>
+            <button id="download-all-btn" class="btn btn-primary">Download All</button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="cart-overlay"></div>
+
+    <!-- Rating Widget -->
+    <div id="rating-widget" class="rating-widget">
+        <span>Rate this site:</span>
+        <div class="stars" data-rating="0">
+            <span class="star" data-value="1">☆</span>
+            <span class="star" data-value="2">☆</span>
+            <span class="star" data-value="3">☆</span>
+            <span class="star" data-value="4">☆</span>
+            <span class="star" data-value="5">☆</span>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script src="js/main.js"></script>
@@ -358,10 +485,19 @@
     <script src="js/animations.js"></script>
     <script src="js/interactive-features.js"></script>
     <script src="js/lazy-load.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/download.js"></script>
+    <script src="js/request-form.js"></script>
+    <script src="js/request-form.js"></script>
+    <script src="js/rating.js"></script>
     <script>
         // Initialize SourceCodeViewer globally
         document.addEventListener('DOMContentLoaded', () => {
             window.sourceCodeViewer = new SourceCodeViewer();
+            window.cart = new Cart();
+            window.downloadManager = new DownloadManager();
+            window.requestFormManager = new RequestFormManager();
+            window.ratingManager = new RatingManager();
         });
     </script>
 </body>
