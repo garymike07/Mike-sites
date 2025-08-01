@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     initMobileMenu();
     initNotifications();
     initBlogGenerator();
+    initBackButton();
 
     // Fetch data
     try {
@@ -364,9 +365,9 @@ function openProjectModal(projectId) {
                     </svg>
                     View on GitHub
                 </a>
-                <a href="${project.demo}" target="_blank" class="btn btn-primary">
+                <button class="btn btn-primary" onclick="openLiveDemoModal(${project.id})">
                     🚀 Live Preview
-                </a>
+                </button>
                 <button class="btn btn-secondary" onclick="requestProjectClone()">
                     🛒 Request Clone
                 </button>
@@ -1096,4 +1097,105 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+
+// Back button functionality
+function initBackButton() {
+    const backButton = document.getElementById("back-to-home");
+    if (backButton) {
+        backButton.addEventListener("click", () => {
+            showSection("home");
+            backButton.style.display = "none";
+        });
+    }
+}
+
+function showSection(sectionId) {
+    document.querySelectorAll(".section").forEach(section => {
+        section.classList.remove("active");
+    });
+    document.getElementById(sectionId).classList.add("active");
+
+    // Update active nav link
+    document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+    const correspondingNavLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+    if (correspondingNavLink) {
+        correspondingNavLink.classList.add("active");
+    }
+
+    const backButton = document.getElementById("back-to-home");
+    if (backButton) {
+        if (sectionId === "home") {
+            backButton.style.display = "none";
+        } else {
+            backButton.style.display = "block";
+        }
+    }
+}
+
+// Modify existing navigation to use showSection
+function initNavigation() {
+    const navLinks = document.querySelectorAll(".nav-link[data-section]");
+    
+    navLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetSection = link.dataset.section;
+            showSection(targetSection);
+            closeMobileMenu();
+        });
+    });
+    
+    // Category navigation
+    document.querySelectorAll("[data-category]").forEach(link => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const category = link.dataset.category;
+            
+            // Switch to home section to show the projects
+            showSection("home");
+            
+            // Filter projects by category
+            filterProjects(category);
+            closeMobileMenu();
+        });
+    });
+}
+
+
+
+
+function openLiveDemoModal(projectId) {
+    const project = projectsData.find(p => p.id === projectId);
+    if (!project) return;
+
+    if (projectId === 2) { // Personal Portfolio project
+        window.open(project.demo, "_blank");
+        closeModal(); // Close the current modal if open
+        return;
+    }
+
+    const modal = document.getElementById("project-modal");
+    const modalBody = document.getElementById("modal-body");
+
+    modalBody.innerHTML = `
+        <div class="modal-header">
+            <h2>${project.title} - Live Demo</h2>
+            <span class="project-status status-${project.status}">${getStatusText(project.status)}</span>
+        </div>
+        <div class="modal-content-body">
+            <p>${project.description}</p>
+            <div class="project-links" style="margin-top: 20px;">
+                <a href="${project.demo}" target="_blank" class="btn btn-primary">
+                    View Live Site
+                </a>
+            </div>
+        </div>
+    `;
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
 
