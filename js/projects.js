@@ -57,7 +57,12 @@ class ProjectManager {
         const container = document.getElementById('projects-grid');
         if (!container) return;
 
-        const filteredProjects = this.getFilteredProjects();
+        let filteredProjects = this.getFilteredProjects();
+
+        // Sort projects by status: Live, Ongoing, Concept
+        const statusOrder = { 'Live': 1, 'Ongoing': 2, 'Concept': 3 };
+        filteredProjects.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
+
         container.innerHTML = filteredProjects.map(project => this.createProjectCard(project)).join('');
         
         this.attachProjectCardListeners(container);
@@ -92,32 +97,27 @@ class ProjectManager {
     }
 
     createProjectCard(project) {
-        const isFavorited = this.favorites.includes(project.id);
         const statusClass = project.status.toLowerCase();
-        const isPortfolio = project.id === 2; // Personal Portfolio project
-        const clickableClass = isPortfolio ? ' clickable' : '';
-        const clickableAttribute = isPortfolio ? `style="cursor:pointer;" onclick="window.open('${project.demo}', '_blank')"` : '';
 
         return `
-            <div class="project-card${clickableClass}" data-project-id="${project.id}" ${clickableAttribute}>
+            <div class="project-card" data-project-id="${project.id}">
                 <div class="project-thumbnail">
                     <img src="${project.thumbnail}" alt="${project.title}" loading="lazy">
-                    <div class="project-status ${statusClass}">${project.status}</div>
                 </div>
-                <div class="project-info">
+                <div class="project-content">
+                    <span class="project-status status-${statusClass}">${project.status}</span>
                     <h3 class="project-title">${project.title}</h3>
                     <p class="project-description">${project.description}</p>
                     <div class="project-tags">
                         ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
                     </div>
                     <div class="project-actions">
-                        <button class="more-info-btn" data-project-id="${project.id}">
+                        <button class="btn btn-primary more-info-btn" data-project-id="${project.id}">
                             More Info
                         </button>
-                        ${isPortfolio ? `<button class="visit-site-btn" onclick="window.open('${project.demo}', '_blank')">Visit Site</button>` : ''}
-                        <button class="favorite-btn ${isFavorited ? 'favorited' : ''}" data-project-id="${project.id}">
-                            <i class="fas fa-heart"></i>
-                        </button>
+                        <a href="${project.demo}" target="_blank" class="btn btn-secondary">
+                            Live Demo
+                        </a>
                     </div>
                 </div>
             </div>
@@ -125,28 +125,17 @@ class ProjectManager {
     }
 
     attachProjectCardListeners(container) {
-        // More info buttons
-        container.querySelectorAll('.more-info-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const projectId = parseInt(btn.getAttribute('data-project-id'));
+        container.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.btn')) return;
+                const projectId = parseInt(card.getAttribute('data-project-id'));
                 this.openProjectModal(projectId);
             });
         });
 
-        // Favorite buttons
-        container.querySelectorAll('.favorite-btn').forEach(btn => {
+        container.querySelectorAll('.more-info-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.stopPropagation();
                 const projectId = parseInt(btn.getAttribute('data-project-id'));
-                this.toggleFavorite(projectId, btn);
-            });
-        });
-
-        // Card click to open modal (except for portfolio which opens site directly)
-        container.querySelectorAll('.project-card:not(.clickable)').forEach(card => {
-            card.addEventListener('click', () => {
-                const projectId = parseInt(card.getAttribute('data-project-id'));
                 this.openProjectModal(projectId);
             });
         });
