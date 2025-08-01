@@ -70,7 +70,7 @@ html {
 body {
     font-family: 'Soria', sans-serif;
     font-weight: 700; /* Make all text bolder by default */
-    background: url('../1000024301.jpg') no-repeat center center fixed;
+    background: url('../images/background.jpg') no-repeat center center fixed;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -81,19 +81,6 @@ body {
     position: relative;
 }
 
-/* Remove blur overlay - keep original background crisp */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('../1000024301.jpg') no-repeat center center fixed;
-    background-size: cover;
-    z-index: -2;
-}
-
 /* Enhanced dark overlay for better component visibility */
 body::after {
     content: '';
@@ -102,7 +89,7 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Stronger overlay for better contrast */
+    background: rgba(0, 0, 0, 0.3); /* Lighter overlay for better background visibility */
     z-index: -1;
 }
 
@@ -2230,5 +2217,165 @@ p, span, div {
     .header-actions {
         gap: 20px;
     }
+}
+
+
+
+body {
+    font-weight: bold;
+}
+
+
+
+
+/* Glassmorphism and reduced shadow for components */
+.hero-features div,
+.project-card,
+.tech-ticker,
+.search-container input,
+.filter-container select,
+.contact-form,
+.about-container,
+.tech-stack-container,
+.blog-post-card,
+.live-demo-card,
+.toolbox-item,
+.playground-item {
+    background: rgba(255, 255, 255, 0.05); /* Lighter background for glassmorphism */
+    backdrop-filter: blur(10px); /* Glassmorphism blur */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+}
+
+/* Adjusting existing shadows to be lighter */
+.clock-container,
+.daily-tip {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+}
+
+.project-card:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Reduced hover shadow */
+}
+
+.tech-icon {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+}
+
+#project-search,
+#project-filter {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+}
+
+
+
+
+/* Logo adjustments */
+.header-logo {
+    width: 60px; /* Reduced size */
+    height: 60px; /* Reduced size */
+    border-radius: 50%; /* Circular shape */
+    object-fit: cover;
+    margin-right: 10px; /* Adjust spacing */
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to start */
+    width: 100%; /* Ensure it takes full width for alignment */
+}
+
+.sidebar .logo-img {
+    width: 80px; /* Slightly larger for sidebar */
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+
+
+/* Modal glassmorphism styles */
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.4); /* Lighter overlay */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.1) !important; /* Glassmorphism background */
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important; /* Reduced shadow */
+    border-radius: 15px !important;
+}
+
+.modal {
+    background: rgba(0, 0, 0, 0.4); /* Lighter modal background */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal .modal-content {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+    border-radius: 15px !important;
+}
+
+.modal-body {
+    color: var(--text-primary) !important;
+    font-weight: bold !important;
+}
+
+.demo-modal-header {
+    color: var(--text-primary) !important;
+    font-weight: bold !important;
+}
+
+.modal-close {
+    color: var(--text-primary) !important;
+    font-weight: bold !important;
+    font-size: 1.5rem !important;
+}
+
+
+/* Global bold text styles */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+}
+
+p, span, div, a, li, td, th, label, input, textarea, select, button {
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+}
+
+/* Ensure all navigation elements are bold and visible */
+.nav-link, .nav-btn, .theme-btn {
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+}
+
+/* Make sure form elements are visible */
+input, textarea, select {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}
+
+/* Ensure buttons are bold and visible */
+button {
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+}
+
+/* Make sure all content in cards is visible */
+.project-card *, .hero-features *, .tech-ticker * {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
 }
 
