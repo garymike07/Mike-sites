@@ -5,6 +5,7 @@ class ProjectManager {
         this.projects = [];
         this.favorites = this.loadFavorites();
         this.currentFilter = 'all';
+        this.currentTechFilter = '';
         this.init();
     }
 
@@ -24,11 +25,13 @@ class ProjectManager {
             
             this.renderFeaturedProjects();
             this.renderAllProjects();
+            this.renderHomeProjects();
         } catch (error) {
             console.error('Error loading project data:', error);
             this.projects = this.getFallbackProjects();
             this.renderFeaturedProjects();
             this.renderAllProjects();
+            this.renderHomeProjects();
         }
     }
 
@@ -78,7 +81,7 @@ class ProjectManager {
     }
 
     setupEventListeners() {
-        // Project filter dropdown
+        // Project filter dropdown - Projects section
         const projectFilter = document.getElementById("project-filter");
         if (projectFilter) {
             projectFilter.addEventListener("change", (e) => {
@@ -86,15 +89,170 @@ class ProjectManager {
             });
         }
 
-        // Project search
+        // Project search - Projects section
         const projectSearch = document.getElementById("project-search");
         if (projectSearch) {
             projectSearch.addEventListener("input", () => {
                 this.renderAllProjects();
             });
         }
+
+        // Home section filter dropdown
+        const homeProjectFilter = document.getElementById("home-project-filter");
+        if (homeProjectFilter) {
+            homeProjectFilter.addEventListener("change", (e) => {
+                this.setHomeFilter(e.target.value);
+            });
+        }
+
+        // Home section search
+        const homeProjectSearch = document.getElementById("home-project-search");
+        if (homeProjectSearch) {
+            homeProjectSearch.addEventListener("input", () => {
+                this.renderHomeProjects();
+            });
+        }
+
+        // Clear filters button
+        this.addClearFiltersButton();
     }
 
+    renderHomeProjects() {
+        const container = document.getElementById('home-projects-grid');
+        if (!container) return;
+
+        let filteredProjects = this.getHomeFilteredProjects();
+
+        // Sort projects by status: live, ongoing, concept
+        const statusOrder = { 'live': 1, 'ongoing': 2, 'progress': 3, 'concept': 4 };
+        filteredProjects.sort((a, b) => {
+            const aOrder = statusOrder[a.status.toLowerCase()] || 5;
+            const bOrder = statusOrder[b.status.toLowerCase()] || 5;
+            return aOrder - bOrder;
+        });
+
+        if (filteredProjects.length === 0) {
+            container.innerHTML = '<div class="no-projects">No projects found matching your criteria.</div>';
+            return;
+        }
+
+        // Show first 6 projects on home page
+        const homeProjects = filteredProjects.slice(0, 6);
+        container.innerHTML = homeProjects.map(project => this.createProjectCard(project, true)).join('');
+        
+        this.attachProjectCardListeners(container);
+    }
+
+    getHomeFilteredProjects() {
+        let filtered = [...this.projects];
+
+        // Apply category filter from home dropdown
+        const homeProjectFilter = document.getElementById("home-project-filter");
+        if (homeProjectFilter && homeProjectFilter.value !== "all") {
+            filtered = filtered.filter(project => 
+                project.category && project.category.toLowerCase() === homeProjectFilter.value.toLowerCase()
+            );
+        }
+
+        // Apply search query from home search
+        const homeProjectSearch = document.getElementById("home-project-search");
+        if (homeProjectSearch && homeProjectSearch.value.trim()) {
+            const searchTerm = homeProjectSearch.value.toLowerCase().trim();
+            filtered = filtered.filter(project => 
+                project.title.toLowerCase().includes(searchTerm) ||
+                project.description.toLowerCase().includes(searchTerm) ||
+                (project.tags && project.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
+            );
+        }
+
+        // Apply technology filter if set
+        if (this.currentTechFilter) {
+            filtered = filtered.filter(project => 
+                project.tags && project.tags.some(tag => 
+                    tag.toLowerCase().includes(this.currentTechFilter.toLowerCase())
+                )
+            );
+        }
+        
+        return filtered;
+    }
+
+    setHomeFilter(filter) {
+        this.renderHomeProjects();
+    }
+
+    setTechFilter(tech) {
+        this.currentTechFilter = tech;
+        this.renderAllProjects();
+        this.renderHomeProjects();
+        
+        // Show visual feedback
+        this.showFilterFeedback(`Filtering by: ${tech}`);
+    }
+
+    clearAllFilters() {
+        this.currentFilter = 'all';
+        this.currentTechFilter = '';
+        
+        // Reset dropdowns
+        const projectFilter = document.getElementById("project-filter");
+        if (projectFilter) projectFilter.value = 'all';
+        
+        const homeProjectFilter = document.getElementById("home-project-filter");
+        if (homeProjectFilter) homeProjectFilter.value = 'all';
+        
+        // Clear search boxes
+        const projectSearch = document.getElementById("project-search");
+        if (projectSearch) projectSearch.value = '';
+        
+        const homeProjectSearch = document.getElementById("home-project-search");
+        if (homeProjectSearch) homeProjectSearch.value = '';
+        
+        // Re-render
+        this.renderAllProjects();
+        this.renderHomeProjects();
+        
+        this.showFilterFeedback('All filters cleared');
+    }
+
+    showFilterFeedback(message) {
+        // Create or update filter feedback element
+        let feedback = document.getElementById('filter-feedback');
+        if (!feedback) {
+            feedback = document.createElement('div');
+            feedback.id = 'filter-feedback';
+            feedback.className = 'filter-feedback';
+            document.body.appendChild(feedback);
+        }
+        
+        feedback.textContent = message;
+        feedback.classList.add('show');
+        
+        setTimeout(() => {
+            feedback.classList.remove('show');
+        }, 2000);
+    }
+
+    addClearFiltersButton() {
+        // Add clear filters button to both sections
+        const projectControls = document.querySelector('#projects .project-controls');
+        if (projectControls && !projectControls.querySelector('.clear-filters-btn')) {
+            const clearBtn = document.createElement('button');
+            clearBtn.className = 'btn btn-secondary clear-filters-btn';
+            clearBtn.textContent = 'Clear Filters';
+            clearBtn.addEventListener('click', () => this.clearAllFilters());
+            projectControls.appendChild(clearBtn);
+        }
+
+        const homeProjectControls = document.querySelector('#home .project-controls');
+        if (homeProjectControls && !homeProjectControls.querySelector('.clear-filters-btn')) {
+            const clearBtn = document.createElement('button');
+            clearBtn.className = 'btn btn-secondary clear-filters-btn';
+            clearBtn.textContent = 'Clear Filters';
+            clearBtn.addEventListener('click', () => this.clearAllFilters());
+            homeProjectControls.appendChild(clearBtn);
+        }
+    }
     renderFeaturedProjects() {
         const container = document.getElementById('projects-scroll');
         if (!container) return;
@@ -160,7 +318,7 @@ class ProjectManager {
         this.renderAllProjects();
     }
 
-    createProjectCard(project) {
+    createProjectCard(project, isHome = false) {
         const statusClass = project.status ? project.status.toLowerCase() : 'unknown';
         const thumbnail = project.thumbnail && project.thumbnail.startsWith('images/') 
             ? project.thumbnail 
@@ -186,7 +344,7 @@ class ProjectManager {
                     <h3 class="project-title">${project.title}</h3>
                     <p class="project-description">${project.description}</p>
                     <div class="project-tags">
-                        ${project.tags ? project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('') : ''}
+                        ${project.tags ? project.tags.map(tag => `<span class="project-tag tech-filter-tag" data-tech="${tag}">${tag}</span>`).join('') : ''}
                     </div>
                     <div class="project-actions">
                         <button class="btn btn-primary more-info-btn" data-project-id="${project.id}">
@@ -221,10 +379,19 @@ class ProjectManager {
             });
         });
 
-        // Card click (excluding buttons)
+        // Tech tag filtering
+        container.querySelectorAll('.tech-filter-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const tech = tag.getAttribute('data-tech');
+                this.setTechFilter(tech);
+            });
+        });
+
+        // Card click (excluding buttons and tags)
         container.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('click', (e) => {
-                if (e.target.closest('.btn')) return;
+                if (e.target.closest('.btn') || e.target.closest('.tech-filter-tag')) return;
                 const projectId = parseInt(card.getAttribute('data-project-id'));
                 this.openProjectModal(projectId);
             });

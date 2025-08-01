@@ -55,12 +55,16 @@
     <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="css/modern-design.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="css/interactive-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/filter-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/modal-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- Fallback for browsers without JavaScript -->
     <noscript>
         <link rel="stylesheet" href="css/animations.css">
         <link rel="stylesheet" href="css/modern-design.css">
         <link rel="stylesheet" href="css/interactive-styles.css">
+        <link rel="stylesheet" href="css/filter-styles.css">
+        <link rel="stylesheet" href="css/modal-styles.css">
     </noscript>
     
     <!-- External Libraries - Defer loading -->
@@ -168,10 +172,10 @@
                         <h2>Smart Project Showcase</h2>
                         <div class="project-controls">
                             <div class="search-container">
-                                <input type="text" id="project-search" placeholder="Search projects...">
+                                <input type="text" id="home-project-search" placeholder="Search projects...">
                             </div>
                             <div class="filter-container">
-                                <select id="project-filter">
+                                <select id="home-project-filter">
                                     <option value="all">All Categories</option>
                                     <option value="saas">SaaS</option>
                                     <option value="portfolio">Portfolio</option>
@@ -183,7 +187,7 @@
                         </div>
                     </div>
 
-                    <div id="projects-grid" class="projects-grid">
+                    <div id="home-projects-grid" class="projects-grid">
                         <!-- Projects will be dynamically loaded here -->
                     </div>
                 </div>
@@ -419,55 +423,13 @@
 
     <!-- Project Modal -->
     <div id="project-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="close-button" id="close-modal">×</button>
+        <div class="modal-container">
             <div class="modal-header">
                 <h2 id="modal-title">Project Title</h2>
-                <div id="modal-status" class="project-status">Status</div>
+                <button class="modal-close" id="close-modal">×</button>
             </div>
-            
-            <div class="modal-section">
-                <div id="modal-image-container">
-                    <img id="modal-image" class="modal-image" src="" alt="Project Screenshot">
-                </div>
-                <div id="modal-icon" class="modal-icon" style="display: none;">📱</div>
-            </div>
-            
-            <div class="modal-section">
-                <h3>Project Details</h3>
-                <p><strong>Completed:</strong> <span id="modal-completed">Date</span></p>
-                <p><strong>Developer:</strong> <span id="modal-developer">Mike</span></p>
-            </div>
-            
-            <div class="modal-section">
-                <h3>Description</h3>
-                <p id="modal-description">Project description will appear here.</p>
-            </div>
-            
-            <div class="modal-section">
-                <h3>Key Features</h3>
-                <ul id="modal-features" class="feature-list">
-                    <!-- Features will be populated dynamically -->
-                </ul>
-            </div>
-            
-            <div class="modal-section">
-                <h3>Technologies Used</h3>
-                <div id="modal-tech-tags" class="tech-tags">
-                    <!-- Tech tags will be populated dynamically -->
-                </div>
-            </div>
-            
-            <div class="modal-actions">
-                <button class="btn btn-primary" id="view-source-btn">
-                    <span>👨‍💻</span> View Source Code
-                </button>
-                <a class="btn btn-secondary" id="modal-demo-link" href="#" target="_blank">
-                    <span>🚀</span> Live Demo
-                </a>
-                <a class="btn btn-secondary" id="modal-github-link" href="#" target="_blank">
-                    <span>📂</span> GitHub
-                </a>
+            <div class="modal-body" id="modal-body">
+                <!-- Modal content will be dynamically populated -->
             </div>
         </div>
     </div>
@@ -477,13 +439,13 @@
         <div class="loading-spinner"></div>
     </div>
 
-    <!-- Scripts - Defer loading for better performance -->
-    <script src="js/lazy-load.js" defer></script>
-    <script src="js/main.js" defer></script>
-    <script src="js/projects.js" defer></script>
-    <script src="js/animations.js" defer></script>
-    <script src="js/three-scene.js" defer></script>
-    <script src="js/interactive-features.js" defer></script>
+    <!-- Scripts - Load in correct order -->
+    <script src="js/lazy-load.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/three-scene.js"></script>
+    <script src="js/interactive-features.js"></script>
     
     <!-- Monaco Editor Setup -->
     <script>

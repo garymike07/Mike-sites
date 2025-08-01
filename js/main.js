@@ -22,6 +22,9 @@ class MikeSites {
         setTimeout(() => {
             this.projectManager = new ProjectManager();
         }, 100);
+
+        // Make this instance globally available
+        window.mikeSites = this;
     }
 
     hideLoadingOverlay() {
@@ -131,11 +134,59 @@ class MikeSites {
         }
 
         // Back to home button
-        const backButton = document.getElementById('back-to-home');
-        if (backButton) {
-            backButton.addEventListener('click', () => {
+        const backToHomeBtn = document.getElementById('back-to-home');
+        if (backToHomeBtn) {
+            backToHomeBtn.addEventListener('click', () => {
                 this.showSection('home');
             });
+        }
+
+        // Modal functionality
+        this.setupModalListeners();
+    }
+
+    setupModalListeners() {
+        const modalOverlay = document.getElementById('project-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                this.closeModal();
+            });
+        }
+
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    this.closeModal();
+                }
+            });
+        }
+
+        // ESC key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeModal();
+            }
+        });
+    }
+
+    openModal(content) {
+        const modalOverlay = document.getElementById('project-modal');
+        const modalBody = document.getElementById('modal-body');
+        
+        if (modalOverlay && modalBody) {
+            modalBody.innerHTML = content;
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    closeModal() {
+        const modalOverlay = document.getElementById('project-modal');
+        if (modalOverlay) {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
         }
     }
 
