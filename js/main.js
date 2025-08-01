@@ -33,7 +33,11 @@ class MikeSites {
             btn.addEventListener("click", (e) => {
                 e.preventDefault();
                 const section = btn.getAttribute("data-section");
-                this.navigateToSection(section);
+                if (section === 'demos') {
+                    this.openModal('live-demo-modal');
+                } else {
+                    this.navigateToSection(section);
+                }
             });
         });
 
@@ -190,10 +194,6 @@ class MikeSites {
         switch (sectionName) {
             case 'projects':
                 // Projects are now loaded directly on the home page
-                break;
-            case 'demos':
-                // Load live demos content
-                this.loadLiveDemos();
                 break;
             case 'tech-stack':
                 this.animateProficiencyBars();
@@ -576,34 +576,5 @@ document.addEventListener('DOMContentLoaded', () => {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = MikeSites;
 }
-
-
-
-    loadLiveDemos() {
-        const demosContainer = document.querySelector("#demos .demos-container");
-        if (demosContainer) {
-            demosContainer.innerHTML = `
-                <h2>Live Demos</h2>
-                <p>Explore interactive live demonstrations of my projects.</p>
-                <div class="demo-grid">
-                    <div class="demo-card">
-                        <h3>Project Alpha</h3>
-                        <p>A cutting-edge SaaS platform.</p>
-                        <a href="#" class="btn btn-primary">View Demo</a>
-                    </div>
-                    <div class="demo-card">
-                        <h3>Project Beta</h3>
-                        <p>An e-commerce solution with advanced features.</p>
-                        <a href="#" class="btn btn-primary">View Demo</a>
-                    </div>
-                    <div class="demo-card">
-                        <h3>Project Gamma</h3>
-                        <p>A data visualization dashboard.</p>
-                        <a href="#" class="btn btn-primary">View Demo</a>
-                    </div>
-                </div>
-            `;
-        }
-    }
 
 
