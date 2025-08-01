@@ -9,13 +9,13 @@ class MikeSites {
     constructor() {
         this.currentSection = 'home';
         this.projectManager = null;
+        this.hour12 = localStorage.getItem('clockFormat') === '12h';
     }
 
     init() {
         this.setupEventListeners();
         this.initializeClock();
         this.initializeDailyTip();
-        this.showSection('home');
         this.hideLoadingOverlay();
         
         // Initialize project manager after DOM is ready
@@ -39,14 +39,31 @@ class MikeSites {
 
     initializeClock() {
         const clockElement = document.getElementById('clock');
-        if (clockElement) {
+        const toggleButton = document.getElementById('clock-format-toggle');
+
+        if (clockElement && toggleButton) {
             const updateClock = () => {
                 const now = new Date();
-                const timeString = now.toLocaleTimeString();
-                clockElement.textContent = timeString;
+                const options = {
+                    timeZone: 'Africa/Nairobi',
+                    hour12: this.hour12,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                };
+                clockElement.textContent = now.toLocaleTimeString('en-GB', options);
             };
+
             updateClock();
             setInterval(updateClock, 1000);
+
+            toggleButton.textContent = this.hour12 ? '12h' : '24h';
+            toggleButton.addEventListener('click', () => {
+                this.hour12 = !this.hour12;
+                localStorage.setItem('clockFormat', this.hour12 ? '12h' : '24h');
+                toggleButton.textContent = this.hour12 ? '12h' : '24h';
+                updateClock(); // Update immediately on toggle
+            });
         }
     }
 
@@ -73,11 +90,16 @@ class MikeSites {
     }
 
     setupEventListeners() {
-        // Navigation
-        document.querySelectorAll('.nav-btn').forEach(btn => {
+        // Smooth scroll navigation
+        document.querySelectorAll('.nav-btn, .btn-cta[data-section]').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const sectionId = e.target.getAttribute('data-section');
-                this.showSection(sectionId);
+                e.preventDefault();
+                const sectionId = e.currentTarget.getAttribute('data-section');
+                if (window.animationController) {
+                    window.animationController.smoothScrollTo(`#${sectionId}`);
+                } else {
+                    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
 
@@ -92,20 +114,11 @@ class MikeSites {
         // Project filtering and search
         const projectFilter = document.getElementById('project-filter');
         if (projectFilter) {
-            projectFilter.addEventListener('change', () => {
-                if (this.projectManager) {
-                    this.projectManager.renderAllProjects();
-                }
-            });
+            projectFilter.addEventListener('change', () => this.projectManager?.renderAllProjects());
         }
-
         const projectSearch = document.getElementById('project-search');
         if (projectSearch) {
-            projectSearch.addEventListener('input', () => {
-                if (this.projectManager) {
-                    this.projectManager.renderAllProjects();
-                }
-            });
+            projectSearch.addEventListener('input', () => this.projectManager?.renderAllProjects());
         }
 
         // Modal close button
@@ -137,12 +150,76 @@ class MikeSites {
         const backToHomeBtn = document.getElementById('back-to-home');
         if (backToHomeBtn) {
             backToHomeBtn.addEventListener('click', () => {
-                this.showSection('home');
+                 if (window.animationController) {
+                    window.animationController.smoothScrollTo('#home');
+                } else {
+                    document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         }
 
         // Modal functionality
         this.setupModalListeners();
+        this.setupSectionObserver(); // For active nav highlighting
+        this.setupHamburgerMenu();
+    }
+
+    setupHamburgerMenu() {
+        const hamburger = document.querySelector('.hamburger-menu');
+        const siteHeader = document.querySelector('.site-header');
+        const mainNav = document.querySelector('.main-nav');
+
+        if (hamburger && siteHeader && mainNav) {
+            hamburger.addEventListener('click', () => {
+                siteHeader.classList.toggle('nav-open');
+            });
+
+            mainNav.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (siteHeader.classList.contains('nav-open')) {
+                        siteHeader.classList.remove('nav-open');
+                    }
+                });
+            });
+        }
+    }
+
+    setupSectionObserver() {
+        const sections = document.querySelectorAll('.section');
+        const navButtons = document.querySelectorAll('.nav-btn, .btn-cta[data-section]');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5, // Section is active when 50% is visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    this.currentSection = sectionId;
+
+                    // Update nav buttons state
+                    navButtons.forEach(btn => {
+                        btn.classList.toggle('active', btn.getAttribute('data-section') === sectionId);
+                    });
+
+                    // Also handle header nav buttons if they exist separately
+                     document.querySelectorAll('.main-nav .nav-btn').forEach(btn => {
+                        btn.classList.toggle('active', btn.getAttribute('data-section') === sectionId);
+                    });
+
+                    // Show/hide back button
+                    const backButton = document.getElementById('back-to-home');
+                    if (backButton) {
+                        backButton.style.display = (sectionId === 'home') ? 'none' : 'inline-block';
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
     }
 
     setupModalListeners() {
@@ -201,58 +278,6 @@ class MikeSites {
                 btn.classList.add('active');
             }
         });
-    }
-
-    showSection(sectionId) {
-        // Hide all sections
-        document.querySelectorAll('.section').forEach(section => {
-            section.classList.remove('active');
-        });
-        
-        // Show target section
-        const activeSection = document.getElementById(sectionId);
-        if (activeSection) {
-            activeSection.classList.add('active');
-            this.currentSection = sectionId;
-        }
-
-        // Update navigation button states
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.getAttribute('data-section') === sectionId) {
-                btn.classList.add('active');
-            }
-        });
-
-        // Show/hide back button
-        const backButton = document.getElementById('back-to-home');
-        if (backButton) {
-            if (sectionId === 'home') {
-                backButton.style.display = 'none';
-            } else {
-                backButton.style.display = 'inline-block';
-            }
-        }
-
-        // Load projects if navigating to projects section
-        if (sectionId === 'projects') {
-            this.ensureProjectsLoaded();
-        }
-    }
-
-    ensureProjectsLoaded() {
-        if (this.projectManager && this.projectManager.projects.length > 0) {
-            this.projectManager.renderAllProjects();
-        } else {
-            // Force initialize project manager
-            this.projectManager = new ProjectManager();
-            // Wait for initialization and force render
-            setTimeout(() => {
-                if (this.projectManager) {
-                    this.projectManager.renderAllProjects();
-                }
-            }, 200);
-        }
     }
 
     openModal(content) {
