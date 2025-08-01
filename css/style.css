@@ -70,7 +70,7 @@ html {
 body {
     font-family: 'Soria', sans-serif;
     font-weight: 700; /* Make all text bolder by default */
-    background: url('../images/background.jpg') no-repeat center center fixed;
+    background: url('/Mike-sites/images/background.jpg') no-repeat center center fixed;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
