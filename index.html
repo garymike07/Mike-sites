@@ -85,13 +85,10 @@
                 <!-- Navigation Buttons -->
                 <div class="main-navigation">
                     <div class="nav-buttons-grid">
-                        <button class="nav-btn" data-section="demos">🎯 Live Demos</button>
-                        <button class="nav-btn" data-section="about">👨‍💻 About Me</button>
+                        <button class="nav-btn" data-section="home">🏠 Home</button>
+                        <button class="nav-btn" data-section="projects">🚀 Projects</button>
+                        <button class="nav-btn" data-section="about">👨‍💻 About</button>
                         <button class="nav-btn" data-section="contact">📧 Contact</button>
-                        <button class="nav-btn" data-section="tech-stack">⚡ Tech Stack</button>
-                        <button class="nav-btn" data-section="toolbox">🛠️ Toolbox</button>
-                        <button class="nav-btn" data-section="blog">📝 Blog Posts</button>
-                        <button class="nav-btn" data-section="playground">🎮 Playground</button>
                     </div>
                 </div>
 
@@ -140,53 +137,26 @@
             </div>
         </section>
 
-        <!-- Projects Section (now empty, can be removed later) -->
+        <!-- Projects Section -->
         <section id="projects" class="section">
-        </section>
-
-        <!-- Live Demos Section -->
-        <section id="demos" class="section">
-            <div class="demos-container">
-                <h2>🌟 Personal Portfolio - Live Demo</h2>
-                <p>This is a live demonstration of my personal portfolio website. It showcases my skills, projects, and professional experience in a clean, modern interface. The site is fully responsive and designed with a glassmorphism aesthetic.</p>
-                
-                <div class="demo-preview">
-                    <img src="https://via.placeholder.com/400x300/1a1a1a/00d4ff?text=Mike+Portfolio" alt="Portfolio Preview" style="width: 100%; max-width: 400px; border-radius: 10px; margin: 20px 0;">
+            <div class="section-header">
+                <h2>Projects</h2>
+                <div class="project-controls">
+                    <div class="filter-container">
+                        <select id="project-filter">
+                            <option value="all">All Categories</option>
+                            <option value="live">Live</option>
+                            <option value="ongoing">Ongoing</option>
+                            <option value="concept">Concept</option>
+                        </select>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" id="project-search" placeholder="Search projects...">
+                    </div>
                 </div>
-
-                <div class="demo-features">
-                    <h3>⭐ Key Features:</h3>
-                    <ul>
-                        <li>🎨 <strong>Interactive Design:</strong> A visually appealing layout with smooth animations and transitions.</li>
-                        <li>🚀 <strong>Project Showcase:</strong> Detailed view of my projects with descriptions, technologies used, and links.</li>
-                        <li>📱 <strong>Fully Responsive:</strong> Adapts seamlessly to all screen sizes, from mobile phones to desktops.</li>
-                        <li>🌙 <strong>Dynamic Theme Switching:</strong> Allows users to switch between dark, light, and neon themes.</li>
-                        <li>⚡ <strong>Performance Optimized:</strong> Built for speed with fast loading times and efficient code.</li>
-                    </ul>
-                </div>
-
-                <div class="demo-tech">
-                    <h3>🛠️ Core Technologies:</h3>
-                    <p>HTML5 CSS3 JavaScript (ES6+) Responsive Design Flexbox & Grid</p>
-                </div>
-
-                <div class="demo-iframe-container" style="margin-top: 30px;">
-                    <iframe 
-                        id="portfolio-iframe"
-                        src="https://garymike07.github.io/myk/" 
-                        style="width: 100%; height: 600px; border: none; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);"
-                        title="Personal Portfolio Live Demo">
-                    </iframe>
-                </div>
-
-                <div class="demo-actions" style="margin-top: 30px; text-align: center;">
-                    <a href="https://garymike07.github.io/myk/" target="_blank" class="btn btn-primary" style="margin-right: 15px;">
-                        🔗 View Live Site
-                    </a>
-                    <button onclick="document.getElementById('portfolio-iframe').src = document.getElementById('portfolio-iframe').src" class="btn btn-secondary">
-                        🔄 Reload Demo
-                    </button>
-                </div>
+            </div>
+            <div id="projects-grid" class="projects-grid">
+                <!-- Projects will be dynamically loaded here -->
             </div>
         </section>
 
@@ -283,181 +253,6 @@
             </div>
         </section>
 
-        <!-- Tech Stack Section -->
-        <section id="tech-stack" class="section">
-            <div class="tech-stack-container">
-                <h2>Tech Stack</h2>
-                <div class="tech-categories">
-                    <div class="tech-category">
-                        <h3>Frontend</h3>
-                        <div class="tech-items">
-                            <span class="tech-item">React</span>
-                            <span class="tech-item">Vue.js</span>
-                            <span class="tech-item">TypeScript</span>
-                            <span class="tech-item">Angular</span>
-                            <span class="tech-item">HTML5</span>
-                            <span class="tech-item">CSS3</span>
-                            <span class="tech-item">JavaScript (ES6+)</span>
-                            <span class="tech-item">Sass/Less</span>
-                            <span class="tech-item">Webpack/Rollup</span>
-                        </div>
-                    </div>
-                    <div class="tech-category">
-                        <h3>Backend</h3>
-                        <div class="tech-items">
-                            <span class="tech-item">Node.js</span>
-                            <span class="tech-item">Python</span>
-                            <span class="tech-item">Express.js</span>
-                            <span class="tech-item">Django/Flask</span>
-                            <span class="tech-item">Ruby on Rails</span>
-                            <span class="tech-item">PHP</span>
-                            <span class="tech-item">Go</span>
-                        </div>
-                    </div>
-                    <div class="tech-category">
-                        <h3>Databases</h3>
-                        <div class="tech-items">
-                            <span class="tech-item">MongoDB</span>
-                            <span class="tech-item">PostgreSQL</span>
-                            <span class="tech-item">MySQL</span>
-                            <span class="tech-item">Firebase Firestore</span>
-                            <span class="tech-item">Redis</span>
-                        </div>
-                    </div>
-                    <div class="tech-category">
-                        <h3>Cloud & DevOps</h3>
-                        <div class="tech-items">
-                            <span class="tech-item">AWS</span>
-                            <span class="tech-item">Google Cloud</span>
-                            <span class="tech-item">Azure</span>
-                            <span class="tech-item">Docker</span>
-                            <span class="tech-item">Kubernetes</span>
-                            <span class="tech-item">CI/CD</span>
-                        </div>
-                    </div>
-                    <div class="tech-category">
-                        <h3>Tools & Others</h3>
-                        <div class="tech-items">
-                            <span class="tech-item">Git</span>
-                            <span class="tech-item">GitHub/GitLab</span>
-                            <span class="tech-item">Jira</span>
-                            <span class="tech-item">Figma</span>
-                            <span class="tech-item">RESTful APIs</span>
-                            <span class="tech-item">GraphQL</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Toolbox Section -->
-        <section id="toolbox" class="section">
-            <div class="toolbox-container">
-                <h2>Developer Toolbox</h2>
-                <div class="toolbox-grid">
-                    <div class="tool-card">
-                        <h3>Color Converter</h3>
-                        <p>Convert color formats (Hex, RGB, HSL).</p>
-                        <button>Open Tool</button>
-                    </div>
-                    <div class="tool-card">
-                        <h3>Base64 Encoder/Decoder</h3>
-                        <p>Encode and decode Base64 strings.</p>
-                        <button>Open Tool</button>
-                    </div>
-                    <div class="tool-card">
-                        <h3>JSON Formatter</h3>
-                        <p>Prettify and validate JSON data.</p>
-                        <button>Open Tool</button>
-                    </div>
-                    <div class="tool-card">
-                        <h3>URL Encoder/Decoder</h3>
-                        <p>Encode and decode URL components.</p>
-                        <button>Open Tool</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Blog Section -->
-        <section id="blog" class="section">
-            <div class="blog-container">
-                <h2>Latest Blog Posts</h2>
-                <div class="blog-posts-grid">
-                    <!-- Blog posts will be dynamically loaded here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Playground Section -->
-        <section id="playground" class="section">
-            <div class="playground-container">
-                <h2>Code Playground</h2>
-                <p>Experiment with HTML, CSS, and JavaScript in real-time.</p>
-                <div class="editor-area">
-                    <div class="editor-panel">
-                        <label for="html-editor">HTML</label>
-                        <textarea id="html-editor" spellcheck="false"></textarea>
-                    </div>
-                    <div class="editor-panel">
-                        <label for="css-editor">CSS</label>
-                        <textarea id="css-editor" spellcheck="false"></textarea>
-                    </div>
-                    <div class="editor-panel">
-                        <label for="js-editor">JavaScript</label>
-                        <textarea id="js-editor" spellcheck="false"></textarea>
-                    </div>
-                </div>
-                <div class="preview-area">
-                    <label>Live Preview</label>
-                    <iframe id="preview-frame"></iframe>
-                </div>
-                <button id="run-code-btn">Run Code</button>
-            </div>
-        </section>
-
-        <!-- Blog Generator Section -->
-        <section id="blog-generator" class="section">
-            <div class="section-header">
-                <h2>Blog Post Generator</h2>
-                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Create a styled blog post from your content. Type your content, choose a template, and see a live preview. When you're ready, you can download the complete HTML file.</p>
-            </div>
-
-            <div class="generator-container">
-                <div class="generator-controls">
-                    <h3>Content</h3>
-                    <div class="form-group">
-                        <label for="blog-title">Title</label>
-                        <input type="text" id="blog-title" placeholder="Enter your blog post title">
-                    </div>
-                    <div class="form-group">
-                        <label for="blog-author">Author</label>
-                        <input type="text" id="blog-author" placeholder="Enter the author's name">
-                    </div>
-                    <div class="form-group">
-                        <label for="blog-content">Content (Markdown supported)</label>
-                        <textarea id="blog-content" rows="15" placeholder="Write your blog content here..."></textarea>
-                    </div>
-
-                    <h3>Templates</h3>
-                    <div id="template-selector" class="template-selector">
-                        <button class="template-btn active" data-template="minimalist">Minimalist</button>
-                        <button class="template-btn" data-template="professional">Professional</button>
-                        <button class="template-btn" data-template="creative">Creative</button>
-                        <button class="template-btn" data-template="developer">Developer</button>
-                    </div>
-
-                    <button id="download-html-btn" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
-                        Download HTML
-                    </button>
-                </div>
-
-                <div class="generator-preview">
-                    <h3>Live Preview</h3>
-                    <iframe id="blog-preview-frame" class="blog-preview-frame"></iframe>
-                </div>
-            </div>
-        </section>
     </main>
 
         <!-- Project Modal Structure -->
@@ -469,48 +264,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Live Demo Modal Structure -->
-        <div id="live-demo-modal" class="modal" onclick="window.open('https://garymike07.github.io/myk/', '_blank')">
-            <div class="modal-content" style="cursor: pointer;">
-                <span class="modal-close">&times;</span>
-                <div class="modal-body">
-                    <div class="demo-modal-header" style="cursor:pointer;" onclick="window.open('https://garymike07.github.io/myk/', '_blank')">
-                        <h2>🌟 Personal Portfolio - Live Demo</h2>
-                        <p>This is a live demonstration of my personal portfolio website. It showcases my skills, projects, and professional experience in a clean, modern interface. The site is fully responsive and designed with a glassmorphism aesthetic.</p>
-                    </div>
-                    
-                    <div class="portfolio-frame-container">
-                        <iframe src="https://garymike07.github.io/myk/" title="Personal Portfolio Live Demo"></iframe>
-                    </div>
-
-                    <div class="demo-info">
-                        <div class="demo-details">
-                            <h3>Key Features:</h3>
-                            <ul>
-                                <li>✨ **Interactive Design:** A visually appealing layout with smooth animations and transitions.</li>
-                                <li>🚀 **Project Showcase:** Detailed view of my projects with descriptions, technologies used, and links.</li>
-                                <li>📱 **Fully Responsive:** Adapts seamlessly to all screen sizes, from mobile phones to desktops.</li>
-                                <li>🎨 **Dynamic Theme Switching:** Allows users to switch between dark, light, and neon themes.</li>
-                                <li>⚡ **Performance Optimized:** Built for speed with fast loading times and efficient code.</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="demo-tech-stack">
-                            <h3>Core Technologies:</h3>
-                            <div class="tech-tags">
-                                <span class="tech-tag">HTML5</span>
-                                <span class="tech-tag">CSS3</span>
-                                <span class="tech-tag">JavaScript (ES6+)</span>
-                                <span class="tech-tag">Responsive Design</span>
-                                <span class="tech-tag">Flexbox & Grid</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </main>
 
     <!-- Loading Overlay -->
