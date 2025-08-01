@@ -14,6 +14,17 @@ class MikeSites {
         this.setupEventListeners();
         this.projectManager.renderAllProjects();
         this.showSection('home');
+        this.hideLoadingOverlay();
+    }
+
+    hideLoadingOverlay() {
+        const loadingOverlay = document.getElementById('loading-overlay');
+        if (loadingOverlay) {
+            loadingOverlay.style.opacity = '0';
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+            }, 500);
+        }
     }
 
     setupEventListeners() {
