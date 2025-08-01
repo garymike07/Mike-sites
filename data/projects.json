@@ -435,9 +435,29 @@
       "github": "#",
       "completionDate": "November 2023",
       "developedBy": "Mike",
-      "challenges": "Creating smooth animations and ensuring accurate location-based weather data."
+      "challenges": "Integrating with various fitness devices and creating accurate health metrics algorithms."
+    },
+    {
+      "id": 22,
+      "title": "AI-Powered Personal Assistant",
+      "category": "ai-tool",
+      "status": "concept",
+      "description": "A smart personal assistant that uses AI to manage schedules, set reminders, and automate daily tasks.",
+      "tags": ["Python", "Flask", "GPT-3", "Speech Recognition", "Text-to-Speech"],
+      "thumbnail": "images/ai-assistant-thumbnail.png",
+      "features": [
+        "Voice commands",
+        "Natural language understanding",
+        "Calendar integration",
+        "Task automation",
+        "Personalized recommendations"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "Q1 2025",
+      "developedBy": "Mike",
+      "challenges": "Achieving high accuracy in speech recognition and natural language processing in real-time."
     }
   ]
 }
-
 

@@ -83,6 +83,11 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body data-theme="dark">
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
     <!-- Main Content -->
     <main id="main-content" class="main-content">
         <!-- Header -->
@@ -206,7 +211,6 @@
                             <option value="ongoing">Ongoing</option>
                             <option value="progress">Progress</option>
                             <option value="concept">Concept</option>
-                        </select>tion value="concept">Concept</option>
                         </select>
                     </div>
                     <div class="search-container">
@@ -257,7 +261,7 @@
                                 <div class="timeline-date">2019 - 2020</div>
                                 <div class="timeline-content">
                                     <h4>Junior Developer</h4>
-                                    <p>Started journey with HTML, CSS, JavaScript and foundational web technologies</p>
+                                    <p>Gained foundational knowledge in web development and software engineering principles</p>
                                 </div>
                             </div>
                         </div>
@@ -270,193 +274,113 @@
         <section id="contact" class="section">
             <div class="contact-container">
                 <h2>Get In Touch</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <h3>Let's Build Something Amazing Together</h3>
-                        <p>Ready to bring your next project to life? I'm passionate about creating innovative web solutions that drive results. Whether you need a modern SaaS platform, an e-commerce solution, or a custom web application, I'm here to help.</p>
-                        
-                        <div class="contact-methods">
-                            <div class="contact-method">
-                                <span class="contact-icon">📧</span>
-                                <span>mike.waitindi@gmail.com</span>
-                            </div>
-                            <div class="contact-method">
-                                <span class="contact-icon">💼</span>
-                                <span>Available for freelance & full-time opportunities</span>
-                            </div>
-                            <div class="contact-method">
-                                <span class="contact-icon">🌍</span>
-                                <span>Remote work & global collaboration</span>
-                            </div>
-                            <div class="contact-method">
-                                <span class="contact-icon">⚡</span>
-                                <span>Quick turnaround & agile development</span>
-                            </div>
-                                            <form id="contact-form" class="contact-form">
-                        <div class="form-group">
-                            <label for="name">Name *</label>
-                            <input type="text" id="name" name="name" required>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-type">Project Type</label>
+                        <select id="project-type" name="project-type">
+                            <option value="website">Website Development</option>
+                            <option value="saas">SaaS Application</option>
+                            <option value="mobile">Mobile App</option>
+                            <option value="consulting">Consulting</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Budget (USD)</label>
+                        <input type="number" id="budget" name="budget" min="0" placeholder="e.g., 5000">
+                    </div>
+                    <div class="form-group">
+                        <label for="timeline">Desired Timeline</label>
+                        <input type="text" id="timeline" name="timeline" placeholder="e.g., 2-3 months">
+                    </div>
+                    <div class="form-group">
+                        <label>Key Features (Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="feature-auth" name="features" value="authentication">
+                            <label for="feature-auth">User Authentication</label>
+                            <input type="checkbox" id="feature-db" name="features" value="database">
+                            <label for="feature-db">Database Integration</label>
+                            <input type="checkbox" id="feature-api" name="features" value="api">
+                            <label for="feature-api">API Development</label>
+                            <input type="checkbox" id="feature-uiux" name="features" value="uiux">
+                            <label for="feature-uiux">Custom UI/UX Design</label>
+                            <input type="checkbox" id="feature-payment" name="features" value="payment">
+                            <label for="feature-payment">Payment Gateway</label>
+                            <input type="checkbox" id="feature-admin" name="features" value="admin">
+                            <label for="feature-admin">Admin Panel</label>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="project-type">Project Type *</label>
-                            <select id="project-type" name="project-type" required>
-                                <option value="">Select Project Type</option>
-                                <option value="saas">SaaS Platform</option>
-                                <option value="ecommerce">E-commerce Store</option>
-                                <option value="portfolio">Portfolio Website</option>
-                                <option value="blog">Blog/CMS</option>
-                                <option value="dashboard">Admin Dashboard</option>
-                                <option value="mobile-app">Mobile App</option>
-                                <option value="ai-tool">AI-Powered Tool</option>
-                                <option value="fintech">FinTech Solution</option>
-                                <option value="social-platform">Social Platform</option>
-                                <option value="custom">Custom Solution</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="budget">Budget Range</label>
-                            <select id="budget" name="budget">
-                                <option value="">Select Budget Range</option>
-                                <option value="under-5k">Under $5,000</option>
-                                <option value="5k-15k">$5,000 - $15,000</option>
-                                <option value="15k-30k">$15,000 - $30,000</option>
-                                <option value="30k-50k">$30,000 - $50,000</option>
-                                <option value="50k-plus">$50,000+</option>
-                                <option value="discuss">Let's Discuss</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="timeline">Preferred Timeline</label>
-                            <select id="timeline" name="timeline">
-                                <option value="">Select Timeline</option>
-                                <option value="asap">ASAP (Rush Job)</option>
-                                <option value="1-month">1 Month</option>
-                                <option value="2-3-months">2-3 Months</option>
-                                <option value="3-6-months">3-6 Months</option>
-                                <option value="6-months-plus">6+ Months</option>
-                                <option value="flexible">Flexible</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="features">Required Features (Check all that apply)</label>
-                            <div class="checkbox-group">
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="features" value="responsive-design"> Responsive Design
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="features" value="user-auth"> User Authentication
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="features" value="payment-integration"> Payment Integration
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="features" value="cms"> Content Management
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="features" value="api-integration"> API Integration
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="features" value="analytics"> Analytics Dashboard
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="features" value="seo"> SEO Optimization
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="features" value="mobile-app"> Mobile App
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Project Description *</label>
-                            <textarea id="message" name="message" rows="6" placeholder="Describe your project vision, goals, target audience, and any specific requirements..." required></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="inspiration">Inspiration/Reference Sites</label>
-                            <textarea id="inspiration" name="inspiration" rows="3" placeholder="Share any websites or apps that inspire you for this project..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn" id="submit-btn">
-                            <span class="btn-text">Send Project Request</span>
-                            <span class="btn-loading" style="display: none;">Sending...</span>
-                        </button>
-                        
-                        <div class="form-success" id="form-success" style="display: none;">
-                            <p>✅ Your project request has been sent successfully! I'll get back to you within 24 hours.</p>
-                        </div>
-                    </form>     </section>
-
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tell me about your project</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inspiration">Any websites or apps that inspire you?</label>
+                        <input type="text" id="inspiration" name="inspiration" placeholder="e.g., Airbnb, Stripe">
+                    </div>
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loading" style="display:none;">Sending...</span>
+                    </button>
+                    <p id="form-success" style="display:none; color: var(--success-color); margin-top: 1rem;">Thank you! Your message has been sent.</p>
+                </form>
+            </div>
+        </section>
     </main>
 
-    <!-- Source Code Viewer -->
-    <div id="source-code-viewer" class="source-code-viewer">
-        <div class="source-code-container">
-            <div class="source-code-header">
-                <div class="source-code-title" id="source-code-title">Project Source Code</div>
-                <div class="source-code-tabs">
+    <!-- Project Modal Structure -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Source Code Viewer Modal -->
+    <div id="source-code-viewer" class="modal-overlay">
+        <div class="modal-content source-code-modal">
+            <button class="close-button" id="close-source-btn">&times;</button>
+            <div class="modal-header">
+                <h2 id="source-code-title"></h2>
+                <div class="source-tabs">
                     <button class="source-tab active" data-tab="html">HTML</button>
                     <button class="source-tab" data-tab="css">CSS</button>
                     <button class="source-tab" data-tab="js">JavaScript</button>
                 </div>
-                <div class="source-code-actions">
-                    <button class="copy-code-btn" id="copy-code-btn">Copy Code</button>
-                    <button class="close-source-btn" id="close-source-btn">×</button>
-                </div>
             </div>
-            <div class="source-code-content">
-                <div class="code-block" id="code-display">
-                    <pre><code id="code-content">// Select a project to view its source code</code></pre>
-                </div>
+            <div class="code-container">
+                <pre><code id="code-content"></code></pre>
             </div>
+            <button class="btn btn-primary mt-4" id="copy-code-btn">Copy Code</button>
         </div>
     </div>
 
-    <!-- Project Modal -->
-    <div id="project-modal" class="modal-overlay">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h2 id="modal-title">Project Title</h2>
-                <button class="modal-close" id="close-modal">×</button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Modal content will be dynamically populated -->
-            </div>
-        </div>
-    </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2025 Mike Sites. All rights reserved.</p>
+        <p>Built with ❤️ and code by <a href="https://github.com/garymike07" target="_blank">Mike Sites</a></p>
+    </footer>
 
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="loading-overlay">
-        <div class="loading-spinner"></div>
-    </div>
-
-    <!-- Scripts - Load in correct order -->
-    <script src="js/lazy-load.js"></script>
-    <script src="js/projects.js"></script>
+    <!-- JavaScript -->
     <script src="js/main.js"></script>
+    <script src="js/projects.js"></script>
     <script src="js/animations.js"></script>
-    <script src="js/three-scene.js"></script>
     <script src="js/interactive-features.js"></script>
-    
-    <!-- Monaco Editor Setup -->
+    <script src="js/lazy-load.js"></script>
     <script>
-        if (typeof monaco !== 'undefined') {
-            require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs' }});
-            require(['vs/editor/editor.main'], function() {
-                console.log('Monaco Editor loaded');
-            });
-        }
+        // Initialize SourceCodeViewer globally
+        document.addEventListener('DOMContentLoaded', () => {
+            window.sourceCodeViewer = new SourceCodeViewer();
+        });
     </script>
 </body>
 </html>
-
 
