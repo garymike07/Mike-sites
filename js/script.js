@@ -990,3 +990,107 @@ window.mikeSites = {
     closeModal: closeModal
 };
 
+
+// Live Demo Modal Functions
+function openLiveDemoModal() {
+    const modal = document.getElementById('live-demo-modal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLiveDemoModal() {
+    const modal = document.getElementById('live-demo-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    
+    // Reset modal state
+    const frameContainer = document.getElementById('portfolio-frame-container');
+    const loading = document.getElementById('portfolio-loading');
+    const viewBtn = document.getElementById('view-portfolio-btn');
+    
+    frameContainer.style.display = 'none';
+    loading.style.display = 'none';
+    viewBtn.style.display = 'inline-block';
+    
+    // Clear iframe src
+    const iframe = document.getElementById('portfolio-frame');
+    iframe.src = '';
+}
+
+function loadPortfolioSite() {
+    const loading = document.getElementById('portfolio-loading');
+    const frameContainer = document.getElementById('portfolio-frame-container');
+    const viewBtn = document.getElementById('view-portfolio-btn');
+    const iframe = document.getElementById('portfolio-frame');
+    
+    // Show loading state
+    viewBtn.style.display = 'none';
+    loading.style.display = 'flex';
+    
+    // Simulate loading delay and then show the iframe
+    setTimeout(() => {
+        loading.style.display = 'none';
+        frameContainer.style.display = 'block';
+        
+        // Load the current site in the iframe
+        iframe.src = window.location.href;
+        
+        // Handle iframe load event
+        iframe.onload = function() {
+            console.log('Portfolio loaded successfully');
+        };
+        
+        iframe.onerror = function() {
+            loading.style.display = 'none';
+            frameContainer.style.display = 'none';
+            viewBtn.style.display = 'inline-block';
+            alert('Failed to load portfolio. Please try again.');
+        };
+    }, 1500);
+}
+
+// Event listeners for Live Demo functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Portfolio demo button
+    const portfolioDemoBtn = document.getElementById('portfolio-demo-btn');
+    if (portfolioDemoBtn) {
+        portfolioDemoBtn.addEventListener('click', openLiveDemoModal);
+    }
+    
+    // View portfolio button
+    const viewPortfolioBtn = document.getElementById('view-portfolio-btn');
+    if (viewPortfolioBtn) {
+        viewPortfolioBtn.addEventListener('click', loadPortfolioSite);
+    }
+    
+    // Close modal when clicking outside
+    const liveDemoModal = document.getElementById('live-demo-modal');
+    if (liveDemoModal) {
+        liveDemoModal.addEventListener('click', function(e) {
+            if (e.target === liveDemoModal) {
+                closeLiveDemoModal();
+            }
+        });
+    }
+    
+    // Add navigation button functionality
+    const navButtons = document.querySelectorAll('.nav-btn');
+    navButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const section = this.getAttribute('data-section');
+            if (section) {
+                showSection(section);
+                
+                // Update sidebar navigation active state
+                const sidebarLinks = document.querySelectorAll('.nav-link');
+                sidebarLinks.forEach(link => link.classList.remove('active'));
+                
+                const correspondingLink = document.querySelector(`[data-section="${section}"]`);
+                if (correspondingLink) {
+                    correspondingLink.classList.add('active');
+                }
+            }
+        });
+    });
+});
+
