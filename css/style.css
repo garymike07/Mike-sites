@@ -2272,8 +2272,8 @@ body {
 
 /* Logo adjustments */
 .header-logo {
-    width: 60px; /* Reduced size */
-    height: 60px; /* Reduced size */
+    width: 40px; /* Further reduced size */
+    height: 40px; /* Further reduced size */
     border-radius: 50%; /* Circular shape */
     object-fit: cover;
     margin-right: 10px; /* Adjust spacing */
