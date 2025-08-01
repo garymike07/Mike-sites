@@ -397,3 +397,43 @@ class ProjectManager {
 // Make ProjectManager available globally
 window.ProjectManager = ProjectManager;
 
+
+// Add view source button functionality to project modal
+document.addEventListener('DOMContentLoaded', function() {
+    // Override the openProjectModal method to include source code viewer
+    if (window.ProjectManager) {
+        const originalOpenModal = ProjectManager.prototype.openProjectModal;
+        
+        ProjectManager.prototype.openProjectModal = function(projectId) {
+            const project = this.projects.find(p => p.id === projectId);
+            if (!project) return;
+
+            // Call original modal opening
+            originalOpenModal.call(this, projectId);
+            
+            // Add source code viewer functionality after modal is opened
+            setTimeout(() => {
+                const viewSourceBtn = document.getElementById('view-source-btn');
+                if (viewSourceBtn && window.sourceCodeViewer) {
+                    viewSourceBtn.addEventListener('click', () => {
+                        window.sourceCodeViewer.show(project);
+                        // Close the project modal
+                        const modalOverlay = document.querySelector('.modal-overlay');
+                        if (modalOverlay) {
+                            modalOverlay.classList.remove('active');
+                        }
+                    });
+                }
+            }, 100);
+        };
+    }
+});
+
+// Make source code viewer globally accessible
+window.sourceCodeViewer = null;
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof SourceCodeViewer !== 'undefined') {
+        window.sourceCodeViewer = new SourceCodeViewer();
+    }
+});
+

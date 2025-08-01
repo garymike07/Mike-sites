@@ -233,50 +233,189 @@
                                 <span class="contact-icon">⚡</span>
                                 <span>Quick turnaround & agile development</span>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <form id="contact-form" class="contact-form">
+                                            <form id="contact-form" class="contact-form">
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">Name *</label>
                             <input type="text" id="name" name="name" required>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email">Email *</label>
                             <input type="email" id="email" name="email" required>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="project-type">Project Type</label>
-                            <select id="project-type" name="project-type">
-                                <option value="website">Website</option>
-                                <option value="webapp">Web Application</option>
-                                <option value="saas">SaaS Solution</option>
-                                <option value="ecommerce">E-commerce</option>
-                                <option value="other">Other</option>
+                            <label for="project-type">Project Type *</label>
+                            <select id="project-type" name="project-type" required>
+                                <option value="">Select Project Type</option>
+                                <option value="saas">SaaS Platform</option>
+                                <option value="ecommerce">E-commerce Store</option>
+                                <option value="portfolio">Portfolio Website</option>
+                                <option value="blog">Blog/CMS</option>
+                                <option value="dashboard">Admin Dashboard</option>
+                                <option value="mobile-app">Mobile App</option>
+                                <option value="ai-tool">AI-Powered Tool</option>
+                                <option value="fintech">FinTech Solution</option>
+                                <option value="social-platform">Social Platform</option>
+                                <option value="custom">Custom Solution</option>
                             </select>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <label for="budget">Budget Range</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select Budget Range</option>
+                                <option value="under-5k">Under $5,000</option>
+                                <option value="5k-15k">$5,000 - $15,000</option>
+                                <option value="15k-30k">$15,000 - $30,000</option>
+                                <option value="30k-50k">$30,000 - $50,000</option>
+                                <option value="50k-plus">$50,000+</option>
+                                <option value="discuss">Let's Discuss</option>
+                            </select>
                         </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+                        
+                        <div class="form-group">
+                            <label for="timeline">Preferred Timeline</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Select Timeline</option>
+                                <option value="asap">ASAP (Rush Job)</option>
+                                <option value="1-month">1 Month</option>
+                                <option value="2-3-months">2-3 Months</option>
+                                <option value="3-6-months">3-6 Months</option>
+                                <option value="6-months-plus">6+ Months</option>
+                                <option value="flexible">Flexible</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="features">Required Features (Check all that apply)</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="features" value="responsive-design"> Responsive Design
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="features" value="user-auth"> User Authentication
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="features" value="payment-integration"> Payment Integration
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="features" value="cms"> Content Management
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="features" value="api-integration"> API Integration
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="features" value="analytics"> Analytics Dashboard
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="features" value="seo"> SEO Optimization
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="features" value="mobile-app"> Mobile App
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Project Description *</label>
+                            <textarea id="message" name="message" rows="6" placeholder="Describe your project vision, goals, target audience, and any specific requirements..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inspiration">Inspiration/Reference Sites</label>
+                            <textarea id="inspiration" name="inspiration" rows="3" placeholder="Share any websites or apps that inspire you for this project..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submit-btn">
+                            <span class="btn-text">Send Project Request</span>
+                            <span class="btn-loading" style="display: none;">Sending...</span>
+                        </button>
+                        
+                        <div class="form-success" id="form-success" style="display: none;">
+                            <p>✅ Your project request has been sent successfully! I'll get back to you within 24 hours.</p>
+                        </div>
+                    </form>     </section>
 
     </main>
 
-        <!-- Project Modal Structure -->
-        <div id="project-modal" class="modal-overlay">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <div id="modal-body">
-                    <!-- Modal content will be dynamically inserted here -->
+    <!-- Source Code Viewer -->
+    <div id="source-code-viewer" class="source-code-viewer">
+        <div class="source-code-container">
+            <div class="source-code-header">
+                <div class="source-code-title" id="source-code-title">Project Source Code</div>
+                <div class="source-code-tabs">
+                    <button class="source-tab active" data-tab="html">HTML</button>
+                    <button class="source-tab" data-tab="css">CSS</button>
+                    <button class="source-tab" data-tab="js">JavaScript</button>
+                </div>
+                <div class="source-code-actions">
+                    <button class="copy-code-btn" id="copy-code-btn">Copy Code</button>
+                    <button class="close-source-btn" id="close-source-btn">×</button>
+                </div>
+            </div>
+            <div class="source-code-content">
+                <div class="code-block" id="code-display">
+                    <pre><code id="code-content">// Select a project to view its source code</code></pre>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-button" id="close-modal">×</button>
+            <div class="modal-header">
+                <h2 id="modal-title">Project Title</h2>
+                <div id="modal-status" class="project-status">Status</div>
+            </div>
+            
+            <div class="modal-section">
+                <div id="modal-image-container">
+                    <img id="modal-image" class="modal-image" src="" alt="Project Screenshot">
+                </div>
+                <div id="modal-icon" class="modal-icon" style="display: none;">📱</div>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Project Details</h3>
+                <p><strong>Completed:</strong> <span id="modal-completed">Date</span></p>
+                <p><strong>Developer:</strong> <span id="modal-developer">Mike</span></p>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Description</h3>
+                <p id="modal-description">Project description will appear here.</p>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Key Features</h3>
+                <ul id="modal-features" class="feature-list">
+                    <!-- Features will be populated dynamically -->
+                </ul>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Technologies Used</h3>
+                <div id="modal-tech-tags" class="tech-tags">
+                    <!-- Tech tags will be populated dynamically -->
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="view-source-btn">
+                    <span>👨‍💻</span> View Source Code
+                </button>
+                <a class="btn btn-secondary" id="modal-demo-link" href="#" target="_blank">
+                    <span>🚀</span> Live Demo
+                </a>
+                <a class="btn btn-secondary" id="modal-github-link" href="#" target="_blank">
+                    <span>📂</span> GitHub
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="loading-overlay">

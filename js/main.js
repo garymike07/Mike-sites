@@ -236,3 +236,679 @@ class MikeSites {
 // Make MikeSites available globally
 window.MikeSites = MikeSites;
 
+
+
+// Enhanced Contact Form Handler
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+    const successMessage = document.getElementById('form-success');
+    
+    // Show loading state
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+    
+    // Collect form data
+    const formData = new FormData(this);
+    const features = [];
+    formData.getAll('features').forEach(feature => features.push(feature));
+    
+    const projectData = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        projectType: formData.get('project-type'),
+        budget: formData.get('budget'),
+        timeline: formData.get('timeline'),
+        features: features,
+        description: formData.get('message'),
+        inspiration: formData.get('inspiration'),
+        timestamp: new Date().toISOString()
+    };
+    
+    // Simulate form submission (in real implementation, this would send to a server)
+    setTimeout(() => {
+        // Reset loading state
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+        
+        // Show success message
+        successMessage.style.display = 'block';
+        
+        // Reset form
+        this.reset();
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 5000);
+        
+        // Log project request (for demo purposes)
+        console.log('Project Request Submitted:', projectData);
+        
+        // In a real implementation, you would send this data to your email service
+        // Example: EmailJS, Netlify Forms, or a custom backend
+        
+    }, 2000);
+});
+
+// Source Code Viewer Functionality
+class SourceCodeViewer {
+    constructor() {
+        this.viewer = document.getElementById('source-code-viewer');
+        this.title = document.getElementById('source-code-title');
+        this.codeContent = document.getElementById('code-content');
+        this.tabs = document.querySelectorAll('.source-tab');
+        this.copyBtn = document.getElementById('copy-code-btn');
+        this.closeBtn = document.getElementById('close-source-btn');
+        this.currentProject = null;
+        this.currentTab = 'html';
+        
+        this.init();
+    }
+    
+    init() {
+        // Tab switching
+        this.tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                this.switchTab(tab.dataset.tab);
+            });
+        });
+        
+        // Copy code functionality
+        this.copyBtn.addEventListener('click', () => {
+            this.copyCode();
+        });
+        
+        // Close viewer
+        this.closeBtn.addEventListener('click', () => {
+            this.close();
+        });
+        
+        // Close on overlay click
+        this.viewer.addEventListener('click', (e) => {
+            if (e.target === this.viewer) {
+                this.close();
+            }
+        });
+    }
+    
+    show(project) {
+        this.currentProject = project;
+        this.title.textContent = `${project.title} - Source Code`;
+        this.switchTab('html');
+        this.viewer.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    close() {
+        this.viewer.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    switchTab(tabName) {
+        this.currentTab = tabName;
+        
+        // Update active tab
+        this.tabs.forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.tab === tabName);
+        });
+        
+        // Generate and display code
+        const code = this.generateCode(tabName);
+        this.codeContent.innerHTML = this.highlightSyntax(code, tabName);
+    }
+    
+    generateCode(type) {
+        if (!this.currentProject) return '';
+        
+        const project = this.currentProject;
+        
+        switch (type) {
+            case 'html':
+                return this.generateHTML(project);
+            case 'css':
+                return this.generateCSS(project);
+            case 'js':
+                return this.generateJS(project);
+            default:
+                return '';
+        }
+    }
+    
+    generateHTML(project) {
+        return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${project.title}</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>${project.title}</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">${project.title}</h1>
+                <p class="hero-description">${project.description}</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary">Get Started</button>
+                    <button class="btn btn-secondary">Learn More</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    ${project.features.map(feature => `
+                    <div class="feature-card">
+                        <div class="feature-icon">✨</div>
+                        <h3>${feature}</h3>
+                        <p>Advanced ${feature.toLowerCase()} functionality</p>
+                    </div>
+                    `).join('')}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 ${project.title}. Built with ${project.tags.join(', ')}.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>`;
+    }
+    
+    generateCSS(project) {
+        return `/* ${project.title} - Styles */
+:root {
+    --primary-color: #3b82f6;
+    --secondary-color: #1e293b;
+    --accent-color: #60a5fa;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --background: #ffffff;
+    --surface: #f8fafc;
+    --border: #e5e7eb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--background);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Header Styles */
+.header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.nav-brand h1 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--primary-color);
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Button Styles */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: white;
+    color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: var(--primary-color);
+}
+
+/* Features Section */
+.features-section {
+    padding: 6rem 2rem;
+    background: var(--surface);
+}
+
+.features-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+}
+
+/* Footer */
+.footer {
+    background: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}`;
+    }
+    
+    generateJS(project) {
+        return `// ${project.title} - JavaScript Functionality
+
+class ${project.title.replace(/\s+/g, '')}App {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.setupEventListeners();
+        this.setupAnimations();
+        this.loadContent();
+    }
+    
+    setupEventListeners() {
+        // Navigation
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.smoothScroll(link.getAttribute('href'));
+            });
+        });
+        
+        // Button interactions
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.handleButtonClick(e.target);
+            });
+        });
+        
+        // Feature cards hover effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                this.animateCard(card, 'enter');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                this.animateCard(card, 'leave');
+            });
+        });
+    }
+    
+    setupAnimations() {
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    }
+    
+    smoothScroll(target) {
+        const element = document.querySelector(target);
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }
+    
+    handleButtonClick(button) {
+        // Add click animation
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            button.style.transform = '';
+        }, 150);
+        
+        // Handle different button types
+        if (button.classList.contains('btn-primary')) {
+            this.handlePrimaryAction();
+        } else if (button.classList.contains('btn-secondary')) {
+            this.handleSecondaryAction();
+        }
+    }
+    
+    handlePrimaryAction() {
+        // Primary button functionality
+        console.log('Primary action triggered');
+        this.showNotification('Welcome to ${project.title}!', 'success');
+    }
+    
+    handleSecondaryAction() {
+        // Secondary button functionality
+        console.log('Secondary action triggered');
+        this.showNotification('Learn more about our features', 'info');
+    }
+    
+    animateCard(card, type) {
+        if (type === 'enter') {
+            card.style.transform = 'translateY(-10px) scale(1.02)';
+            card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
+        } else {
+            card.style.transform = '';
+            card.style.boxShadow = '';
+        }
+    }
+    
+    loadContent() {
+        // Simulate content loading
+        const features = ${JSON.stringify(project.features)};
+        const technologies = ${JSON.stringify(project.tags)};
+        
+        console.log('Loaded features:', features);
+        console.log('Built with:', technologies);
+        
+        // Initialize any dynamic content
+        this.updateStats();
+    }
+    
+    updateStats() {
+        // Update any dynamic statistics or counters
+        const stats = {
+            users: Math.floor(Math.random() * 10000) + 1000,
+            projects: Math.floor(Math.random() * 100) + 50,
+            satisfaction: 98
+        };
+        
+        console.log('Current stats:', stats);
+    }
+    
+    showNotification(message, type = 'info') {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = \`notification notification-\${type}\`;
+        notification.textContent = message;
+        
+        // Style the notification
+        Object.assign(notification.style, {
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            padding: '1rem 1.5rem',
+            borderRadius: '0.5rem',
+            color: 'white',
+            backgroundColor: type === 'success' ? '#10b981' : '#3b82f6',
+            zIndex: '1000',
+            transform: 'translateX(100%)',
+            transition: 'transform 0.3s ease'
+        });
+        
+        document.body.appendChild(notification);
+        
+        // Animate in
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+}
+
+// Utility functions
+const utils = {
+    // Format date
+    formatDate(date) {
+        return new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }).format(new Date(date));
+    },
+    
+    // Debounce function
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
+    
+    // Local storage helpers
+    storage: {
+        set(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
+        },
+        
+        get(key) {
+            const item = localStorage.getItem(key);
+            return item ? JSON.parse(item) : null;
+        },
+        
+        remove(key) {
+            localStorage.removeItem(key);
+        }
+    }
+};
+
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const app = new ${project.title.replace(/\s+/g, '')}App();
+    
+    // Make app globally accessible for debugging
+    window.app = app;
+    window.utils = utils;
+    
+    console.log('${project.title} application initialized successfully!');
+});
+
+// Export for module systems
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { ${project.title.replace(/\s+/g, '')}App, utils };
+}`;
+    }
+    
+    highlightSyntax(code, language) {
+        // Basic syntax highlighting
+        let highlighted = code;
+        
+        if (language === 'html') {
+            highlighted = highlighted
+                .replace(/(&lt;\/?)(\w+)([^&gt;]*&gt;)/g, '<span class="code-keyword">$1$2</span><span class="code-variable">$3</span>')
+                .replace(/(&quot;[^&quot;]*&quot;)/g, '<span class="code-string">$1</span>');
+        } else if (language === 'css') {
+            highlighted = highlighted
+                .replace(/(\/\*.*?\*\/)/g, '<span class="code-comment">$1</span>')
+                .replace(/([a-zA-Z-]+)(\s*:)/g, '<span class="code-keyword">$1</span>$2')
+                .replace(/(#[a-fA-F0-9]{3,6})/g, '<span class="code-string">$1</span>')
+                .replace(/(\d+px|\d+rem|\d+%)/g, '<span class="code-number">$1</span>');
+        } else if (language === 'js') {
+            highlighted = highlighted
+                .replace(/(\/\/.*$)/gm, '<span class="code-comment">$1</span>')
+                .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="code-comment">$1</span>')
+                .replace(/\b(class|function|const|let|var|if|else|for|while|return|import|export)\b/g, '<span class="code-keyword">$1</span>')
+                .replace(/('[^']*'|"[^"]*"|`[^`]*`)/g, '<span class="code-string">$1</span>')
+                .replace(/\b(\d+)\b/g, '<span class="code-number">$1</span>');
+        }
+        
+        return highlighted;
+    }
+    
+    copyCode() {
+        const code = this.codeContent.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            const originalText = this.copyBtn.textContent;
+            this.copyBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                this.copyBtn.textContent = originalText;
+            }, 2000);
+        });
+    }
+}
+
+// Initialize source code viewer
+const sourceCodeViewer = new SourceCodeViewer();
+
