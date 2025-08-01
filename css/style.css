@@ -12,8 +12,8 @@
     --text-primary: #ffffff;
     --text-secondary: #b0b0b0;
     --text-muted: #808080;
-    --shadow-color: rgba(0, 212, 255, 0.3);
-    --shadow-dark: rgba(0, 0, 0, 0.5);
+    --shadow-color: rgba(0, 212, 255, 0.15);
+    --shadow-dark: rgba(0, 0, 0, 0.3);
     --border-color: #333;
     --success-color: #00ff88;
     --warning-color: #ffaa00;
@@ -195,14 +195,11 @@ body {
     text-align: center;
 }
 
-.logo h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 5px;
+.logo-img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
 }
 
 .tagline {
