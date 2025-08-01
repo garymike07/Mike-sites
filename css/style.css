@@ -2272,11 +2272,11 @@ body {
 
 /* Logo adjustments */
 .header-logo {
-    width: 40px; /* Further reduced size */
-    height: 40px; /* Further reduced size */
-    border-radius: 50%; /* Circular shape */
-    object-fit: cover;
-    margin-right: 10px; /* Adjust spacing */
+    width: 40px !important; /* Further reduced size */
+    height: 40px !important; /* Further reduced size */
+    border-radius: 50% !important; /* Circular shape */
+    object-fit: cover !important;
+    margin-right: 10px !important; /* Adjust spacing */
 }
 
 .logo-section {
