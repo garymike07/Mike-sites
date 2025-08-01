@@ -940,7 +940,7 @@ function initBlogGenerator() {
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
-        modal.style.display = 'block';
+        modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 }
@@ -948,7 +948,7 @@ function openModal(modalId) {
 function closeModal(modalId) {
     const modal = document.getElementById(modalId || 'project-modal');
     if (modal) {
-        modal.style.display = 'none';
+        modal.classList.remove('active');
         document.body.style.overflow = 'auto';
     }
 }
@@ -963,10 +963,10 @@ function initModals() {
     });
 
     // Close modal when clicking outside of it
-    document.querySelectorAll('.modal').forEach(modal => {
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                closeModal();
+                closeModal(modal.id);
             }
         });
     });
