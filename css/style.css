@@ -69,7 +69,8 @@ html {
 
 body {
     font-family: 'Soria', sans-serif;
-    background: url('../images/background.jpg') no-repeat center center fixed;
+    font-weight: 700; /* Make all text bolder by default */
+    background: url('../1000024301.jpg') no-repeat center center fixed;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -80,6 +81,7 @@ body {
     position: relative;
 }
 
+/* Add blur overlay to background */
 body::before {
     content: '';
     position: fixed;
@@ -87,7 +89,21 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: url('../1000024301.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(1.5px); /* Blur the background */
+    z-index: -2;
+}
+
+/* Add dark overlay for better text visibility */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Darker overlay */
     z-index: -1;
 }
 
@@ -1900,42 +1916,47 @@ body::before {
 }
 
 
-/* Main Navigation Buttons */
-.main-navigation {
-    margin: 40px 0;
-    padding: 0 20px;
-}
-
-.nav-buttons-grid {
+/* Main Navigation Buttons /* Main Navigation Buttons */
+.main-nav {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
+    margin: 40px 0;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .nav-btn {
-    padding: 15px 25px;
-    background: rgba(26, 26, 26, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
+    padding: 15px 25px;
     color: var(--text-primary);
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 700 !important;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.6),
+        0 6px 18px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-.nav-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+.nav-btn:hover,
+.nav-btn.active {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 
+        0 16px 45px rgba(0, 0, 0, 0.7),
+        0 8px 22px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-    color: var(--accent-color);
+    border-color: var(--accent-color);
 }
 
 .nav-btn:active {
@@ -1947,26 +1968,41 @@ body::before {
 /* Demos Section */
 .demos-container {
     max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
+    margi/* Enhanced shadows and visibility for all components */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 800 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-.demo-card {
-    background: rgba(26, 26, 26, 0.2);
+p, span, div {
+    font-weight: 600 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Hero Container */
+.hero-container {
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 60px 40px;
     text-align: center;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    margin: 40px auto;
+    max-width: 1000px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
 }
 
-.demo-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+.hero-container:hover {
+    box-shadow: 
+        0 25px 70px rgba(0, 0, 0, 0.8),
+        0 12px 35px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
 }
 
 .demo-icon {

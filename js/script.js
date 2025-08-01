@@ -991,6 +991,14 @@ window.mikeSites = {
 };
 
 
+// Show section function
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+        section.classList.toggle('active', section.id === sectionId);
+    });
+}
+
 // Live Demo Modal Functions
 function openLiveDemoModal() {
     const modal = document.getElementById('live-demo-modal');
@@ -1081,14 +1089,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (section) {
                 showSection(section);
                 
-                // Update sidebar navigation active state
-                const sidebarLinks = document.querySelectorAll('.nav-link');
-                sidebarLinks.forEach(link => link.classList.remove('active'));
-                
-                const correspondingLink = document.querySelector(`[data-section="${section}"]`);
-                if (correspondingLink) {
-                    correspondingLink.classList.add('active');
-                }
+                // Update navigation button active state
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
             }
         });
     });
