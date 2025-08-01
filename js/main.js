@@ -236,18 +236,22 @@ class MikeSites {
 
         // Load projects if navigating to projects section
         if (sectionId === 'projects') {
-            if (this.projectManager) {
-                this.projectManager.renderAllProjects();
-            } else {
-                // Initialize project manager if not already done
-                this.projectManager = new ProjectManager();
-                // Give it a moment to initialize then render
-                setTimeout(() => {
-                    if (this.projectManager) {
-                        this.projectManager.renderAllProjects();
-                    }
-                }, 100);
-            }
+            this.ensureProjectsLoaded();
+        }
+    }
+
+    ensureProjectsLoaded() {
+        if (this.projectManager && this.projectManager.projects.length > 0) {
+            this.projectManager.renderAllProjects();
+        } else {
+            // Force initialize project manager
+            this.projectManager = new ProjectManager();
+            // Wait for initialization and force render
+            setTimeout(() => {
+                if (this.projectManager) {
+                    this.projectManager.renderAllProjects();
+                }
+            }, 200);
         }
     }
 

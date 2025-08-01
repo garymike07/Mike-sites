@@ -22,17 +22,17 @@ class ProjectManager {
             }
             const data = await response.json();
             this.projects = data.projects || [];
-            
-            this.renderFeaturedProjects();
-            this.renderAllProjects();
-            this.renderHomeProjects();
+            console.log('Projects loaded:', this.projects.length);
         } catch (error) {
             console.error('Error loading project data:', error);
             this.projects = this.getFallbackProjects();
-            this.renderFeaturedProjects();
-            this.renderAllProjects();
-            this.renderHomeProjects();
+            console.log('Using fallback projects:', this.projects.length);
         }
+        
+        // Always render after loading data
+        this.renderFeaturedProjects();
+        this.renderAllProjects();
+        this.renderHomeProjects();
     }
 
     getFallbackProjects() {
@@ -265,10 +265,15 @@ class ProjectManager {
     }
 
     renderAllProjects() {
+        console.log('renderAllProjects called, projects count:', this.projects.length);
         const container = document.getElementById('projects-grid');
-        if (!container) return;
+        if (!container) {
+            console.error('projects-grid container not found');
+            return;
+        }
 
         let filteredProjects = this.getFilteredProjects();
+        console.log('Filtered projects count:', filteredProjects.length);
 
         // Sort projects by status: live, ongoing, concept
         const statusOrder = { 'live': 1, 'ongoing': 2, 'progress': 3, 'concept': 4 };
@@ -283,7 +288,9 @@ class ProjectManager {
             return;
         }
 
-        container.innerHTML = filteredProjects.map(project => this.createProjectCard(project)).join('');
+        const projectsHTML = filteredProjects.map(project => this.createProjectCard(project)).join('');
+        container.innerHTML = projectsHTML;
+        console.log('Projects rendered to container');
         
         this.attachProjectCardListeners(container);
     }
