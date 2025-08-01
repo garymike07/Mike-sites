@@ -28,25 +28,18 @@ class ProjectManager {
     }
 
     setupEventListeners() {
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                this.setFilter(e.target.getAttribute('data-filter'));
+        // Filter buttons (now handled by main.js nav-btn for sections)
+        // The project filter dropdown is still handled here
+        const projectFilter = document.getElementById("project-filter");
+        if (projectFilter) {
+            projectFilter.addEventListener("change", (e) => {
+                this.setFilter(e.target.value);
             });
-        });
+        }
 
-        // Category navigation
-        document.querySelectorAll('[data-category]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const category = e.target.getAttribute('data-category');
-                this.setFilter(category);
-                // Navigate to projects page
-                if (window.mikeSites) {
-                    window.mikeSites.navigateToPage('projects');
-                }
-            });
-        });
+        // Category navigation (now handled by main.js nav-btn for sections)
+        // No longer need to navigate to a separate projects page
+
     }
 
     renderFeaturedProjects() {
@@ -71,31 +64,30 @@ class ProjectManager {
     }
 
     getFilteredProjects() {
-        if (this.currentFilter === 'all') {
-            return this.projects;
+        let filtered = this.projects;
+
+        // Apply category filter from dropdown
+        const projectFilter = document.getElementById("project-filter");
+        if (projectFilter && projectFilter.value !== "all") {
+            filtered = filtered.filter(project => project.category === projectFilter.value);
+        }
+
+        // Apply search query
+        const projectSearch = document.getElementById("project-search");
+        if (projectSearch && projectSearch.value) {
+            const searchTerm = projectSearch.value.toLowerCase();
+            filtered = filtered.filter(project => 
+                project.title.toLowerCase().includes(searchTerm) ||
+                project.description.toLowerCase().includes(searchTerm) ||
+                project.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+            );
         }
         
-        return this.projects.filter(project => {
-            if (this.currentFilter === 'live' || this.currentFilter === 'ongoing' || this.currentFilter === 'concept') {
-                return project.status === this.currentFilter;
-            }
-            return project.category === this.currentFilter;
-        });
+        return filtered;
     }
 
     setFilter(filter) {
-        this.currentFilter = filter;
-        
-        // Update active filter button
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        const activeBtn = document.querySelector(`[data-filter="${filter}"]`);
-        if (activeBtn) {
-            activeBtn.classList.add('active');
-        }
-        
+        // No longer setting this.currentFilter as filtering is done directly from DOM elements
         this.renderAllProjects();
     }
 
@@ -176,10 +168,13 @@ class ProjectManager {
 
     createProjectModalContent(project) {
         const liveButton = project.demo ? 
-            `<a href="${project.demo}" target="_blank" class="cta-btn primary">
+            `<a href="${project.demo}" target="_blank" class="btn btn-primary project-action-btn">
                 <span>View Live Demo</span>
                 <i class="fas fa-external-link-alt"></i>
-            </a>` : '';
+            </a>` : 
+            `<button class="btn btn-secondary project-action-btn" disabled>
+                <span>Demo Not Available</span>
+            </button>`;
 
         const githubButton = project.github ? 
             `<a href="${project.github}" target="_blank" class="cta-btn secondary">

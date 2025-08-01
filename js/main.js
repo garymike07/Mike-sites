@@ -29,12 +29,12 @@ class MikeSites {
         }
 
         // Navigation links
-        document.addEventListener('click', (e) => {
-            if (e.target.matches('[data-page]')) {
+        document.querySelectorAll(".nav-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
                 e.preventDefault();
-                const page = e.target.getAttribute('data-page');
-                this.navigateToPage(page);
-            }
+                const section = btn.getAttribute("data-section");
+                this.navigateToSection(section);
+            });
         });
 
         // Submenu toggles
@@ -143,26 +143,25 @@ class MikeSites {
         menuItem.classList.toggle('open', !isOpen);
     }
 
-    navigateToPage(pageName) {
+    navigateToSection(sectionName) {
         // Update active nav item
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
+        document.querySelectorAll(".nav-btn").forEach(btn => {
+            btn.classList.remove("active");
         });
-        
-        const activeNavItem = document.querySelector(`[data-page="${pageName}"]`)?.closest('.nav-item');
-        if (activeNavItem) {
-            activeNavItem.classList.add('active');
+        const activeNavBtn = document.querySelector(`.nav-btn[data-section="${sectionName}"]`);
+        if (activeNavBtn) {
+            activeNavBtn.classList.add("active");
         }
 
-        // Show/hide pages
-        document.querySelectorAll('.page').forEach(page => {
-            page.classList.remove('active');
+        // Show/hide sections
+        document.querySelectorAll(".section").forEach(section => {
+            section.classList.remove("active");
         });
         
-        const targetPage = document.getElementById(`${pageName}-page`);
-        if (targetPage) {
-            targetPage.classList.add('active');
-            this.currentPage = pageName;
+        const targetSection = document.getElementById(sectionName);
+        if (targetSection) {
+            targetSection.classList.add("active");
+            this.currentPage = sectionName;
         }
 
         // Close sidebar on mobile after navigation
@@ -171,16 +170,30 @@ class MikeSites {
         }
 
         // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
 
-        // Load page-specific content
-        this.loadPageContent(pageName);
+        // Load section-specific content
+        this.loadSectionContent(sectionName);
+
+        // Handle back button visibility
+        const backButton = document.getElementById("back-to-home");
+        if (backButton) {
+            if (sectionName !== "home") {
+                backButton.style.display = "block";
+            } else {
+                backButton.style.display = "none";
+            }
+        }
     }
 
-    loadPageContent(pageName) {
-        switch (pageName) {
+    loadSectionContent(sectionName) {
+        switch (sectionName) {
             case 'projects':
-                this.loadProjects();
+                // Projects are now loaded directly on the home page
+                break;
+            case 'demos':
+                // Load live demos content
+                this.loadLiveDemos();
                 break;
             case 'tech-stack':
                 this.animateProficiencyBars();
@@ -563,4 +576,34 @@ document.addEventListener('DOMContentLoaded', () => {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = MikeSites;
 }
+
+
+
+    loadLiveDemos() {
+        const demosContainer = document.querySelector("#demos .demos-container");
+        if (demosContainer) {
+            demosContainer.innerHTML = `
+                <h2>Live Demos</h2>
+                <p>Explore interactive live demonstrations of my projects.</p>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h3>Project Alpha</h3>
+                        <p>A cutting-edge SaaS platform.</p>
+                        <a href="#" class="btn btn-primary">View Demo</a>
+                    </div>
+                    <div class="demo-card">
+                        <h3>Project Beta</h3>
+                        <p>An e-commerce solution with advanced features.</p>
+                        <a href="#" class="btn btn-primary">View Demo</a>
+                    </div>
+                    <div class="demo-card">
+                        <h3>Project Gamma</h3>
+                        <p>A data visualization dashboard.</p>
+                        <a href="#" class="btn btn-primary">View Demo</a>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
 
