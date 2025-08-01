@@ -70,10 +70,7 @@ html {
 body {
     font-family: 'Soria', sans-serif;
     font-weight: 700; /* Make all text bolder by default */
-    background: url('../images/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background: var(--primary-bg); /* Set background to primary-bg variable for dark mode */
     color: var(--text-primary);
     overflow-x: hidden;
     line-height: 1.6;
@@ -82,8 +79,8 @@ body {
 }
 
 /* Enhanced dark overlay for better component visibility */
-body::after {
-    content: '';
+/* body::after {
+    content: \'\';
     position: fixed;
     top: 0;
     left: 0;
@@ -91,7 +88,7 @@ body::after {
     height: 100%;
     background: rgba(0, 0, 0, 0.3); /* Lighter overlay for better background visibility */
     z-index: -1;
-}
+} */
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
