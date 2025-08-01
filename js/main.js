@@ -190,6 +190,12 @@ class MikeSites {
             } else {
                 // Initialize project manager if not already done
                 this.projectManager = new ProjectManager();
+                // Give it a moment to initialize then render
+                setTimeout(() => {
+                    if (this.projectManager) {
+                        this.projectManager.renderAllProjects();
+                    }
+                }, 100);
             }
         }
     }
