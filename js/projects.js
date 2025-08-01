@@ -209,7 +209,9 @@ class ProjectManager {
                         `<img src="images/${screenshot}" alt="${project.title} screenshot" class="screenshot">`
                     ).join("")}
                 </div>
-            </div>` : "";          <div class="project-modal-content">
+            </div>` : "";
+        return `
+            <div class="project-modal-content">
                 <div class="modal-header">
                     <h2>${project.title}</h2>
                     <div class="project-status ${project.status}">${project.status}</div>
