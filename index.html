@@ -22,7 +22,25 @@
     <meta property="twitter:description" content="Professional developer portfolio showcasing modern web development projects and innovative digital experiences.">
     <meta property="twitter:image" content="https://garymike07.github.io/Mike-sites/images/og-image.jpg">
 
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css?v=1.1">
+    <link rel="stylesheet" href="css/animations.css?v=1.0">
+    <link rel="stylesheet" href="css/modern-design.css?v=1.0">
+    <link rel="stylesheet" href="css/interactive-styles.css?v=1.0">
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.min.js"></script>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0066ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Mike Sites">
+    
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body data-theme="dark">
@@ -65,34 +83,34 @@
         <!-- Home Section -->
         <section id="home" class="section active">
             <div class="hero-container">
-                <div class="hero-text">
-                    <h1 class="hero-title">Welcome to Mike Sites</h1>
-                    <h2 class="hero-subtitle">A Living Web Lab</h2>
+                <div class="hero-text fade-in-up">
+                    <h1 class="hero-title gradient-text typewriter">Welcome to Mike Sites</h1>
+                    <h2 class="hero-subtitle fade-in-up">A Living Web Lab</h2>
                 </div>
                 
-                <div class="hero-features">
-                    <div class="clock-container">
+                <div class="hero-features fade-in-up">
+                    <div class="clock-container modern-card floating">
                         <div class="clock-label">Current Time</div>
                         <div id="clock" class="clock">00:00:00</div>
                     </div>
                     
-                    <div class="daily-tip">
+                    <div class="daily-tip modern-card floating">
                         <div class="tip-label">💡 Daily Coding Tip</div>
                         <div id="daily-tip" class="tip-content">Use semantic HTML elements to improve accessibility and SEO.</div>
                     </div>
                 </div>
 
                 <!-- Navigation Buttons -->
-                <div class="main-navigation">
+                <div class="main-navigation fade-in-up">
                     <div class="nav-buttons-grid">
-                        <button class="nav-btn" data-section="home">🏠 Home</button>
-                        <button class="nav-btn" data-section="projects">🚀 Projects</button>
-                        <button class="nav-btn" data-section="about">👨‍💻 About</button>
-                        <button class="nav-btn" data-section="contact">📧 Contact</button>
+                        <button class="nav-btn magnetic-btn interactive-button stagger-item" data-section="home">🏠 Home</button>
+                        <button class="nav-btn magnetic-btn interactive-button stagger-item" data-section="projects">🚀 Projects</button>
+                        <button class="nav-btn magnetic-btn interactive-button stagger-item" data-section="about">👨‍💻 About</button>
+                        <button class="nav-btn magnetic-btn interactive-button stagger-item" data-section="contact">📧 Contact</button>
                     </div>
                 </div>
 
-                <div class="tech-ticker">
+                <div class="tech-ticker fade-in-up">
                     <div class="ticker-track">
                         <span class="tech-icon">⚛️ React</span>
                         <span class="tech-icon">🟢 Node.js</span>
@@ -422,8 +440,22 @@
         <div class="loading-spinner"></div>
     </div>
 
+    <!-- Scripts -->
     <script src="js/main.js"></script>
     <script src="js/projects.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/three-scene.js"></script>
+    <script src="js/interactive-features.js"></script>
+    
+    <!-- Monaco Editor Setup -->
+    <script>
+        if (typeof monaco !== 'undefined') {
+            require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs' }});
+            require(['vs/editor/editor.main'], function() {
+                console.log('Monaco Editor loaded');
+            });
+        }
+    </script>
 </body>
 </html>
 
