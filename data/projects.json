@@ -27,7 +27,7 @@
       "status": "ongoing",
       "description": "Modern, conversion-optimized landing page for SaaS products with animated sections and responsive design.",
       "tags": ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
-      "thumbnail": "🚀",
+      "thumbnail": "images/saas-landing-thumbnail.png",
       "features": [
         "Responsive design for all devices",
         "Smooth scroll animations",
@@ -49,7 +49,7 @@
       "status": "progress",
       "description": "Feature-rich blog template with markdown support, search functionality, and social sharing capabilities.",
       "tags": ["Next.js", "MDX", "Tailwind CSS", "Prisma"],
-      "thumbnail": "📝",
+      "thumbnail": "images/blog-template-thumbnail.png",
       "features": [
         "Markdown blog posts",
         "Search and filtering",
@@ -69,7 +69,7 @@
       "status": "concept",
       "description": "Full-featured e-commerce platform with shopping cart, payment integration, and admin dashboard.",
       "tags": ["React", "Node.js", "MongoDB", "Stripe"],
-      "thumbnail": "🛒",
+      "thumbnail": "images/ecommerce-thumbnail.png",
       "features": [
         "Product catalog",
         "Shopping cart",
