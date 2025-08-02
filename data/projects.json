@@ -7,7 +7,7 @@
       "status": "live",
       "description": "Clean, minimalist portfolio website showcasing creative work with interactive elements and smooth transitions.",
       "tags": ["HTML5", "CSS3", "JavaScript", "GSAP"],
-      "thumbnail": "👨‍💻",
+      "thumbnail": "images/1000023920.jpg",
       "features": [
         "Interactive animations",
         "Project showcase gallery",
@@ -24,10 +24,10 @@
       "id": 1,
       "title": "SaaS Landing Page",
       "category": "saas",
-      "status": "live",
+      "status": "ongoing",
       "description": "Modern, conversion-optimized landing page for SaaS products with animated sections and responsive design.",
       "tags": ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
-      "thumbnail": "🚀",
+      "thumbnail": "images/saas-landing-thumbnail.png",
       "features": [
         "Responsive design for all devices",
         "Smooth scroll animations",
@@ -37,7 +37,7 @@
       ],
       "challenges": "Creating smooth animations while maintaining performance across all devices.",
       "github": "https://github.com/garymike07/myk",
-      "demo": "https://github.com/garymike07/myk",
+      "demo": "https://garymike07.github.io/myk/",
       "screenshots": ["screenshot1.jpg", "screenshot2.jpg"],
       "completionDate": "30/07/2025",
       "developedBy": "Mike"
@@ -49,7 +49,7 @@
       "status": "progress",
       "description": "Feature-rich blog template with markdown support, search functionality, and social sharing capabilities.",
       "tags": ["Next.js", "MDX", "Tailwind CSS", "Prisma"],
-      "thumbnail": "📝",
+      "thumbnail": "images/blog-template-thumbnail.png",
       "features": [
         "Markdown blog posts",
         "Search and filtering",
@@ -69,7 +69,7 @@
       "status": "concept",
       "description": "Full-featured e-commerce platform with shopping cart, payment integration, and admin dashboard.",
       "tags": ["React", "Node.js", "MongoDB", "Stripe"],
-      "thumbnail": "🛒",
+      "thumbnail": "images/ecommerce-thumbnail.png",
       "features": [
         "Product catalog",
         "Shopping cart",
@@ -85,8 +85,8 @@
     {
       "id": 5,
       "title": "Cafe Website",
-      "category": "portfolio",
-      "status": "live",
+      "category": "other",
+      "status": "ongoing",
       "description": "Elegant website for a local cafe with online menu, reservation system, and location information.",
       "tags": ["Vue.js", "Nuxt.js", "SCSS", "Firebase"],
       "thumbnail": "☕",
@@ -121,8 +121,343 @@
       "github": "https://github.com/garymike07/admin-dashboard",
       "demo": "https://dashboard-demo.mikesites.dev",
       "screenshots": ["dashboard1.jpg", "dashboard2.jpg"]
+    },
+    {
+      "id": 7,
+      "title": "CV Maker",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "A web application to help users create professional CVs and resumes.",
+      "tags": ["React", "Node.js", "Express", "MongoDB"],
+      "thumbnail": "📄",
+      "features": [
+        "Multiple templates",
+        "Real-time preview",
+        "PDF export",
+        "User authentication"
+      ],
+      "challenges": "Generating PDF documents with consistent styling across different platforms.",
+      "github": "https://github.com/garymike07/cv-maker",
+      "demo": "#",
+      "screenshots": []
+    },
+    {
+      "id": 8,
+      "title": "Learning App",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "An online platform for learning new skills through courses and quizzes.",
+      "tags": ["Vue.js", "Nuxt.js", "Firebase"],
+      "thumbnail": "🎓",
+      "features": [
+        "Course management",
+        "Video lectures",
+        "Quizzes and assignments",
+        "Progress tracking"
+      ],
+      "challenges": "Streaming video content efficiently and securing course materials.",
+      "github": "https://github.com/garymike07/learning-app",
+      "demo": "#",
+      "screenshots": []
+    },
+    {
+      "id": 9,
+      "title": "Landlord Rent Management System",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "A system for landlords to manage properties, tenants, and rent payments.",
+      "tags": ["Angular", "TypeScript", "Node.js", "PostgreSQL"],
+      "thumbnail": "🏠",
+      "features": [
+        "Property and tenant management",
+        "Rent tracking and reminders",
+        "Expense logging",
+        "Reporting"
+      ],
+      "challenges": "Ensuring data security and privacy for sensitive tenant information.",
+      "github": "https://github.com/garymike07/rent-management",
+      "demo": "#",
+      "screenshots": []
+    },
+    {
+      "id": 10,
+      "title": "Pharmacy Management System",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "A comprehensive system for managing pharmacy operations, including inventory and sales.",
+      "tags": ["React", "Redux", "Node.js", "MySQL"],
+      "thumbnail": "💊",
+      "features": [
+        "Inventory management",
+        "Sales and billing",
+        "Prescription management",
+        "Supplier management"
+      ],
+      "challenges": "Complying with healthcare regulations and ensuring data accuracy.",
+      "github": "https://github.com/garymike07/pharmacy-management",
+      "demo": "#",
+      "screenshots": []
+    },
+    {
+      "id": 11,
+      "title": "School Management System",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "An all-in-one platform for managing school activities, students, and staff.",
+      "tags": ["PHP", "Laravel", "MySQL", "jQuery"],
+      "thumbnail": "🏫",
+      "features": [
+        "Student and staff management",
+        "Attendance tracking",
+        "Grading and reports",
+        "Timetable scheduling"
+      ],
+      "challenges": "Handling a large number of concurrent users and managing complex permissions.",
+      "github": "https://github.com/garymike07/school-management",
+      "demo": "#",
+      "screenshots": []
+    },
+    {
+      "id": 12,
+      "title": "AI-Powered Chatbot Platform",
+      "category": "ai-tool",
+      "status": "concept",
+      "description": "Intelligent chatbot platform with natural language processing, multi-language support, and seamless integration capabilities for businesses.",
+      "tags": ["React", "Node.js", "OpenAI API", "WebSocket", "MongoDB"],
+      "thumbnail": "images/ai-chatbot-thumbnail.png",
+      "features": [
+        "Natural language understanding",
+        "Multi-language support",
+        "Custom training data",
+        "API integrations",
+        "Analytics dashboard",
+        "Real-time conversations"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "Q2 2024",
+      "developedBy": "Mike",
+      "challenges": "Implementing advanced NLP algorithms and ensuring seamless user experience across different platforms."
+    },
+    {
+      "id": 13,
+      "title": "Cryptocurrency Trading Dashboard",
+      "category": "fintech",
+      "status": "progress",
+      "description": "Professional trading platform with real-time market data, advanced charting tools, and automated trading strategies.",
+      "tags": ["React", "TypeScript", "WebSocket", "Chart.js", "Redis"],
+      "thumbnail": "images/crypto-trading-thumbnail.png",
+      "features": [
+        "Real-time price tracking",
+        "Advanced charting tools",
+        "Portfolio management",
+        "Trading alerts",
+        "Risk management",
+        "API trading"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "Q3 2024",
+      "developedBy": "Mike",
+      "challenges": "Handling high-frequency data updates and implementing secure trading mechanisms."
+    },
+    {
+      "id": 14,
+      "title": "Food Delivery Mobile App",
+      "category": "mobile-app",
+      "status": "ongoing",
+      "description": "Full-featured food delivery application with restaurant discovery, real-time tracking, and seamless payment integration.",
+      "tags": ["React Native", "Firebase", "Google Maps", "Stripe", "Redux"],
+      "thumbnail": "images/food-delivery-thumbnail.png",
+      "features": [
+        "Restaurant discovery",
+        "Real-time order tracking",
+        "Multiple payment options",
+        "User reviews and ratings",
+        "Push notifications",
+        "Delivery scheduling"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "Q4 2024",
+      "developedBy": "Mike",
+      "challenges": "Optimizing location services and ensuring smooth real-time updates across the platform."
+    },
+    {
+      "id": 15,
+      "title": "Fitness Tracking Platform",
+      "category": "mobile-app",
+      "status": "live",
+      "description": "Comprehensive fitness tracking application with workout planning, progress monitoring, and social features.",
+      "tags": ["Flutter", "Firebase", "HealthKit", "Machine Learning", "SQLite"],
+      "thumbnail": "images/fitness-tracker-thumbnail.png",
+      "features": [
+        "Workout tracking",
+        "Progress analytics",
+        "Social challenges",
+        "Nutrition logging",
+        "Wearable integration",
+        "Personal trainer matching"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "January 2024",
+      "developedBy": "Mike",
+      "challenges": "Integrating with various fitness devices and creating accurate health metrics algorithms."
+    },
+    {
+      "id": 16,
+      "title": "Real Estate Property Portal",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "Modern real estate platform with advanced search filters, virtual tours, and comprehensive property management tools.",
+      "tags": ["Next.js", "PostgreSQL", "Mapbox", "AWS S3", "Tailwind CSS"],
+      "thumbnail": "images/real-estate-thumbnail.png",
+      "features": [
+        "Advanced property search",
+        "Virtual tour integration",
+        "Mortgage calculator",
+        "Agent management",
+        "Market analytics",
+        "Document management"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "Q2 2024",
+      "developedBy": "Mike",
+      "challenges": "Implementing complex search algorithms and managing large datasets efficiently."
+    },
+    {
+      "id": 17,
+      "title": "Social Media Analytics Platform",
+      "category": "social-platform",
+      "status": "concept",
+      "description": "Comprehensive social media management platform with content scheduling, analytics, and engagement tracking across multiple platforms.",
+      "tags": ["Vue.js", "Python", "Django", "Celery", "PostgreSQL"],
+      "thumbnail": "images/social-media-thumbnail.png",
+      "features": [
+        "Multi-platform posting",
+        "Content scheduling",
+        "Engagement analytics",
+        "Hashtag research",
+        "Competitor analysis",
+        "Team collaboration"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "Q3 2024",
+      "developedBy": "Mike",
+      "challenges": "Managing API rate limits and providing real-time analytics across multiple social platforms."
+    },
+    {
+      "id": 18,
+      "title": "Video Streaming Platform",
+      "category": "saas",
+      "status": "progress",
+      "description": "Netflix-style video streaming platform with content management, user subscriptions, and advanced recommendation algorithms.",
+      "tags": ["React", "Node.js", "FFmpeg", "AWS CloudFront", "Elasticsearch"],
+      "thumbnail": "images/video-streaming-thumbnail.png",
+      "features": [
+        "Video content management",
+        "Subscription billing",
+        "Recommendation engine",
+        "Multi-device streaming",
+        "Content analytics",
+        "Parental controls"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "Q4 2024",
+      "developedBy": "Mike",
+      "challenges": "Optimizing video delivery and implementing scalable recommendation algorithms."
+    },
+    {
+      "id": 19,
+      "title": "Online Learning Management System",
+      "category": "saas",
+      "status": "ongoing",
+      "description": "Comprehensive e-learning platform with course creation tools, progress tracking, and interactive learning features.",
+      "tags": ["Angular", "Spring Boot", "MySQL", "WebRTC", "Docker"],
+      "thumbnail": "images/learning-platform-thumbnail.png",
+      "features": [
+        "Course creation tools",
+        "Video conferencing",
+        "Progress tracking",
+        "Interactive quizzes",
+        "Certificate generation",
+        "Discussion forums"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "Q3 2024",
+      "developedBy": "Mike",
+      "challenges": "Creating engaging interactive content and ensuring smooth video streaming for live classes."
+    },
+    {
+      "id": 20,
+      "title": "Project Management Suite",
+      "category": "saas",
+      "status": "live",
+      "description": "Comprehensive project management platform with kanban boards, time tracking, and team collaboration features.",
+      "tags": ["React", "Express.js", "MongoDB", "Socket.io", "Material-UI"],
+      "thumbnail": "images/task-management-thumbnail.png",
+      "features": [
+        "Kanban boards",
+        "Time tracking",
+        "Team collaboration",
+        "File sharing",
+        "Project analytics",
+        "Custom workflows"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "December 2023",
+      "developedBy": "Mike",
+      "challenges": "Implementing real-time collaboration features and ensuring data consistency across multiple users."
+    },
+    {
+      "id": 21,
+      "title": "Weather Forecast Application",
+      "category": "mobile-app",
+      "status": "live",
+      "description": "Beautiful weather application with accurate forecasts, interactive maps, and personalized weather alerts.",
+      "tags": ["React Native", "OpenWeather API", "Redux", "Animated", "AsyncStorage"],
+      "thumbnail": "images/weather-app-thumbnail.png",
+      "features": [
+        "7-day weather forecast",
+        "Interactive weather maps",
+        "Severe weather alerts",
+        "Location-based updates",
+        "Weather widgets",
+        "Historical data"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "November 2023",
+      "developedBy": "Mike",
+      "challenges": "Integrating with various fitness devices and creating accurate health metrics algorithms."
+    },
+    {
+      "id": 22,
+      "title": "AI-Powered Personal Assistant",
+      "category": "ai-tool",
+      "status": "concept",
+      "description": "A smart personal assistant that uses AI to manage schedules, set reminders, and automate daily tasks.",
+      "tags": ["Python", "Flask", "GPT-3", "Speech Recognition", "Text-to-Speech"],
+      "thumbnail": "images/ai-assistant-thumbnail.png",
+      "features": [
+        "Voice commands",
+        "Natural language understanding",
+        "Calendar integration",
+        "Task automation",
+        "Personalized recommendations"
+      ],
+      "demo": "#",
+      "github": "#",
+      "completionDate": "Q1 2025",
+      "developedBy": "Mike",
+      "challenges": "Achieving high accuracy in speech recognition and natural language processing in real-time."
     }
   ]
 }
-
 

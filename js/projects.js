@@ -5,6 +5,7 @@ class ProjectManager {
         this.projects = [];
         this.favorites = this.loadFavorites();
         this.currentFilter = 'all';
+        this.currentTechFilter = '';
         this.init();
     }
 
@@ -13,224 +14,254 @@ class ProjectManager {
         this.setupEventListeners();
     }
 
-    loadProjectData() {
-        // Sample project data - in a real application, this would come from an API
-        this.projects = [
+    async loadProjectData() {
+        try {
+            const response = await fetch('data/projects.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            this.projects = data.projects || [];
+            console.log('Projects loaded:', this.projects.length);
+        } catch (error) {
+            console.error('Error loading project data:', error);
+            this.projects = this.getFallbackProjects();
+            console.log('Using fallback projects:', this.projects.length);
+        }
+        
+        // Always render after loading data
+        this.renderFeaturedProjects();
+        this.renderAllProjects();
+        this.renderHomeProjects();
+    }
+
+    getFallbackProjects() {
+        return [
             {
                 id: 1,
-                title: "E-Commerce Platform",
-                description: "A modern, scalable e-commerce solution with advanced features including real-time inventory management, payment processing, and analytics dashboard.",
-                category: "ecommerce",
+                title: "Personal Portfolio",
+                category: "portfolio",
                 status: "live",
-                thumbnail: "assets/images/project-ecommerce.jpg",
-                tags: ["React", "Node.js", "MongoDB", "Stripe"],
-                liveUrl: "https://demo-ecommerce.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/myk",
-                completionDate: "30/07/2025",
-                developer: "Mike",
+                description: "Clean, minimalist portfolio website showcasing creative work with interactive elements and smooth transitions.",
+                tags: ["HTML5", "CSS3", "JavaScript", "GSAP"],
+                thumbnail: "images/1000023920.jpg",
                 features: [
-                    "Real-time inventory management",
-                    "Secure payment processing with Stripe",
-                    "Advanced search and filtering",
-                    "Admin dashboard with analytics",
-                    "Mobile-responsive design",
-                    "SEO optimized"
+                    "Interactive animations",
+                    "Project showcase gallery",
+                    "Contact form",
+                    "Blog integration",
+                    "Dark/Light mode toggle"
                 ],
-                challenges: "Implementing real-time inventory updates across multiple concurrent users while maintaining data consistency.",
-                clientFeedback: "Exceeded expectations! The platform increased our online sales by 150% in the first quarter.",
-                screenshots: [
-                    "assets/images/ecommerce-home.jpg",
-                    "assets/images/ecommerce-product.jpg",
-                    "assets/images/ecommerce-checkout.jpg"
-                ],
-                techStack: {
-                    frontend: ["React", "Redux", "Tailwind CSS"],
-                    backend: ["Node.js", "Express", "MongoDB"],
-                    deployment: ["AWS", "Docker", "Nginx"]
-                }
+                challenges: "Balancing visual appeal with fast loading times and accessibility.",
+                github: "https://github.com/garymike07/portfolio",
+                demo: "https://garymike07.github.io/myk/",
+                screenshots: []
             },
             {
                 id: 2,
-                title: "SaaS Analytics Dashboard",
-                description: "A comprehensive analytics platform for SaaS businesses with real-time data visualization, custom reporting, and team collaboration features.",
+                title: "SaaS Landing Page",
                 category: "saas",
                 status: "ongoing",
-                thumbnail: "assets/images/project-saas.jpg",
-                tags: ["Vue.js", "Python", "PostgreSQL", "D3.js"],
-                liveUrl: "https://analytics.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/saas-analytics",
+                description: "Modern, conversion-optimized landing page for SaaS products with animated sections and responsive design.",
+                tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
+                thumbnail: "🚀",
                 features: [
-                    "Real-time data visualization",
-                    "Custom dashboard builder",
-                    "Advanced filtering and segmentation",
-                    "Team collaboration tools",
-                    "API integrations",
-                    "White-label solutions"
-                ],
-                challenges: "Processing and visualizing large datasets in real-time while maintaining optimal performance.",
-                clientFeedback: "The insights we get from this dashboard have transformed our decision-making process.",
-                screenshots: [
-                    "assets/images/saas-dashboard.jpg",
-                    "assets/images/saas-reports.jpg",
-                    "assets/images/saas-settings.jpg"
-                ],
-                techStack: {
-                    frontend: ["Vue.js", "Vuex", "D3.js", "Chart.js"],
-                    backend: ["Python", "Django", "PostgreSQL", "Redis"],
-                    deployment: ["Google Cloud", "Kubernetes", "Docker"]
-                }
-            },
-            {
-                id: 3,
-                title: "Tech Blog Platform",
-                description: "A modern blogging platform specifically designed for tech writers with syntax highlighting, collaborative editing, and SEO optimization.",
-                category: "blogs",
-                status: "live",
-                thumbnail: "assets/images/project-blog.jpg",
-                tags: ["Next.js", "TypeScript", "Prisma", "Vercel"],
-                liveUrl: "https://techblog.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/tech-blog-platform",
-                features: [
-                    "Markdown editor with live preview",
-                    "Syntax highlighting for code blocks",
-                    "SEO optimization tools",
-                    "Comment system with moderation",
-                    "Newsletter integration",
-                    "Analytics and insights"
-                ],
-                challenges: "Creating a seamless writing experience while ensuring optimal SEO performance and fast loading times.",
-                clientFeedback: "This platform has made technical writing so much more enjoyable and efficient.",
-                screenshots: [
-                    "assets/images/blog-editor.jpg",
-                    "assets/images/blog-post.jpg",
-                    "assets/images/blog-dashboard.jpg"
-                ],
-                techStack: {
-                    frontend: ["Next.js", "TypeScript", "Tailwind CSS"],
-                    backend: ["Prisma", "PostgreSQL", "NextAuth.js"],
-                    deployment: ["Vercel", "PlanetScale"]
-                }
-            },
-            {
-                id: 4,
-                title: "Creative Portfolio Website",
-                description: "A stunning portfolio website for a creative agency featuring smooth animations, interactive galleries, and a content management system.",
-                category: "portfolios",
-                status: "live",
-                thumbnail: "assets/images/project-portfolio.jpg",
-                tags: ["React", "Framer Motion", "Sanity", "GSAP"],
-                liveUrl: "https://creative-agency.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/creative-portfolio",
-                features: [
+                    "Responsive design for all devices",
                     "Smooth scroll animations",
-                    "Interactive project galleries",
-                    "Content management system",
-                    "Contact form with validation",
-                    "Mobile-optimized design",
-                    "Performance optimized"
+                    "Contact form integration",
+                    "SEO optimized",
+                    "Fast loading performance"
                 ],
-                challenges: "Balancing stunning visual effects with optimal performance across all devices.",
-                clientFeedback: "Our new website has significantly improved our client acquisition rate.",
-                screenshots: [
-                    "assets/images/portfolio-home.jpg",
-                    "assets/images/portfolio-gallery.jpg",
-                    "assets/images/portfolio-contact.jpg"
-                ],
-                techStack: {
-                    frontend: ["React", "Framer Motion", "GSAP", "SCSS"],
-                    backend: ["Sanity CMS", "Node.js"],
-                    deployment: ["Netlify", "Sanity Cloud"]
-                }
-            },
-            {
-                id: 5,
-                title: "AI-Powered Task Manager",
-                description: "An intelligent task management application that uses AI to prioritize tasks, suggest optimal schedules, and provide productivity insights.",
-                category: "saas",
-                status: "concept",
-                thumbnail: "assets/images/project-ai-tasks.jpg",
-                tags: ["React", "Python", "TensorFlow", "OpenAI"],
-                liveUrl: null,
-                githubUrl: "https://github.com/garymike07/ai-task-manager",
-                features: [
-                    "AI-powered task prioritization",
-                    "Smart scheduling suggestions",
-                    "Productivity analytics",
-                    "Natural language task input",
-                    "Team collaboration",
-                    "Integration with popular tools"
-                ],
-                challenges: "Training AI models to understand user preferences and provide accurate task prioritization.",
-                clientFeedback: null,
-                screenshots: [
-                    "assets/images/ai-tasks-concept1.jpg",
-                    "assets/images/ai-tasks-concept2.jpg"
-                ],
-                techStack: {
-                    frontend: ["React", "TypeScript", "Material-UI"],
-                    backend: ["Python", "FastAPI", "TensorFlow", "OpenAI API"],
-                    deployment: ["AWS", "Docker", "Lambda"]
-                }
-            },
-            {
-                id: 6,
-                title: "Restaurant Ordering System",
-                description: "A complete restaurant ordering system with QR code menus, online ordering, payment processing, and kitchen management.",
-                category: "ecommerce",
-                status: "ongoing",
-                thumbnail: "assets/images/project-restaurant.jpg",
-                tags: ["Vue.js", "Laravel", "MySQL", "Stripe"],
-                liveUrl: "https://restaurant-demo.mikesites.dev",
-                githubUrl: "https://github.com/garymike07/restaurant-ordering",
-                features: [
-                    "QR code digital menus",
-                    "Online ordering system",
-                    "Payment processing",
-                    "Kitchen order management",
-                    "Customer feedback system",
-                    "Analytics dashboard"
-                ],
-                challenges: "Ensuring real-time order synchronization between customer app and kitchen display.",
-                clientFeedback: "This system has streamlined our operations and improved customer satisfaction.",
-                screenshots: [
-                    "assets/images/restaurant-menu.jpg",
-                    "assets/images/restaurant-order.jpg",
-                    "assets/images/restaurant-kitchen.jpg"
-                ],
-                techStack: {
-                    frontend: ["Vue.js", "Vuetify", "PWA"],
-                    backend: ["Laravel", "MySQL", "Redis"],
-                    deployment: ["DigitalOcean", "Docker", "Nginx"]
-                }
+                challenges: "Creating smooth animations while maintaining performance across all devices.",
+                github: "https://github.com/garymike07/myk",
+                demo: "https://garymike07.github.io/myk/",
+                screenshots: []
             }
         ];
-
-        this.renderFeaturedProjects();
-        this.renderAllProjects();
     }
 
     setupEventListeners() {
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                this.setFilter(e.target.getAttribute('data-filter'));
+        // Project filter dropdown - Projects section
+        const projectFilter = document.getElementById("project-filter");
+        if (projectFilter) {
+            projectFilter.addEventListener("change", (e) => {
+                this.setFilter(e.target.value);
             });
-        });
+        }
 
-        // Category navigation
-        document.querySelectorAll('[data-category]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const category = e.target.getAttribute('data-category');
-                this.setFilter(category);
-                // Navigate to projects page
-                if (window.mikeSites) {
-                    window.mikeSites.navigateToPage('projects');
-                }
+        // Project search - Projects section
+        const projectSearch = document.getElementById("project-search");
+        if (projectSearch) {
+            projectSearch.addEventListener("input", () => {
+                this.renderAllProjects();
             });
-        });
+        }
+
+        // Home section filter dropdown
+        const homeProjectFilter = document.getElementById("home-project-filter");
+        if (homeProjectFilter) {
+            homeProjectFilter.addEventListener("change", (e) => {
+                this.setHomeFilter(e.target.value);
+            });
+        }
+
+        // Home section search
+        const homeProjectSearch = document.getElementById("home-project-search");
+        if (homeProjectSearch) {
+            homeProjectSearch.addEventListener("input", () => {
+                this.renderHomeProjects();
+            });
+        }
+
+        // Clear filters button
+        this.addClearFiltersButton();
     }
 
+    renderHomeProjects() {
+        const container = document.getElementById('home-projects-grid');
+        if (!container) return;
+
+        let filteredProjects = this.getHomeFilteredProjects();
+
+        // Sort projects by status: live, ongoing, concept
+        const statusOrder = { 'live': 1, 'ongoing': 2, 'progress': 3, 'concept': 4 };
+        filteredProjects.sort((a, b) => {
+            const aOrder = statusOrder[a.status.toLowerCase()] || 5;
+            const bOrder = statusOrder[b.status.toLowerCase()] || 5;
+            return aOrder - bOrder;
+        });
+
+        if (filteredProjects.length === 0) {
+            container.innerHTML = '<div class="no-projects">No projects found matching your criteria.</div>';
+            return;
+        }
+
+        // Show first 6 projects on home page
+        const homeProjects = filteredProjects.slice(0, 6);
+        container.innerHTML = homeProjects.map(project => this.createProjectCard(project, true)).join('');
+        
+        this.attachProjectCardListeners(container);
+    }
+
+    getHomeFilteredProjects() {
+        let filtered = [...this.projects];
+
+        // Apply category filter from home dropdown
+        const homeProjectFilter = document.getElementById("home-project-filter");
+        if (homeProjectFilter && homeProjectFilter.value !== "all") {
+            filtered = filtered.filter(project => 
+                project.category && project.category.toLowerCase() === homeProjectFilter.value.toLowerCase()
+            );
+        }
+
+        // Apply search query from home search
+        const homeProjectSearch = document.getElementById("home-project-search");
+        if (homeProjectSearch && homeProjectSearch.value.trim()) {
+            const searchTerm = homeProjectSearch.value.toLowerCase().trim();
+            filtered = filtered.filter(project => 
+                project.title.toLowerCase().includes(searchTerm) ||
+                project.description.toLowerCase().includes(searchTerm) ||
+                (project.tags && project.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
+            );
+        }
+
+        // Apply technology filter if set
+        if (this.currentTechFilter) {
+            filtered = filtered.filter(project => 
+                project.tags && project.tags.some(tag => 
+                    tag.toLowerCase().includes(this.currentTechFilter.toLowerCase())
+                )
+            );
+        }
+        
+        // Apply technology filter if set
+        if (this.currentTechFilter) {
+            filtered = filtered.filter(project =>
+                project.tags && project.tags.some(tag =>
+                    tag.toLowerCase().includes(this.currentTechFilter.toLowerCase())
+                )
+            );
+        }
+
+        return filtered;
+    }
+
+    setHomeFilter(filter) {
+        this.renderHomeProjects();
+    }
+
+    setTechFilter(tech) {
+        this.currentTechFilter = tech;
+        this.renderAllProjects();
+        this.renderHomeProjects();
+        
+        // Show visual feedback
+        this.showFilterFeedback(`Filtering by: ${tech}`);
+    }
+
+    clearAllFilters() {
+        this.currentFilter = 'all';
+        this.currentTechFilter = '';
+        
+        // Reset dropdowns
+        const projectFilter = document.getElementById("project-filter");
+        if (projectFilter) projectFilter.value = 'all';
+        
+        const homeProjectFilter = document.getElementById("home-project-filter");
+        if (homeProjectFilter) homeProjectFilter.value = 'all';
+        
+        // Clear search boxes
+        const projectSearch = document.getElementById("project-search");
+        if (projectSearch) projectSearch.value = '';
+        
+        const homeProjectSearch = document.getElementById("home-project-search");
+        if (homeProjectSearch) homeProjectSearch.value = '';
+        
+        // Re-render
+        this.renderAllProjects();
+        this.renderHomeProjects();
+        
+        this.showFilterFeedback('All filters cleared');
+    }
+
+    showFilterFeedback(message) {
+        // Create or update filter feedback element
+        let feedback = document.getElementById('filter-feedback');
+        if (!feedback) {
+            feedback = document.createElement('div');
+            feedback.id = 'filter-feedback';
+            feedback.className = 'filter-feedback';
+            document.body.appendChild(feedback);
+        }
+        
+        feedback.textContent = message;
+        feedback.classList.add('show');
+        
+        setTimeout(() => {
+            feedback.classList.remove('show');
+        }, 2000);
+    }
+
+    addClearFiltersButton() {
+        // Add clear filters button to both sections
+        const projectControls = document.querySelector('#projects .project-controls');
+        if (projectControls && !projectControls.querySelector('.clear-filters-btn')) {
+            const clearBtn = document.createElement('button');
+            clearBtn.className = 'btn btn-secondary clear-filters-btn';
+            clearBtn.textContent = 'Clear Filters';
+            clearBtn.addEventListener('click', () => this.clearAllFilters());
+            projectControls.appendChild(clearBtn);
+        }
+
+        const homeProjectControls = document.querySelector('#home .project-controls');
+        if (homeProjectControls && !homeProjectControls.querySelector('.clear-filters-btn')) {
+            const clearBtn = document.createElement('button');
+            clearBtn.className = 'btn btn-secondary clear-filters-btn';
+            clearBtn.textContent = 'Clear Filters';
+            clearBtn.addEventListener('click', () => this.clearAllFilters());
+            homeProjectControls.appendChild(clearBtn);
+        }
+    }
     renderFeaturedProjects() {
         const container = document.getElementById('projects-scroll');
         if (!container) return;
@@ -243,73 +274,125 @@ class ProjectManager {
     }
 
     renderAllProjects() {
+        console.log('renderAllProjects called, projects count:', this.projects.length);
         const container = document.getElementById('projects-grid');
-        if (!container) return;
+        if (!container) {
+            console.error('projects-grid container not found');
+            return;
+        }
 
-        const filteredProjects = this.getFilteredProjects();
-        container.innerHTML = filteredProjects.map(project => this.createProjectCard(project)).join('');
+        let filteredProjects = this.getFilteredProjects();
+        console.log('Filtered projects count:', filteredProjects.length);
+
+        // Sort projects by status: live, ongoing, concept
+        const statusOrder = { 'live': 1, 'ongoing': 2, 'progress': 3, 'concept': 4 };
+        filteredProjects.sort((a, b) => {
+            const aOrder = statusOrder[a.status.toLowerCase()] || 5;
+            const bOrder = statusOrder[b.status.toLowerCase()] || 5;
+            return aOrder - bOrder;
+        });
+
+        if (filteredProjects.length === 0) {
+            container.innerHTML = '<div class="no-projects">No projects found matching your criteria.</div>';
+            return;
+        }
+
+        const projectsHTML = filteredProjects.map(project => this.createProjectCard(project)).join('');
+        container.innerHTML = projectsHTML;
+        console.log('Projects rendered to container');
         
         this.attachProjectCardListeners(container);
     }
 
     getFilteredProjects() {
-        if (this.currentFilter === 'all') {
-            return this.projects;
+        let filtered = [...this.projects];
+
+        // Apply status filter from dropdown
+        const projectFilter = document.getElementById("project-filter");
+        if (projectFilter && projectFilter.value !== "all") {
+            filtered = filtered.filter(project => 
+                project.status && project.status.toLowerCase() === projectFilter.value.toLowerCase()
+            );
+        }
+
+        // Apply search query
+        const projectSearch = document.getElementById("project-search");
+        if (projectSearch && projectSearch.value.trim()) {
+            const searchTerm = projectSearch.value.toLowerCase().trim();
+            filtered = filtered.filter(project => 
+                project.title.toLowerCase().includes(searchTerm) ||
+                project.description.toLowerCase().includes(searchTerm) ||
+                (project.tags && project.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
+            );
         }
         
-        return this.projects.filter(project => {
-            if (this.currentFilter === 'live' || this.currentFilter === 'ongoing' || this.currentFilter === 'concept') {
-                return project.status === this.currentFilter;
-            }
-            return project.category === this.currentFilter;
-        });
+        return filtered;
     }
 
     setFilter(filter) {
         this.currentFilter = filter;
-        
-        // Update active filter button
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        const activeBtn = document.querySelector(`[data-filter="${filter}"]`);
-        if (activeBtn) {
-            activeBtn.classList.add('active');
-        }
-        
         this.renderAllProjects();
     }
 
-    createProjectCard(project) {
-        const isFavorited = this.favorites.includes(project.id);
-        const statusClass = project.status.toLowerCase();
-        const clickableClass = project.id === 1 ? ' clickable' : '';
-        const clickableAttribute = project.id === 1 ? `style="cursor:pointer;" onclick="window.location.href='https://github.com/garymike07/myk'"` : '';
+    createProjectCard(project, isHome = false) {
+        const statusClass = project.status ? project.status.toLowerCase() : 'unknown';
+        const thumbnail = project.thumbnail && project.thumbnail.startsWith('images/') 
+            ? project.thumbnail 
+            : (project.thumbnail && !project.thumbnail.includes('emoji') 
+                ? project.thumbnail 
+                : this.getProjectIcon(project.category));
+
+        const demoLink = project.demo && project.demo !== '#' 
+            ? `<a href="${project.demo}" target="_blank" class="btn btn-secondary">Live Demo</a>`
+            : `<button class="btn btn-secondary" disabled>Demo Soon</button>`;
 
         return `
-            <div class="project-card${clickableClass}" data-project-id="${project.id}" ${clickableAttribute}>
+            <div class="project-card" data-project-id="${project.id}">
                 <div class="project-thumbnail">
-                    <img src="${project.thumbnail}" alt="${project.title}" loading="lazy">
-                    <div class="project-status ${statusClass}">${project.status}</div>
+                    ${thumbnail.startsWith('images/') 
+                        ? `<img src="${thumbnail}" alt="${project.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+                        : `<div class="project-icon">${thumbnail}</div>`
+                    }
+                    <div class="project-icon-fallback" style="display: none;">${this.getProjectIcon(project.category)}</div>
                 </div>
-                <div class="project-info">
+                <div class="project-content">
+                    <span class="project-status status-${statusClass}">${project.status || 'Unknown'}</span>
                     <h3 class="project-title">${project.title}</h3>
                     <p class="project-description">${project.description}</p>
                     <div class="project-tags">
-                        ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                        ${project.tags ? project.tags.map(tag => `<span class="project-tag tech-filter-tag" data-tech="${tag}">${tag}</span>`).join('') : ''}
                     </div>
                     <div class="project-actions">
-                        <button class="more-info-btn" data-project-id="${project.id}">
+                        <button class="btn btn-primary more-info-btn" data-project-id="${project.id}">
                             More Info
                         </button>
-                        <button class="favorite-btn ${isFavorited ? 'favorited' : ''}" data-project-id="${project.id}">
-                            <i class="fas fa-heart"></i>
+                        ${demoLink}
+                        <button class="btn btn-secondary source-code-btn" data-project-id="${project.id}">
+                            Source Code
+                        </button>
+                        <button class="btn btn-cta add-to-cart-btn" data-project-id="${project.id}">
+                            Add to Cart
                         </button>
                     </div>
                 </div>
             </div>
         `;
+    }
+
+    getProjectIcon(category) {
+        const icons = {
+            'saas': '🚀',
+            'portfolio': '👨‍💻',
+            'blog': '📝',
+            'ecommerce': '🛒',
+            'dashboard': '📊',
+            'other': '🌐',
+            'ai-tool': '🤖',
+            'fintech': '💰',
+            'mobile-app': '📱',
+            'social-platform': '🤝'
+        };
+        return icons[category] || '🌐';
     }
 
     attachProjectCardListeners(container) {
@@ -322,18 +405,31 @@ class ProjectManager {
             });
         });
 
-        // Favorite buttons
-        container.querySelectorAll('.favorite-btn').forEach(btn => {
+        // Source Code buttons
+        container.querySelectorAll('.source-code-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const projectId = parseInt(btn.getAttribute('data-project-id'));
-                this.toggleFavorite(projectId, btn);
+                const project = this.projects.find(p => p.id === projectId);
+                if (project && window.sourceCodeViewer) {
+                    window.sourceCodeViewer.show(project);
+                }
             });
         });
 
-        // Card click to open modal
+        // Tech tag filtering
+        container.querySelectorAll('.tech-filter-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const tech = tag.getAttribute('data-tech');
+                this.setTechFilter(tech);
+            });
+        });
+
+        // Card click (excluding buttons and tags)
         container.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.btn') || e.target.closest('.tech-filter-tag')) return;
                 const projectId = parseInt(card.getAttribute('data-project-id'));
                 this.openProjectModal(projectId);
             });
@@ -344,347 +440,83 @@ class ProjectManager {
         const project = this.projects.find(p => p.id === projectId);
         if (!project) return;
 
-        const modalBody = document.getElementById('modal-body');
-        if (!modalBody) return;
-
-        modalBody.innerHTML = this.createProjectModalContent(project);
-
-        if (project.id === 1) {
-            const requestRepoBtn = document.getElementById('request-repo-btn');
-            if (requestRepoBtn) {
-                requestRepoBtn.addEventListener('click', () => {
-                    if (confirm('Contact creator at 0792 618156.')) {
-                        window.open('https://github.com/garymike07/myk', '_blank');
-                    }
-                });
-            }
-        }
+        const modalContent = this.createProjectModalContent(project);
         
+        // Use global MikeSites instance if available
         if (window.mikeSites) {
-            window.mikeSites.openModal('project-modal');
+            window.mikeSites.openModal(modalContent);
         }
     }
 
     createProjectModalContent(project) {
-        const liveButton = project.liveUrl ? 
-            `<a href="${project.liveUrl}" target="_blank" class="cta-btn primary">
-                <span>View Live Demo</span>
-                <i class="fas fa-external-link-alt"></i>
-            </a>` : '';
+        const featuresList = project.features ? project.features.map(feature => `<li>${feature}</li>`).join('') : '';
+        const screenshotsHtml = project.screenshots && project.screenshots.length > 0 
+            ? `<div class="modal-section">
+                <h3>Screenshots</h3>
+                <div class="screenshots-grid">
+                    ${project.screenshots.map(screenshot => `<img src="images/${screenshot}" alt="${project.title} Screenshot" class="modal-image">`).join('')}
+                </div>
+            </div>`
+            : '';
 
-        const githubButton = project.githubUrl ? 
-            `<a href="${project.githubUrl}" target="_blank" class="cta-btn secondary">
-                <span>View on GitHub</span>
-                <i class="fab fa-github"></i>
-            </a>` : '';
-
-        const requestRepoButton = project.id === 1 ?
-            `<button id="request-repo-btn" class="cta-btn secondary">
-                <span>Request similar repo</span>
-            </button>` : '';
-
-        const clientFeedback = project.clientFeedback ? 
-            `<div class="modal-section">
-                <h3>Client Feedback</h3>
-                <blockquote class="client-quote">
-                    "${project.clientFeedback}"
-                </blockquote>
-            </div>` : '';
-
-        const projectDetails = project.completionDate && project.developer ?
-            `<div class="modal-section">
-                <h3>Project Details</h3>
-                <p><strong>Completed on:</strong> ${project.completionDate}</p>
-                <p><strong>Developed by:</strong> ${project.developer}</p>
-            </div>` : '';
+        const githubLink = project.github && project.github !== '#' 
+            ? `<a href="${project.github}" target="_blank" class="btn btn-secondary">View on GitHub</a>`
+            : '';
+        const demoLink = project.demo && project.demo !== '#' 
+            ? `<a href="${project.demo}" target="_blank" class="btn btn-primary">Live Demo</a>`
+            : '';
 
         return `
-            <div class="project-modal-content">
-                <div class="modal-header">
-                    <h2>${project.title}</h2>
-                    <div class="project-status ${project.status}">${project.status}</div>
-                </div>
-                
-                <div class="modal-section">
-                    <img src="${project.thumbnail}" alt="${project.title}" class="modal-image">
-                </div>
-                
-                ${projectDetails}
-
-                <div class="modal-section">
-                    <h3>Description</h3>
-                    <p>${project.description}</p>
-                </div>
-                
-                <div class="modal-section">
-                    <h3>Key Features</h3>
-                    <ul class="feature-list">
-                        ${project.features.map(feature => `<li>${feature}</li>`).join('')}
-                    </ul>
-                </div>
-                
-                <div class="modal-section">
-                    <h3>Technology Stack</h3>
-                    <div class="tech-stack-grid">
-                        <div class="tech-category">
-                            <h4>Frontend</h4>
-                            <div class="tech-tags">
-                                ${project.techStack.frontend.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                            </div>
-                        </div>
-                        <div class="tech-category">
-                            <h4>Backend</h4>
-                            <div class="tech-tags">
-                                ${project.techStack.backend.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                            </div>
-                        </div>
-                        <div class="tech-category">
-                            <h4>Deployment</h4>
-                            <div class="tech-tags">
-                                ${project.techStack.deployment.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="modal-section">
-                    <h3>Challenges Solved</h3>
-                    <p>${project.challenges}</p>
-                </div>
-                
-                ${clientFeedback}
-                
-                <div class="modal-section">
-                    <h3>Screenshots</h3>
-                    <div class="screenshot-gallery">
-                        ${project.screenshots.map(screenshot => 
-                            `<img src="${screenshot}" alt="${project.title} screenshot" class="screenshot">`
-                        ).join('')}
-                    </div>
-                </div>
-                
-                <div class="modal-actions">
-                    ${liveButton}
-                    ${githubButton}
-                    ${requestRepoButton}
+            <button class="close-button" id="close-modal">&times;</button>
+            <div class="modal-header">
+                <h2>${project.title}</h2>
+                <span class="project-status status-${project.status.toLowerCase()}">${project.status}</span>
+            </div>
+            <div class="modal-section">
+                <h3>Description</h3>
+                <p class="modal-description">${project.description}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Technologies Used</h3>
+                <div class="modal-tags">
+                    ${project.tags ? project.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join('') : ''}
                 </div>
             </div>
-            
-            <style>
-                .project-card.clickable:hover {
-                    transform: translateY(-5px);
-                    box-shadow: var(--shadow-lg);
-                }
-                .project-modal-content {
-                    max-width: 800px;
-                    margin: 0 auto;
-                }
-                
-                .modal-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: var(--spacing-xl);
-                    padding-bottom: var(--spacing-lg);
-                    border-bottom: 1px solid var(--border-color);
-                }
-                
-                .modal-header h2 {
-                    font-size: var(--font-size-2xl);
-                    font-weight: 600;
-                    color: var(--text-primary);
-                }
-                
-                .modal-section {
-                    margin-bottom: var(--spacing-xl);
-                }
-                
-                .modal-section h3 {
-                    font-size: var(--font-size-lg);
-                    font-weight: 600;
-                    margin-bottom: var(--spacing-md);
-                    color: var(--text-primary);
-                }
-                
-                .modal-image {
-                    width: 100%;
-                    border-radius: var(--border-radius-lg);
-                    box-shadow: var(--shadow-md);
-                }
-                
-                .feature-list {
-                    list-style: none;
-                    padding: 0;
-                }
-                
-                .feature-list li {
-                    padding: var(--spacing-sm) 0;
-                    border-bottom: 1px solid var(--border-color);
-                    position: relative;
-                    padding-left: var(--spacing-lg);
-                }
-                
-                .feature-list li:before {
-                    content: '✓';
-                    position: absolute;
-                    left: 0;
-                    color: var(--accent-primary);
-                    font-weight: bold;
-                }
-                
-                .tech-stack-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                    gap: var(--spacing-lg);
-                }
-                
-                .tech-category h4 {
-                    font-size: var(--font-size-base);
-                    font-weight: 600;
-                    margin-bottom: var(--spacing-sm);
-                    color: var(--text-primary);
-                }
-                
-                .tech-tags {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: var(--spacing-xs);
-                }
-                
-                .tech-tag {
-                    padding: var(--spacing-xs) var(--spacing-sm);
-                    background: var(--bg-tertiary);
-                    color: var(--text-secondary);
-                    border-radius: var(--border-radius);
-                    font-size: var(--font-size-xs);
-                    font-weight: 500;
-                }
-                
-                .client-quote {
-                    font-style: italic;
-                    font-size: var(--font-size-lg);
-                    color: var(--text-secondary);
-                    border-left: 4px solid var(--accent-primary);
-                    padding-left: var(--spacing-lg);
-                    margin: var(--spacing-lg) 0;
-                }
-                
-                .screenshot-gallery {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                    gap: var(--spacing-md);
-                }
-                
-                .screenshot {
-                    width: 100%;
-                    border-radius: var(--border-radius);
-                    box-shadow: var(--shadow-sm);
-                    transition: transform var(--transition-fast);
-                    cursor: pointer;
-                }
-                
-                .screenshot:hover {
-                    transform: scale(1.05);
-                }
-                
-                .modal-actions {
-                    display: flex;
-                    gap: var(--spacing-md);
-                    justify-content: center;
-                    margin-top: var(--spacing-xl);
-                    padding-top: var(--spacing-lg);
-                    border-top: 1px solid var(--border-color);
-                }
-                
-                @media (max-width: 768px) {
-                    .modal-actions {
-                        flex-direction: column;
-                    }
-                    
-                    .tech-stack-grid {
-                        grid-template-columns: 1fr;
-                    }
-                    
-                    .screenshot-gallery {
-                        grid-template-columns: 1fr;
-                    }
-                }
-            </style>
+            ${featuresList ? `<div class="modal-section"><h3>Key Features</h3><ul>${featuresList}</ul></div>` : ''}
+            ${project.challenges ? `<div class="modal-section"><h3>Challenges & Solutions</h3><p>${project.challenges}</p></div>` : ''}
+            ${screenshotsHtml}
+            <div class="modal-actions">
+                ${githubLink}
+                ${demoLink}
+            </div>
         `;
-    }
-
-    toggleFavorite(projectId, button) {
-        const index = this.favorites.indexOf(projectId);
-        
-        if (index > -1) {
-            this.favorites.splice(index, 1);
-            button.classList.remove('favorited');
-        } else {
-            this.favorites.push(projectId);
-            button.classList.add('favorited');
-        }
-        
-        this.saveFavorites();
-        
-        // Show notification
-        const project = this.projects.find(p => p.id === projectId);
-        const message = index > -1 ? 
-            `Removed "${project.title}" from favorites` : 
-            `Added "${project.title}" to favorites`;
-        
-        if (window.mikeSites) {
-            window.mikeSites.showNotification(message, 'success');
-        }
     }
 
     loadFavorites() {
         try {
-            const saved = localStorage.getItem('mikeSites_favorites');
-            return saved ? JSON.parse(saved) : [];
-        } catch (error) {
-            console.error('Error loading favorites:', error);
+            const favorites = localStorage.getItem('mikeSites_favorites');
+            return favorites ? JSON.parse(favorites) : [];
+        } catch (e) {
+            console.error('Error loading favorites from localStorage', e);
             return [];
         }
     }
 
     saveFavorites() {
-        try {
-            localStorage.setItem('mikeSites_favorites', JSON.stringify(this.favorites));
-        } catch (error) {
-            console.error('Error saving favorites:', error);
+        localStorage.setItem('mikeSites_favorites', JSON.stringify(this.favorites));
+    }
+
+    toggleFavorite(projectId) {
+        const index = this.favorites.indexOf(projectId);
+        if (index > -1) {
+            this.favorites.splice(index, 1);
+        } else {
+            this.favorites.push(projectId);
         }
-    }
-
-    loadProjects() {
-        // This method is called when navigating to projects page
-        this.renderAllProjects();
-    }
-
-    searchProjects(query) {
-        const searchTerm = query.toLowerCase();
-        return this.projects.filter(project => 
-            project.title.toLowerCase().includes(searchTerm) ||
-            project.description.toLowerCase().includes(searchTerm) ||
-            project.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-        );
-    }
-
-    getProjectsByCategory(category) {
-        return this.projects.filter(project => project.category === category);
-    }
-
-    getProjectsByStatus(status) {
-        return this.projects.filter(project => project.status === status);
+        this.saveFavorites();
+        this.renderAllProjects(); // Re-render to update favorite status
     }
 }
 
-// Initialize project manager when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    window.ProjectManager = new ProjectManager();
-});
 
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = ProjectManager;
-}
 
