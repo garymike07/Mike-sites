@@ -633,9 +633,9 @@ body {
 }
 
 .btn-cta {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15); /* Slightly more opaque */
     color: white;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Brighter border */
     backdrop-filter: blur(10px);
     font-weight: 600;
     padding: 1rem 2rem;
@@ -643,8 +643,8 @@ body {
 }
 
 .btn-cta:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3); /* Brighter background on hover */
+    border-color: rgba(255, 255, 255, 0.7); /* Brighter border on hover */
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
