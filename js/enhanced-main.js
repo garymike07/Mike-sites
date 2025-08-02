@@ -297,10 +297,20 @@ class EnhancedMikeSites {
     navigateToSection(sectionId) {
         const section = document.getElementById(sectionId);
         if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            
+            // Show the target section
+            section.classList.add('active');
+            
+            // Scroll to top of the page to show the section properly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
             this.currentSection = sectionId;
             
-            // Update active states
+            // Update active states for navigation buttons
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.section === sectionId);
             });
