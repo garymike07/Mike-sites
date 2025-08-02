@@ -488,17 +488,21 @@ body {
 }
 
 .hero-nav .nav-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.5);
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: 50px; /* Make them pill-shaped */
-    font-weight: 500;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .hero-nav .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .hero-nav .nav-btn.active {
@@ -630,18 +634,22 @@ body {
 }
 
 .btn-cta {
-    background: rgba(255, 255, 255, 0.15); /* Slightly more opaque */
+    background: rgba(255, 255, 255, 0.25); /* More opaque background */
     color: white;
-    border: 2px solid rgba(255, 255, 255, 0.5); /* Brighter border */
+    border: 2px solid rgba(255, 255, 255, 0.6); /* More visible border */
     backdrop-filter: blur(10px);
     font-weight: 600;
     padding: 1rem 2rem;
     font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-normal);
 }
 
 .btn-cta:hover {
-    background: rgba(255, 255, 255, 0.3); /* Brighter background on hover */
-    border-color: rgba(255, 255, 255, 0.7); /* Brighter border on hover */
+    background: rgba(255, 255, 255, 0.4); /* Even brighter background on hover */
+    border-color: rgba(255, 255, 255, 0.8); /* Even brighter border on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .btn-cta.primary {
