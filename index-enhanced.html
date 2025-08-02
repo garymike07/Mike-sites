@@ -494,18 +494,6 @@
             const img = new Image();
             img.src = src;
         });
-
-        // Connect contact request button to main request form
-        document.addEventListener('DOMContentLoaded', () => {
-            const contactRequestBtn = document.getElementById('contact-request-project-btn');
-            const mainRequestBtn = document.getElementById('request-project-btn');
-            
-            if (contactRequestBtn && mainRequestBtn) {
-                contactRequestBtn.addEventListener('click', () => {
-                    mainRequestBtn.click();
-                });
-            }
-        });
     </script>
 
     <!-- Structured Data for Projects -->
