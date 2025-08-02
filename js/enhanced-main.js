@@ -62,7 +62,10 @@ class EnhancedMikeSites {
         gsap.timeline()
             .from('.hero-avatar', { scale: 0, rotation: 180, duration: 1, ease: "back.out(1.7)" })
             .from('.hero-title', { y: 50, opacity: 0, duration: 0.8 }, "-=0.5")
-            .from('.hero-cta-container .btn', { y: 30, opacity: 0, duration: 0.6, stagger: 0.1 }, "-=0.3")
+            .fromTo('.hero-cta-container .btn', 
+                { y: 30, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out" }, 
+                "-=0.3")
             .from('.scroll-indicator', { y: 20, opacity: 0, duration: 0.5 }, "-=0.2");
     }
 
